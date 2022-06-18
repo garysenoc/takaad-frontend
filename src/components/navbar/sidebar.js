@@ -91,7 +91,7 @@ export default function SideBar({
 					<MenuItem
 						key={index}
 						onClick={() => handleCloseUserMenu(language)}
-						sx={{ display: activeLanguage === language && 'none' }}
+						sx={{ display: activeLanguage.label === language.label && 'none' }}
 					>
 						<CardMedia
 							component="img"
