@@ -43,4 +43,9 @@ export const languages = [
 		icon: 'flag-china.webp',
 		locale: 'zh',
 	},
+	{
+		label: 'AR',
+		icon: 'flag-arabia.webp',
+		locale: 'ar',
+	},
 ]
