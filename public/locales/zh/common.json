@@ -1,16 +1,1 @@
-{
-	"_or": "要么",
-	"menu_faq": "常见问题",
-	"menu_home": "家",
-	"menu_imei": "IMEI 检查器",
-	"menu_contact": "接触",
-	"menu_pricing": "价钱",
-	"btn_contact_us": "发信息",
-	"footer_links_1": "条款和条件",
-	"footer_links_2": "隐私政策",
-	"footer_links_3": "关于我们",
-	"btn_client_area": "客户专区",
-	"footer_copyright": "版权所有 ©2020 保留所有权利",
-	"btn_create_account": "创建帐号",
-	"btn_login_to_see_more": "登录查看更多"
-}
+{"btn_client_area":"批发的","btn_contact_us":"发信息","btn_create_account":"创建账户","btn_login_to_see_more":"登录查看更多","footer_copyright":"版权所有 ©2020 保留所有权利","footer_links_1":"条款和条件","footer_links_2":"隐私政策","footer_links_3":"关于我们","menu_contact":"接触","menu_faq":"常问问题","menu_home":"家","menu_imei":"IMEI 检查器","menu_pricing":"价钱","_or":"或者"}
