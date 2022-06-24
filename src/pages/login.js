@@ -125,7 +125,7 @@ const Login = (props) => {
 						{t('login:button_0')}
 					</Button>
 					<Typography align="center">
-						Don't have an account? <Link href="/register">Register</Link>
+						{t('login:label_0')} <Link href="/register">{t('login:label_1')}</Link>
 					</Typography>
 				</Stack>
 			</Container>
