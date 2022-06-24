@@ -55,12 +55,12 @@ const Register = (props) => {
 	const handleRegister = async () => {
 		if ([email, username, fname, lname, password, repassword].filter((value) => value === '').length !== 0) {
 			seterror(1)
-			seterrorMessage('Please fill up all required fields.')
+			seterrorMessage(t('register:error_0'))
 			return
 		}
 		if (password !== repassword) {
 			seterror(2)
-			seterrorMessage('Password does not match.')
+			seterrorMessage(t('register:error_1'))
 			return
 		}
 		const response = await fetch(`${defaultConfig.apiEndpoint}v1/auth/signup`, {
@@ -84,7 +84,7 @@ const Register = (props) => {
 			router.push('/')
 		} else {
 			seterror(3)
-			seterrorMessage('This account is already registered.')
+			seterrorMessage(t('register:error_2'))
 		}
 	}
 	useEffect(() => {
@@ -99,7 +99,7 @@ const Register = (props) => {
 			<Container
 				sx={{
 					height: '100vh',
-					paddingY: 5,
+					marginY: 5,
 				}}
 			>
 				<Stack sx={{ padding: 5, width: { xs: '100%', sm: '50%' } }} spacing={3} marginX="auto">

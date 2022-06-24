@@ -31,29 +31,27 @@ export async function getServerSideProps(ctx) {
 	}
 }
 
-function MyHelperText() {
+function MyHelperText({ message }) {
 	const { error } = useFormControl() || {}
 
-	const helperText = React.useMemo(() => {
-		if (error) {
-			return 'Username or password is incorrect.'
-		}
-
-		return ''
-	}, [error])
-
-	return <FormHelperText>{helperText}</FormHelperText>
+	return <FormHelperText sx={{ paddingBottom: 2 }}>{error ? message : ''}</FormHelperText>
 }
 
 const Login = (props) => {
 	const { t } = useTranslation()
 	const [error, seterror] = useState(false)
+	const [errorMessage, seterrorMessage] = useState('')
 	const [username, setUsername] = useState('')
 	const [password, setPassword] = useState('')
 	const router = useRouter()
 	const handleUsernameChange = (event) => setUsername(event.target.value)
 	const handlePasswordChange = (event) => setPassword(event.target.value)
 	const handleLogin = async () => {
+		if (username === '' || password === '') {
+			seterror(true)
+			seterrorMessage(t('login:error_0'))
+			return
+		}
 		const response = await fetch(`${defaultConfig.apiEndpoint}v1/auth/signin`, {
 			method: 'POST',
 			headers: {
@@ -68,9 +66,11 @@ const Login = (props) => {
 			const data = await response.json()
 			props.setAuth({ username, token: data.token })
 			seterror(false)
+			seterrorMessage('')
 			router.push('/')
 		} else {
 			seterror(true)
+			seterrorMessage(t('login:error_1'))
 		}
 	}
 	useEffect(() => {
@@ -85,7 +85,7 @@ const Login = (props) => {
 			<Container
 				sx={{
 					height: '100vh',
-					paddingY: 5,
+					marginY: 5,
 				}}
 			>
 				<Stack sx={{ padding: 5, width: { xs: '100%', sm: '50%' } }} spacing={3} marginX="auto">
@@ -95,14 +95,16 @@ const Login = (props) => {
 					<FormControl error={error}>
 						<Stack spacing={1}>
 							<TextField
-								error={error}
+								required
+								error={error && username === ''}
 								id="email"
 								label={t('login:input_field_0')}
 								variant="outlined"
 								onChange={handleUsernameChange}
 							/>
 							<TextField
-								error={error}
+								required
+								error={error && password === ''}
 								id="password"
 								label={t('login:input_field_1')}
 								variant="outlined"
@@ -110,7 +112,7 @@ const Login = (props) => {
 								onChange={handlePasswordChange}
 							/>
 						</Stack>
-						<MyHelperText />
+						<MyHelperText message={errorMessage} />
 					</FormControl>
 					<RadioGroup>
 						<FormControlLabel label={t('login:radio_0')} control={<Checkbox />} />
