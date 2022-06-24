@@ -86,7 +86,7 @@ const Navbar = (props) => {
 											: link.label === 'Pricing'
 											? t('common:menu_pricing')
 											: link.label === 'FAQ'
-											? link.label
+											? t('common:menu_faq')
 											: link.label === 'Contact'
 											? t('common:menu_contact')
 											: link.label === 'Wholesale'
@@ -130,22 +130,25 @@ const Navbar = (props) => {
 							<ShoppingCartIcon sx={{ color: '#003056', '&:hover': { cursor: 'pointer', color: '#004d8a' } }} />
 						</CartBadge>
 						<Box sx={{ border: '1px solid #dedede', mx: 2, height: 50 }}></Box>
-						<Button
-							sx={{
-								backgroundColor: '#003056',
-								color: '#fff',
-								borderRadius: 10,
-								textTransform: 'capitalize',
-								minWidth: { md: 100, lg: 120 },
-								fontSize: { md: 15, lg: 18 },
-								'&:hover': {
-									backgroundColor: '#004d8a',
-								},
-								mr: { md: 1, lg: 2 },
-							}}
-						>
-							Login
-						</Button>
+						{props.auth.token === '' && (
+							<Button
+								sx={{
+									backgroundColor: '#003056',
+									color: '#fff',
+									borderRadius: 10,
+									textTransform: 'capitalize',
+									minWidth: { md: 100, lg: 120 },
+									fontSize: { md: 15, lg: 18 },
+									'&:hover': {
+										backgroundColor: '#004d8a',
+									},
+									mr: { md: 1, lg: 2 },
+								}}
+								href="/login"
+							>
+								Login
+							</Button>
+						)}
 						<Button
 							sx={{
 								backgroundColor: '#28cd7e',

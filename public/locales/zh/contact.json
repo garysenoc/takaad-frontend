@@ -1,16 +1,1 @@
-{
-	"contactus_ps": "PS：我们不解码 iCloud，也无法定位被盗手机。",
-	"contactus_header": "还有问题吗？联系我们！",
-	"contactus_form_title": "留言",
-	"quick_contact_body_1": "发信息",
-	"quick_contact_body_2": "发信息",
-	"quick_contact_body_3": "编号：imeicheck",
-	"quick_contact_body_4": "support@taakad.com ",
-	"quick_contact_body_5": "爱尔兰-韦克斯福德-大街",
-	"quick_contact_header": "快速联系",
-	"quick_contact_header_1": "Skype",
-	"quick_contact_header_2": "Whatsapp 没有",
-	"quick_contact_header_3": "微信",
-	"quick_contact_header_4": "电子邮件",
-	"quick_contact_header_5": "地址"
-}
+{"contactus_form_title":"留言","contactus_header":"还有问题吗？联系我们！","contactus_ps":"PS：我们不解码 iCloud，也无法定位被盗手机。","quick_contact_body_1":"发信息","quick_contact_body_2":"发信息","quick_contact_body_3":"编号：imeicheck","quick_contact_body_4":"support@taakad.com","quick_contact_body_5":"爱尔兰-韦克斯福德-大街","quick_contact_header":"快速联系","quick_contact_header_1":"Skype","quick_contact_header_2":"Whatsapp 没有","quick_contact_header_3":"微信","quick_contact_header_4":"电子邮件","quick_contact_header_5":"地址"}
