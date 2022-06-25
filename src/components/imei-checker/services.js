@@ -32,21 +32,22 @@ const Services = (props) => {
 	const handleAddToCart = () => {
 		const items = props.cart.items
 
-		const isItemAdded = items.length && items.filter((item) => item.details.imei === props.checker.imei)
+		const isItemAdded = items.length && items.filter((item) => item.details.imei === payload.imei).length > 0
 
-		if (!isItemAdded[0]) {
-			const payload = {
-				order_number: props.checker.payload.orderId,
-				product: props.checker.payload.result,
+		if (!isItemAdded) {
+			const new_payload = {
+				order_number: payload.orderId,
+				product: `${renderPhoneBrandName(payload.result)} All in One Information`,
 				details: {
-					imei: props.checker.payload.imei,
-					brand: renderPhoneBrandName(props.checker.payload.result),
-					model: props.checker.payload.result,
+					imei: payload.imei,
+					brand: payload.object.brand,
+					name: payload.object.name,
+					model: payload.object.model,
 				},
-				price: renderBrandPricePerCheck(props.checker.payload.result),
+				price: renderBrandPricePerCheck(payload.result),
 			}
 
-			props.addItems(payload)
+			props.addItems(new_payload)
 		}
 
 		if (router.pathname === '/imei-checker') {

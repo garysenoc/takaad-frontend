@@ -26,7 +26,6 @@ import { Elements } from '@stripe/react-stripe-js'
 
 import mapCartStateToProps from 'rtk/cart/state'
 import mapCartDispatchToProps from 'rtk/cart/action'
-import { renderPhoneBrandName } from 'src/utils/renderPhoneInformation'
 import CheckoutForm from './checkoutForm'
 import CreditCardForm from './creditCardForm'
 import { CurrentFormattedDate } from 'src/utils/renderFormattedDate'
@@ -163,7 +162,7 @@ const CheckoutInfo = (props) => {
 								fontSize: { xs: '20px', sm: '24', md: '28px' },
 							}}
 						>
-							Billing & Shipping
+							Billing &amp; Shipping
 						</Typography>
 						<CheckoutForm />
 					</Grid>
@@ -183,7 +182,7 @@ const CheckoutInfo = (props) => {
 													fontSize: { xs: '14px', sm: '16px', md: '18px' },
 												}}
 											>
-												{renderPhoneBrandName(item.details.brand)} All in One Information
+												{item.product}
 											</Typography>
 											<Typography
 												sx={{
@@ -218,7 +217,18 @@ const CheckoutInfo = (props) => {
 												fontSize: { xs: '14px', sm: '16px', md: '18px' },
 											}}
 										>
-											Brand: {renderPhoneBrandName(item.details.brand)}
+											Brand: {item.details.brand}
+										</Typography>
+										<Typography
+											sx={{
+												fontFamily: 'Nunito Sans',
+												color: '#fff',
+												display: 'block',
+												textAlign: 'left',
+												fontSize: { xs: '14px', sm: '16px', md: '18px' },
+											}}
+										>
+											Name: {item.details.name}
 										</Typography>
 										<Typography
 											sx={{

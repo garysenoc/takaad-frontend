@@ -1,17 +1,45 @@
 import { useRouter } from 'next/router'
 import { connect } from 'react-redux'
-import { Fragment, useEffect } from 'react'
-import { Box, Button, Stack, TextField, Typography, Grid } from '@mui/material'
+import React, { Fragment, useEffect, useState } from 'react'
+import { Box, Button, Stack, TextField, Typography, Grid, Snackbar, IconButton } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
+import CloseIcon from '@mui/icons-material/Close'
 
 import mapCartStateToProps from 'rtk/cart/state'
 import mapCartDispatchToProps from 'rtk/cart/action'
-import { renderPhoneBrandName } from 'src/utils/renderPhoneInformation'
 
 const ViewCart = (props) => {
 	const router = useRouter()
+	const [coupon, setcoupon] = useState('')
 	const prices = props.cart.items.map((item) => item.price)
 	const total = prices.length && prices.reduce((partialSum, a) => partialSum + a)
+
+	const handleClose = (event, reason) => {
+		if (reason === 'clickaway') {
+			return
+		}
+
+		props.setIsError(false)
+	}
+
+	const action = (
+		<React.Fragment>
+			<IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+				<CloseIcon fontSize="small" />
+			</IconButton>
+		</React.Fragment>
+	)
+
+	const handleCouponChange = (event) => setcoupon(event.target.value)
+
+	const handleApplyCoupon = () => {
+		if (coupon.length === 0) {
+			props.setIsError(true)
+			props.setErrorMessage('Invalid empty coupon code.')
+		} else {
+			props.nextStep()
+		}
+	}
 
 	useEffect(() => props.setCheckoutPrice(total), [])
 
@@ -144,7 +172,10 @@ const ViewCart = (props) => {
 												{item.details.imei}
 												<br />
 												<strong>Brand: </strong>
-												{renderPhoneBrandName(item.details.brand)}
+												{item.details.brand}
+												<br />
+												<strong>Name: </strong>
+												{item.details.name}
 												<br />
 												<strong>Model: </strong>
 												{item.details.model}
@@ -200,6 +231,7 @@ const ViewCart = (props) => {
 					</Box>
 					<Stack direction="row" mt={4}>
 						<TextField
+							error={props.common.isError}
 							placeholder="Coupon Code"
 							inputProps={{
 								sx: {
@@ -209,7 +241,8 @@ const ViewCart = (props) => {
 								},
 							}}
 							sx={{ width: '100%' }}
-						></TextField>
+							onBlur={handleCouponChange}
+						/>
 						<Button
 							sx={{
 								fontFamily: 'Nunito Sans',
@@ -227,7 +260,7 @@ const ViewCart = (props) => {
 								},
 								marginLeft: '10px',
 							}}
-							onClick={props.nextStep}
+							onClick={handleApplyCoupon}
 						>
 							Apply Coupon
 						</Button>
@@ -307,6 +340,14 @@ const ViewCart = (props) => {
 								Paypal Checkout
 							</Button>
 						</Box> */}
+
+						<Snackbar
+							open={props.common.isError}
+							autoHideDuration={6000}
+							onClose={handleClose}
+							message={props.common.errorMessage}
+							action={action}
+						/>
 					</Box>
 				</Box>
 			) : null}
