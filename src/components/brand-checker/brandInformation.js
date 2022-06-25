@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import mapCheckerStateToProps from 'rtk/checker/state'
 import mapCheckerDispatchToProps from 'rtk/checker/action'
 import { glosarryInfos } from 'src/components/glosarry/data'
+import { useTranslation } from 'next-i18next'
 
 const CustomWidthTooltip = styled(({ className, ...props }) => <Tooltip {...props} classes={{ popper: className }} />)({
 	[`& .${tooltipClasses.tooltip}`]: {
@@ -17,6 +18,8 @@ const CustomWidthTooltip = styled(({ className, ...props }) => <Tooltip {...prop
 })
 
 const BrandInformation = (props) => {
+	const { t } = useTranslation()
+
 	const handleShowValueForTooltip = (label) => {
 		const glosarry = glosarryInfos.filter((info) => info.label === label)
 
@@ -40,7 +43,7 @@ const BrandInformation = (props) => {
 						fontSize: { xs: '24px', sm: '32px', md: '32px', lg: '44px' },
 					}}
 				>
-					What Information Will You Receive?
+					{t('home:brandInfo_text_1')}
 				</Typography>
 				<Typography
 					sx={{
@@ -52,7 +55,7 @@ const BrandInformation = (props) => {
 						fontSize: { xs: '22px', sm: '22px', md: '24px', lg: '27px' },
 					}}
 				>
-					Preview an example of our services below
+					{t('home:brandInfo_text_2')}
 				</Typography>
 				<Box
 					sx={{
@@ -72,7 +75,7 @@ const BrandInformation = (props) => {
 								fontSize: { xs: '18px', sm: '22px', md: '24px', lg: '27px' },
 							}}
 						>
-							{`${props.brand.label} Info`}
+							{`${props.brand.label} ${t('home:brandInfo_text_3')}`}
 						</Typography>
 						<Typography
 							sx={{
@@ -101,7 +104,7 @@ const BrandInformation = (props) => {
 									fontSize: { xs: '16px', sm: '18px', md: '22px' },
 								}}
 							>
-								Example of what information to expect with this service
+								{t('home:brandInfo_text_4')}
 							</Typography>
 						</AccordionSummary>
 						<AccordionDetails>
@@ -115,7 +118,7 @@ const BrandInformation = (props) => {
 									fontSize: { xs: '16px', sm: '18px', md: '20px' },
 								}}
 							>
-								Example Data:
+								{t('home:brandInfo_text_5')}:
 							</Typography>
 							<Box>
 								{props.brand.infos.map((info, index) => (
@@ -212,7 +215,7 @@ const BrandInformation = (props) => {
 						fontSize: { xs: '24px', sm: '32px', md: '32px', lg: '44px' },
 					}}
 				>
-					Find your device's IMEI or serial number
+					{t('home:brandInfo_text_6')}
 				</Typography>
 				<Box
 					sx={{ backgroundColor: '#003056', padding: { xs: 2, sm: 3, md: 5 }, borderRadius: '20px', textAlign: 'left' }}
@@ -226,7 +229,7 @@ const BrandInformation = (props) => {
 							fontSize: { xs: '22px', sm: '22px', md: '24px', lg: '27px' },
 						}}
 					>
-						{`Find the IMEI on your ${props.brand.label} device's`}
+						{t('home:brandInfo_text_7').replace(/<.*>/, ` ${props.brand.label}`)}
 					</Typography>
 					<Box sx={{ paddingLeft: { xs: 0, sm: 2, md: 3 }, marginTop: 1 }}>
 						{props.brand.instructions.map((instruc, index) => (

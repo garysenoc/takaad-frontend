@@ -8,9 +8,11 @@ import mapCheckerStateToProps from 'rtk/checker/state'
 import mapCheckerDispatchToProps from 'rtk/checker/action'
 import { LoadingButton } from '@mui/lab'
 import { basicIMEICheck } from '../../utils/apiCallCollection'
+import { useTranslation } from 'next-i18next'
 
 const HomeHeader = (props) => {
 	const router = useRouter()
+	const { t } = useTranslation()
 
 	const handleOnClick = async () => {
 		props.setIsLoading(true)
@@ -89,16 +91,16 @@ const HomeHeader = (props) => {
 						>
 							<Box textAlign="center" sx={{ width: '100%' }}>
 								<Typography sx={{ color: '#fff', fontWeight: 900, fontSize: { xs: 24, sm: 26, md: 28, lg: 34 } }}>
-									{`Enter Your Device's 15-Digit IMEI Or Serial Number`}
+									{t('home:firstSection_text_1')}
 								</Typography>
 								<Typography
 									sx={{ color: '#fff', fontWeight: 400, mt: 2, fontSize: { xs: 12, sm: 15, md: 14, lg: 16 } }}
 								>
-									All Devices supported, including Apple, iPhone, Huawei and Samsung.
+									{t('home:firstSection_text_2')}
 								</Typography>
 								<Stack direction="row" justifyContent="center" sx={{ width: '100%' }} mt={3}>
 									<InputBase
-										placeholder="Enter IMEI or Serial Number"
+										placeholder={t('home:firstSection_field_1')}
 										sx={{
 											width: { xs: '100%', sm: '60%', md: '100%' },
 											color: '#fff',
@@ -123,7 +125,7 @@ const HomeHeader = (props) => {
 										fontSize: { xs: 12, sm: 15, md: 14, lg: 16 },
 									}}
 								>
-									Dial *#06# to get your phones IMEI number
+									{t('home:firstSection_text_3')}
 								</Typography>
 								<LoadingButton
 									loading={props.common.isLoading}
@@ -131,6 +133,7 @@ const HomeHeader = (props) => {
 										backgroundColor: '#28cd7e',
 										color: '#fff',
 										borderRadius: 50,
+										paddingX: 2,
 										mt: 3,
 										textTransform: 'capitalize',
 										height: 'auto',
@@ -153,7 +156,7 @@ const HomeHeader = (props) => {
 									}
 									onClick={handleOnClick}
 								>
-									Get Device Info
+									{t('home:firstSection_button_1')}
 								</LoadingButton>
 								<Snackbar
 									open={props.common.isError}

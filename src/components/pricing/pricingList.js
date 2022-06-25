@@ -69,7 +69,7 @@ const PricingList = () => {
 									lineHeight: { xs: '25px', sm: '30px', md: '30px', lg: '38px' },
 								}}
 							>
-								{services.generic.firstTitle}
+								{t('pricing:pricing_generic_firstTitle')}
 							</Typography>
 							<Typography
 								sx={{
@@ -82,7 +82,7 @@ const PricingList = () => {
 									lineHeight: { xs: '25px', sm: '30px', md: '30px', lg: '38px' },
 								}}
 							>
-								{services.generic.secondTitle}
+								{t('pricing:pricing_generic_secondTitle')}
 							</Typography>
 						</Box>
 						<Box>
@@ -176,6 +176,7 @@ const PricingList = () => {
 										minWidth: { xs: '220px', sm: '220px' },
 										padding: { xs: '12px 20px', sm: '12px 20px', md: '12px 20px', lg: '14px 25px' },
 									}}
+									href="/login"
 								>
 									{t('common:btn_login_to_see_more')}
 								</LoginButton>
@@ -330,6 +331,7 @@ const PricingList = () => {
 										minWidth: { xs: '220px', sm: '220px' },
 										padding: { xs: '12px 20px', sm: '12px 20px', md: '12px 20px', lg: '14px 25px' },
 									}}
+									href="/login"
 								>
 									{t('common:btn_login_to_see_more')}
 								</LoginButton>
@@ -449,6 +451,7 @@ const PricingList = () => {
 										minWidth: { xs: '220px', sm: '220px' },
 										padding: { xs: '12px 20px', sm: '12px 20px', md: '12px 20px', lg: '14px 25px' },
 									}}
+									href="/login"
 								>
 									{t('common:btn_login_to_see_more')}
 								</LoginButton>

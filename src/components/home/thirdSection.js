@@ -75,7 +75,7 @@ const ThirdSection = () => {
 									fontSize: { xs: '12px', sm: '14px', md: '16px', lg: '18px' },
 								}}
 							>
-								*Based on sources
+								{`*${t('home:thirdSection_text_1')}`}
 							</CheckValueText>
 						</Box>
 					</Container>

@@ -10,7 +10,7 @@ import Footer from 'src/components/footer/footer'
 export async function getServerSideProps(ctx) {
 	return {
 		props: {
-			...(await serverSideTranslations(ctx.locale, ['brand-checker', 'common'])),
+			...(await serverSideTranslations(ctx.locale, ['home', 'common'])),
 		},
 	}
 }

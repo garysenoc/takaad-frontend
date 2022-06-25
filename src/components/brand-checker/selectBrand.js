@@ -10,9 +10,11 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
 import BrandInformation from './brandInformation'
 import { brands } from './data'
+import { useTranslation } from 'next-i18next'
 
 const SelectBrand = ({ page }) => {
 	const router = useRouter()
+	const { t } = useTranslation()
 	const [activeBrand, setActiveBrand] = useState(page === 'brand-checker' ? brands[0] : '')
 
 	const handleChange = (brand) => {
@@ -36,7 +38,7 @@ const SelectBrand = ({ page }) => {
 								lineHeight: { xs: '28px', sm: '40px', md: '40px', lg: '52px' },
 							}}
 						>
-							Need Help?
+							{t('home:secondSection_text_1')}
 						</Typography>
 						<Typography
 							sx={{
@@ -46,7 +48,7 @@ const SelectBrand = ({ page }) => {
 								fontSize: { xs: '14px', sm: '18px', md: '18px', lg: '20px' },
 							}}
 						>
-							{`Select Your Brand To Find Your Device's IMEI Number`}
+							{t('home:secondSection_text_2')}
 						</Typography>
 						{/* tab to desktop large */}
 						<Box mt={2} sx={{ display: { xs: 'none', sm: 'block' } }}>
@@ -340,7 +342,7 @@ const SelectBrand = ({ page }) => {
 									fontSize: { xs: 16, sm: 18, md: 20, lg: 22 },
 								}}
 							>
-								Need support?
+								{t('home:secondSection_text_3')}
 							</Typography>
 							<Box sx={{ height: 50, borderRight: '1px solid #9e9d9d', mx: 2 }}></Box>
 							<Link href="/contact" passHref>

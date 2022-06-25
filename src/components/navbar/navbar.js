@@ -95,8 +95,6 @@ const Navbar = (props) => {
 											? t('common:menu_faq')
 											: link.label === 'Contact'
 											? t('common:menu_contact')
-											: link.label === 'Wholesale'
-											? t('common:btn_client_area')
 											: ''}
 									</LinkLabel>
 								</Button>
@@ -152,7 +150,7 @@ const Navbar = (props) => {
 								}}
 								href="/login"
 							>
-								Login
+								{t('common:btn_login')}
 							</Button>
 						) : (
 							<Button
@@ -170,7 +168,7 @@ const Navbar = (props) => {
 								}}
 								onClick={handleLogOut}
 							>
-								Logout
+								{t('common:btn_logout')}
 							</Button>
 						)}
 						<Button
@@ -186,7 +184,7 @@ const Navbar = (props) => {
 								},
 							}}
 						>
-							Wholesale
+							{t('common:btn_client_area')}
 						</Button>
 					</Box>
 					<Box sx={{ display: { xs: 'block', md: 'none' } }}>

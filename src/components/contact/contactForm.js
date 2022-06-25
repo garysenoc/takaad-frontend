@@ -174,7 +174,7 @@ const ContactForm = (props) => {
 										inputlabelprops={{
 											shrink: true,
 										}}
-										placeholder="Your Name"
+										placeholder={t('contact:field_name')}
 										name="name"
 										value={props.language.name}
 										onChange={(e) => props.setEmailPayload([e.target.name, e.target.value])}
@@ -195,7 +195,7 @@ const ContactForm = (props) => {
 										}}
 										name="email"
 										value={props.language.email}
-										placeholder="Your Email"
+										placeholder={t('contact:field_email')}
 										onChange={(e) => props.setEmailPayload([e.target.name, e.target.value])}
 									/>
 								</Box>
@@ -232,7 +232,7 @@ const ContactForm = (props) => {
 										}}
 										name="subject"
 										value={props.language.subject}
-										placeholder="Your Subject"
+										placeholder={t('contact:field_subject')}
 										onChange={(e) => props.setEmailPayload([e.target.name, e.target.value])}
 									/>
 								</Box>
@@ -254,7 +254,7 @@ const ContactForm = (props) => {
 										minRows={10}
 										name="message"
 										value={props.language.message}
-										placeholder="Your Message..."
+										placeholder={t('contact:field_message')}
 										onChange={(e) => props.setEmailPayload([e.target.name, e.target.value])}
 									/>
 								</Box>

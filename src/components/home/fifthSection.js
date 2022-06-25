@@ -83,6 +83,7 @@ const FifthSection = () => {
 										p: { xs: '12px 20px', sm: '12px 20px', md: '12px 20px', lg: '14px 25px' },
 										minWidth: { xs: '130px', sm: '130px', md: '130px', lg: '140px' },
 									}}
+									href="/register"
 								>
 									{t('common:btn_create_account')}
 								</CreateButton>

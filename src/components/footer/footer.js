@@ -2,8 +2,11 @@ import Link from 'next/link'
 import { Box, Container, Typography } from '@mui/material'
 
 import { infoLinks } from './data'
+import { useTranslation } from 'next-i18next'
 
 const Footer = () => {
+	const { t } = useTranslation()
+
 	return (
 		<>
 			<Box
@@ -15,7 +18,7 @@ const Footer = () => {
 			>
 				<Container>
 					<Typography sx={{ color: '#fff', fontWeight: 400, fontSize: { xs: 14, sm: 16, md: 16, lg: 18 } }}>
-						© Copyright 2021 - Taakad
+						{t('common:footer_copyright')}
 					</Typography>
 					<Box sx={{ display: { xs: 'block', sm: 'flex' }, justifyContent: 'center', mt: 1 }}>
 						{infoLinks.map((link, index) => (
@@ -33,7 +36,7 @@ const Footer = () => {
 										},
 									}}
 								>
-									{link.label}
+									{t(`common:footer_links_${index + 1}`)}
 								</Typography>
 							</Link>
 						))}
