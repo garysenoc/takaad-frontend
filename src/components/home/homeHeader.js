@@ -24,7 +24,7 @@ const HomeHeader = (props) => {
 
 		try {
 			const data = await fetch(
-				`${process.env.imei_baseurl}create?key=${process.env.imei_access_key}&service=10&imei=${props.checker.imei}`,
+				`${process.env.imei_baseurl}create?key=${process.env.imei_access_key}&service=11&imei=${props.checker.imei}`,
 			)
 
 			const response = await data.json()

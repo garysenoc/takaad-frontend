@@ -116,7 +116,7 @@ const Services = (props) => {
 							fontSize: { xs: '14px', sm: '16px', md: '18px' },
 						}}
 					>
-						<strong>Brand: </strong> {renderPhoneBrandName(payload.result)}
+						<strong>Brand: </strong> {payload.object.brand}
 					</Typography>
 					<Typography
 						sx={{
@@ -127,7 +127,18 @@ const Services = (props) => {
 							fontSize: { xs: '14px', sm: '16px', md: '18px' },
 						}}
 					>
-						<strong>Model: </strong> {payload.result}
+						<strong>Name: </strong> {payload.object.name}
+					</Typography>
+					<Typography
+						sx={{
+							fontFamily: 'Nunito Sans',
+							fontWeight: 400,
+							color: '#003056',
+							display: 'block',
+							fontSize: { xs: '14px', sm: '16px', md: '18px' },
+						}}
+					>
+						<strong>Model: </strong> {payload.object.model}
 					</Typography>
 				</Box>
 				<Stack direction="row" justifyContent="space-between" sx={{ borderBottom: 'dashed #003056 2px', marginTop: 1 }}>
