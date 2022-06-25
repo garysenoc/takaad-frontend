@@ -16,10 +16,7 @@ import {
 	Checkbox,
 	Button,
 	Divider,
-	IconButton,
-	Snackbar,
 } from '@mui/material'
-import CloseIcon from '@mui/icons-material/Close'
 // import CreditCardIcon from '@mui/icons-material/CreditCard'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
@@ -37,21 +34,6 @@ const CheckoutInfo = (props) => {
 
 	const prices = props.cart.items.map((item) => item.price)
 	const total = prices.length && prices.reduce((partialSum, a) => partialSum + a, 0)
-
-	const handleClose = (event, reason) => {
-		if (reason === 'clickaway') {
-			return
-		}
-		props.setIsError(false)
-	}
-
-	const action = (
-		<React.Fragment>
-			<IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
-				<CloseIcon fontSize="small" />
-			</IconButton>
-		</React.Fragment>
-	)
 
 	const handlePayPalCreateOrders = async () => {
 		props.setIsLoading(true)
@@ -565,13 +547,6 @@ const CheckoutInfo = (props) => {
 						</Box>
 					</Grid>
 				</Grid>
-				<Snackbar
-					open={props.common.isError}
-					autoHideDuration={6000}
-					onClose={handleClose}
-					message={props.common.errorMessage}
-					action={action}
-				/>
 			</Box>
 		</>
 	)

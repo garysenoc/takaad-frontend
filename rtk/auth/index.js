@@ -11,6 +11,10 @@ export const authSlice = createSlice({
 			state.username = action.payload.username
 			state.token = action.payload.token
 		},
+		logOut(state) {
+			state.username = ''
+			state.token = ''
+		},
 	},
 	extraReducers: {},
 })

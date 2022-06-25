@@ -1,9 +1,8 @@
 import { useRouter } from 'next/router'
 import { connect } from 'react-redux'
 import React, { Fragment, useEffect, useState } from 'react'
-import { Box, Button, Stack, TextField, Typography, Grid, Snackbar, IconButton } from '@mui/material'
+import { Box, Button, Stack, TextField, Typography, Grid } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
-import CloseIcon from '@mui/icons-material/Close'
 
 import mapCartStateToProps from 'rtk/cart/state'
 import mapCartDispatchToProps from 'rtk/cart/action'
@@ -13,22 +12,6 @@ const ViewCart = (props) => {
 	const [coupon, setcoupon] = useState('')
 	const prices = props.cart.items.map((item) => item.price)
 	const total = prices.length && prices.reduce((partialSum, a) => partialSum + a)
-
-	const handleClose = (event, reason) => {
-		if (reason === 'clickaway') {
-			return
-		}
-
-		props.setIsError(false)
-	}
-
-	const action = (
-		<React.Fragment>
-			<IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
-				<CloseIcon fontSize="small" />
-			</IconButton>
-		</React.Fragment>
-	)
 
 	const handleCouponChange = (event) => setcoupon(event.target.value)
 
@@ -340,14 +323,6 @@ const ViewCart = (props) => {
 								Paypal Checkout
 							</Button>
 						</Box> */}
-
-						<Snackbar
-							open={props.common.isError}
-							autoHideDuration={6000}
-							onClose={handleClose}
-							message={props.common.errorMessage}
-							action={action}
-						/>
 					</Box>
 				</Box>
 			) : null}

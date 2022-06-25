@@ -11,6 +11,7 @@ import { useTranslation } from 'next-i18next'
 import { links, languages } from './data.js'
 import mapLanguageStateToProps from 'rtk/language/state'
 import mapLanguageDispatchToProps from 'rtk/language/action'
+import mapAuthDispatchToProps from 'rtk/auth/action'
 import SideBar from './sidebar.js'
 
 const LinkLabel = styled(Typography)({
@@ -37,6 +38,11 @@ const Navbar = (props) => {
 	const handleCloseUserMenu = (language) => {
 		setAnchorElUser(null)
 		props.setActiveLanguage(language)
+	}
+
+	const handleLogOut = () => {
+		props.logOut()
+		router.push('/')
 	}
 
 	useEffect(() => {
@@ -130,7 +136,7 @@ const Navbar = (props) => {
 							<ShoppingCartIcon sx={{ color: '#003056', '&:hover': { cursor: 'pointer', color: '#004d8a' } }} />
 						</CartBadge>
 						<Box sx={{ border: '1px solid #dedede', mx: 2, height: 50 }}></Box>
-						{props.auth.token === '' && (
+						{props.auth.token === '' ? (
 							<Button
 								sx={{
 									backgroundColor: '#003056',
@@ -147,6 +153,24 @@ const Navbar = (props) => {
 								href="/login"
 							>
 								Login
+							</Button>
+						) : (
+							<Button
+								sx={{
+									backgroundColor: '#003056',
+									color: '#fff',
+									borderRadius: 10,
+									textTransform: 'capitalize',
+									minWidth: { md: 100, lg: 120 },
+									fontSize: { md: 15, lg: 18 },
+									'&:hover': {
+										backgroundColor: '#004d8a',
+									},
+									mr: { md: 1, lg: 2 },
+								}}
+								onClick={handleLogOut}
+							>
+								Logout
 							</Button>
 						)}
 						<Button
@@ -182,4 +206,6 @@ const Navbar = (props) => {
 	)
 }
 
-export default connect(mapLanguageStateToProps, mapLanguageDispatchToProps())(Navbar)
+export default connect(mapLanguageStateToProps, { ...mapLanguageDispatchToProps(), ...mapAuthDispatchToProps() })(
+	Navbar,
+)

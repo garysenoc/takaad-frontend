@@ -1,8 +1,9 @@
-import { Fragment, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { connect } from 'react-redux'
-import { Box, Button, Container, Step, StepLabel, Stepper, Typography } from '@mui/material'
+import { Box, Button, Container, IconButton, Snackbar, Step, StepLabel, Stepper, Typography } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import CloseIcon from '@mui/icons-material/Close'
 
 import GuardImeiCheckerPage from 'lib/guard-imei-checker'
 import mapCheckerStateToProps from 'rtk/checker/state'
@@ -22,7 +23,7 @@ export const getServerSideProps = async (ctx) => {
 	}
 }
 
-const ImeiChecker = GuardImeiCheckerPage(() => {
+const ImeiChecker = GuardImeiCheckerPage((props) => {
 	const [activeStep, setActiveStep] = useState(0)
 	const [skipped, setSkipped] = useState(new Set())
 	const steps = ['Services', 'Cart', 'Checkout']
@@ -46,6 +47,22 @@ const ImeiChecker = GuardImeiCheckerPage(() => {
 	const handleBack = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep - 1)
 	}
+
+	const handleClose = (event, reason) => {
+		if (reason === 'clickaway') {
+			return
+		}
+
+		props.setIsError(false)
+	}
+
+	const action = (
+		<React.Fragment>
+			<IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+				<CloseIcon fontSize="small" />
+			</IconButton>
+		</React.Fragment>
+	)
 
 	return (
 		<>
@@ -114,6 +131,13 @@ const ImeiChecker = GuardImeiCheckerPage(() => {
 									Back
 								</Button>
 							</Box>
+							<Snackbar
+								open={props.common.isError}
+								autoHideDuration={6000}
+								onClose={handleClose}
+								message={props.common.errorMessage}
+								action={action}
+							/>
 						</Fragment>
 					</Box>
 				</Container>
