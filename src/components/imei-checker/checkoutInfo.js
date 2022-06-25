@@ -210,17 +210,6 @@ const CheckoutInfo = (props) => {
 												fontSize: { xs: '14px', sm: '16px', md: '18px' },
 											}}
 										>
-											Name: {item.details.name}
-										</Typography>
-										<Typography
-											sx={{
-												fontFamily: 'Nunito Sans',
-												color: '#fff',
-												display: 'block',
-												textAlign: 'left',
-												fontSize: { xs: '14px', sm: '16px', md: '18px' },
-											}}
-										>
 											Model: {item.details.model}
 										</Typography>
 

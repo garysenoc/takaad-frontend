@@ -41,7 +41,6 @@ const Services = (props) => {
 				details: {
 					imei: payload.imei,
 					brand: payload.object.brand,
-					name: payload.object.name,
 					model: payload.object.model,
 				},
 				price: renderBrandPricePerCheck(payload.result),
@@ -118,17 +117,6 @@ const Services = (props) => {
 						}}
 					>
 						<strong>Brand: </strong> {payload.object.brand}
-					</Typography>
-					<Typography
-						sx={{
-							fontFamily: 'Nunito Sans',
-							fontWeight: 400,
-							color: '#003056',
-							display: 'block',
-							fontSize: { xs: '14px', sm: '16px', md: '18px' },
-						}}
-					>
-						<strong>Name: </strong> {payload.object.name}
 					</Typography>
 					<Typography
 						sx={{

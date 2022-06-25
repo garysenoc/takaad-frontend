@@ -157,9 +157,6 @@ const ViewCart = (props) => {
 												<strong>Brand: </strong>
 												{item.details.brand}
 												<br />
-												<strong>Name: </strong>
-												{item.details.name}
-												<br />
 												<strong>Model: </strong>
 												{item.details.model}
 												<br />

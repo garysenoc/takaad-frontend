@@ -7,6 +7,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import mapCheckerStateToProps from 'rtk/checker/state'
 import mapCheckerDispatchToProps from 'rtk/checker/action'
 import { LoadingButton } from '@mui/lab'
+import { basicIMEICheck } from '../../utils/apiCallCollection'
 
 const HomeHeader = (props) => {
 	const router = useRouter()
@@ -23,14 +24,10 @@ const HomeHeader = (props) => {
 		}
 
 		try {
-			const data = await fetch(
-				`${process.env.imei_baseurl}create?key=${process.env.imei_access_key}&service=11&imei=${props.checker.imei}`,
-			)
+			const data = await basicIMEICheck(props.checker.imei)
 
-			const response = await data.json()
-
-			if (response.status === 'failed') {
-				props.setIMEICheckRequestStatus(response.status)
+			if (data.status === 'failed') {
+				props.setIMEICheckRequestStatus(data.status)
 				props.setImeiSerialNumber('')
 				props.setIsLoading(false)
 				props.setErrorMessage('Please enter a valid IMEI/Serial Number.')
@@ -39,8 +36,8 @@ const HomeHeader = (props) => {
 				return null
 			}
 
-			props.setPayload(response)
-			props.setIMEICheckRequestStatus(response.status)
+			props.setPayload(data)
+			props.setIMEICheckRequestStatus(data.status)
 			props.setIsLoading(false)
 			router.push('/imei-checker')
 		} catch (error) {
