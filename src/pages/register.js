@@ -17,7 +17,6 @@ import mapAuthDispatchToProps from 'rtk/auth/action'
 import Link from 'next/link'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
-import defaultConfig from '../../config/default.config'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
@@ -63,7 +62,7 @@ const Register = (props) => {
 			seterrorMessage(t('register:error_1'))
 			return
 		}
-		const response = await fetch(`${defaultConfig.apiEndpoint}v1/auth/signup`, {
+		const response = await fetch(`${process.env.api_baseurl}v1/auth/signup`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

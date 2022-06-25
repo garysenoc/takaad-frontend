@@ -32,7 +32,7 @@ module.exports = {
 	// pageExtensions: ['page.js'],
 
 	env: {
-		api_baseurl: process.env.API_BASEURL,
+		api_baseurl: process.env.API_BASEURL || 'http://localhost:8000/',
 		imei_baseurl: process.env.IMEI_BASEURL,
 		imei_access_key: process.env.IMEI_ACCESS_KEY,
 		nodemailer_username: process.env.NODEMAILER_USERNAME,

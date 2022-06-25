@@ -16,7 +16,6 @@ import {
 	Typography,
 	useFormControl,
 } from '@mui/material'
-import defaultConfig from '../../config/default.config'
 import { connect } from 'react-redux'
 import mapAuthStateToProps from 'rtk/auth/state'
 import mapAuthDispatchToProps from 'rtk/auth/action'
@@ -52,7 +51,7 @@ const Login = (props) => {
 			seterrorMessage(t('login:error_0'))
 			return
 		}
-		const response = await fetch(`${defaultConfig.apiEndpoint}v1/auth/signin`, {
+		const response = await fetch(`${process.env.api_baseurl}v1/auth/signin`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
