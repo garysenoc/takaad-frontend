@@ -9,7 +9,7 @@ import reducers from 'rtk/reducers'
 const persistConfig = {
 	key: 'root',
 	storage,
-	whitelist: ['language', 'cart', 'checkout', 'orders'],
+	whitelist: ['auth', 'language', 'cart', 'checkout', 'orders'],
 	// blacklist: ['auth', 'common'],
 	// transforms: [SetTransform],
 }
