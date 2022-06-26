@@ -188,11 +188,10 @@ export const getDeviceBrand = (str) => {
 		_str.indexOf('macbook') !== -1 ||
 		_str.indexOf('airpod') !== -1 ||
 		(_str.indexOf('watch') !== -1 && _str.indexOf('apple') !== -1)
-	) {
+	)
 		return 'Apple'
-	} else if (_str.indexOf('samsung') !== -1 || _str.indexOf('galaxy') !== -1) {
-		return 'Samsung'
-	}
+	else if (_str.indexOf('samsung') !== -1 || _str.indexOf('galaxy') !== -1) return 'Samsung'
+	// else if (_str.indexOf('nokia') !== -1) return 'Nokia' // To Be Supported
 	return null
 }
 
