@@ -55,8 +55,8 @@ const CheckoutInfo = (props) => {
 		}
 
 		if (!props.auth.isLoggedIn) {
-			props.setErrorMessage('Please log in first.')
-			props.setIsError(true)
+			props.setSnackbarMessage('Please log in first.')
+			props.setIsSnackbarOpen(true)
 			props.setIsLoading(false)
 			return router.push('/login')
 		}
