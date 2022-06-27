@@ -13,6 +13,7 @@ import store, { persistor } from 'rtk/store'
 import theme from 'src/styles/theme'
 import createEmotionCache from 'src/utils/createEmotionCache'
 import 'src/styles/style.css'
+import ErrorSnackbar from '../components/ErrorSnackbar'
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()
@@ -33,7 +34,9 @@ const MyApp = (props) => {
 						{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
 						<CssBaseline />
 						{/* {getLayout(<Component {...pageProps} />)} */}
-						<Component {...pageProps} />
+						<ErrorSnackbar>
+							<Component {...pageProps} />
+						</ErrorSnackbar>
 					</PersistGate>
 				</Provider>
 			</ThemeProvider>

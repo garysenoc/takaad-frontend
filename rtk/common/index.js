@@ -4,18 +4,18 @@ export const commonSlice = createSlice({
 	name: 'common',
 	initialState: {
 		isLoading: false,
-		isError: false,
-		errorMessage: '',
+		isSnackbarOpen: false,
+		snackbarMessage: '',
 	},
 	reducers: {
 		setIsLoading: (state, action) => {
 			state.isLoading = action.payload
 		},
-		setIsError: (state, action) => {
-			state.isError = action.payload
+		setIsSnackbarOpen: (state, action) => {
+			state.isSnackbarOpen = action.payload
 		},
-		setErrorMessage: (state, action) => {
-			state.errorMessage = action.payload
+		setSnackbarMessage: (state, action) => {
+			state.snackbarMessage = action.payload
 		},
 	},
 	extraReducers: {},

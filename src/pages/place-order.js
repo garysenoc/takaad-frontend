@@ -27,8 +27,8 @@ export const getServerSideProps = async (context) => {
 		})
 
 		if (!data.ok) {
-			props.setErrorMessage('Something went wrong, please contact the administrator.')
-			props.setIsError(true)
+			props.setSnackbarMessage('Something went wrong, please contact the administrator.')
+			props.setIsSnackbarOpen(true)
 			return { props: {} }
 		}
 
@@ -60,21 +60,6 @@ const PlaceOrder = GuardOrderDetails((props) => {
 		props.response?.id && props.setOderCheckout(props.response)
 		handleSetOrderData()
 	}, [])
-
-	const handleClose = (event, reason) => {
-		if (reason === 'clickaway') {
-			return
-		}
-		props.setIsError(false)
-	}
-
-	const action = (
-		<React.Fragment>
-			<IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
-				<CloseIcon fontSize="small" />
-			</IconButton>
-		</React.Fragment>
-	)
 
 	const handleSetOrderData = async () => {
 		const options = {
@@ -112,8 +97,8 @@ const PlaceOrder = GuardOrderDetails((props) => {
 			}
 		} catch (error) {
 			if (error) {
-				props.setErrorMessage('Something went wrong, please contact the administrator.')
-				props.setIsError(true)
+				props.setSnackbarMessage('Something went wrong, please contact the administrator.')
+				props.setIsSnackbarOpen(true)
 			}
 		}
 	}
@@ -186,13 +171,6 @@ const PlaceOrder = GuardOrderDetails((props) => {
 					</Grid>
 				</Container>
 			</Box>
-			<Snackbar
-				open={props.common.isError}
-				autoHideDuration={6000}
-				onClose={handleClose}
-				message={props.common.errorMessage}
-				action={action}
-			/>
 			<Footer />
 		</>
 	)

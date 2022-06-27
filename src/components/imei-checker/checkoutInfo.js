@@ -40,16 +40,16 @@ const CheckoutInfo = (props) => {
 
 		for (const [key, value] of Object.entries(props.checkout.billing_details)) {
 			if (key !== 'line2' && !value) {
-				props.setErrorMessage('Please fill up the required details in Billing & Shipping form.')
-				props.setIsError(true)
+				props.setSnackbarMessage('Please fill up the required details in Billing & Shipping form.')
+				props.setIsSnackbarOpen(true)
 				props.setIsLoading(false)
 				return null
 			}
 		}
 
 		if (!props.checkout.isAgreed) {
-			props.setErrorMessage('Please check the box for website terms and conditions to agree.')
-			props.setIsError(true)
+			props.setSnackbarMessage('Please check the box for website terms and conditions to agree.')
+			props.setIsSnackbarOpen(true)
 			props.setIsLoading(false)
 			return null
 		}
@@ -74,8 +74,8 @@ const CheckoutInfo = (props) => {
 			const response = await data.json()
 
 			if (!data.ok) {
-				props.setErrorMessage('Something went wrong!')
-				props.setIsError(true)
+				props.setSnackbarMessage('Something went wrong!')
+				props.setIsSnackbarOpen(true)
 				props.setIsLoading(false)
 				return null
 			}
@@ -83,8 +83,8 @@ const CheckoutInfo = (props) => {
 			handleSetOrderDetails()
 			router.push(`${response.links[1].href}`)
 		} catch (error) {
-			props.setErrorMessage('Payment failed using paypal.')
-			props.setIsError(true)
+			props.setSnackbarMessage('Payment failed using paypal.')
+			props.setIsSnackbarOpen(true)
 			props.setIsLoading(false)
 		}
 	}

@@ -19,16 +19,16 @@ const CreditCardForm = (props) => {
 
 		for (const [key, value] of Object.entries(props.checkout.billing_details)) {
 			if (key !== 'line2' && !value) {
-				props.setErrorMessage('Please fill up the required details in Billing & Shipping form.')
-				props.setIsError(true)
+				props.setSnackbarMessage('Please fill up the required details in Billing & Shipping form.')
+				props.setIsSnackbarOpen(true)
 				props.setIsLoading(false)
 				return null
 			}
 		}
 
 		if (!props.checkout.isAgreed) {
-			props.setErrorMessage('Please check the box for website terms and conditions to agree.')
-			props.setIsError(true)
+			props.setSnackbarMessage('Please check the box for website terms and conditions to agree.')
+			props.setIsSnackbarOpen(true)
 			props.setIsLoading(false)
 			return null
 		}
@@ -52,8 +52,8 @@ const CreditCardForm = (props) => {
 		})
 
 		if (error) {
-			props.setIsError(true)
-			props.setErrorMessage('Payment failed using credit card.')
+			props.setIsSnackbarOpen(true)
+			props.setSnackbarMessage('Payment failed using credit card.')
 			props.setIsLoading(false)
 			return null
 		}
@@ -84,8 +84,8 @@ const CreditCardForm = (props) => {
 			// console.log(paymentIntentResponse)
 		} catch (error) {
 			props.setIsLoading(false)
-			props.setErrorMessage('Payment failed using credit card.')
-			props.setIsError(true)
+			props.setSnackbarMessage('Payment failed using credit card.')
+			props.setIsSnackbarOpen(true)
 		}
 	}
 

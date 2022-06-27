@@ -48,22 +48,6 @@ const ImeiChecker = GuardImeiCheckerPage((props) => {
 		setActiveStep((prevActiveStep) => prevActiveStep - 1)
 	}
 
-	const handleClose = (event, reason) => {
-		if (reason === 'clickaway') {
-			return
-		}
-
-		props.setIsError(false)
-	}
-
-	const action = (
-		<React.Fragment>
-			<IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
-				<CloseIcon fontSize="small" />
-			</IconButton>
-		</React.Fragment>
-	)
-
 	return (
 		<>
 			<Navbar />
@@ -131,13 +115,6 @@ const ImeiChecker = GuardImeiCheckerPage((props) => {
 									Back
 								</Button>
 							</Box>
-							<Snackbar
-								open={props.common.isError}
-								autoHideDuration={6000}
-								onClose={handleClose}
-								message={props.common.errorMessage}
-								action={action}
-							/>
 						</Fragment>
 					</Box>
 				</Container>

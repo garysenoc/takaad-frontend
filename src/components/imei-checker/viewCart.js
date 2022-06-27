@@ -17,8 +17,8 @@ const ViewCart = (props) => {
 
 	const handleApplyCoupon = () => {
 		if (coupon.length === 0) {
-			props.setIsError(true)
-			props.setErrorMessage('Invalid empty coupon code.')
+			props.setIsSnackbarOpen(true)
+			props.setSnackbarMessage('Invalid empty coupon code.')
 		} else {
 			props.nextStep()
 		}
@@ -211,7 +211,7 @@ const ViewCart = (props) => {
 					</Box>
 					<Stack direction="row" mt={4}>
 						<TextField
-							error={props.common.isError}
+							error={props.common.isSnackbarOpen}
 							placeholder="Coupon Code"
 							inputProps={{
 								sx: {

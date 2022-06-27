@@ -2,7 +2,7 @@ import checkerActions from 'rtk/checker'
 import cartActions from 'rtk/cart'
 import commonActions from 'rtk/common'
 
-const { setIsLoading, setIsError, setErrorMessage } = commonActions.actions
+const { setIsLoading, setIsSnackbarOpen, setSnackbarMessage } = commonActions.actions
 const { addItems } = cartActions.actions
 
 const mapDispatchToProps = () => {
@@ -10,8 +10,8 @@ const mapDispatchToProps = () => {
 		...checkerActions.actions,
 		addItems,
 		setIsLoading,
-		setIsError,
-		setErrorMessage,
+		setIsSnackbarOpen,
+		setSnackbarMessage,
 	}
 }
 

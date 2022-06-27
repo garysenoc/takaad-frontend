@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { useRouter } from 'next/router'
 import { connect } from 'react-redux'
-import { Box, Container, Grid, Typography, Stack, InputBase, CardMedia, Snackbar, IconButton } from '@mui/material'
-import CloseIcon from '@mui/icons-material/Close'
+import { Box, Container, Grid, Typography, Stack, InputBase, CardMedia } from '@mui/material'
 
 import mapCheckerStateToProps from 'rtk/checker/state'
 import mapCheckerDispatchToProps from 'rtk/checker/action'
@@ -19,8 +18,8 @@ const HomeHeader = (props) => {
 
 		if (!props.checker.imei) {
 			props.setIsLoading(false)
-			props.setErrorMessage('Please fill up the Enter IMEI/Serial Number.')
-			props.setIsError(true)
+			props.setSnackbarMessage('Please fill up the Enter IMEI/Serial Number.')
+			props.setIsSnackbarOpen(true)
 
 			return null
 		}
@@ -32,8 +31,8 @@ const HomeHeader = (props) => {
 				props.setIMEICheckRequestStatus(data.status)
 				props.setImeiSerialNumber('')
 				props.setIsLoading(false)
-				props.setErrorMessage('Please enter a valid IMEI/Serial Number.')
-				props.setIsError(true)
+				props.setSnackbarMessage('Please enter a valid IMEI/Serial Number.')
+				props.setIsSnackbarOpen(true)
 
 				return null
 			}
@@ -44,26 +43,10 @@ const HomeHeader = (props) => {
 			router.push('/imei-checker')
 		} catch (error) {
 			props.setIsLoading(false)
-			props.setErrorMessage('Please enter a valid IMEI/Serial Number.')
-			props.setIsError(true)
+			props.setSnackbarMessage('Please enter a valid IMEI/Serial Number.')
+			props.setIsSnackbarOpen(true)
 		}
 	}
-
-	const handleClose = (event, reason) => {
-		if (reason === 'clickaway') {
-			return
-		}
-
-		props.setIsError(false)
-	}
-
-	const action = (
-		<React.Fragment>
-			<IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
-				<CloseIcon fontSize="small" />
-			</IconButton>
-		</React.Fragment>
-	)
 
 	return (
 		<>
@@ -158,13 +141,6 @@ const HomeHeader = (props) => {
 								>
 									{t('home:firstSection_button_1')}
 								</LoadingButton>
-								<Snackbar
-									open={props.common.isError}
-									autoHideDuration={6000}
-									onClose={handleClose}
-									message={props.common.errorMessage}
-									action={action}
-								/>
 							</Box>
 						</Grid>
 					</Grid>
