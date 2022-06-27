@@ -32,7 +32,7 @@ export const checkoutSlice = createSlice({
 		setOderDetails: (state, action) => {
 			state.order_details.push(action.payload)
 		},
-		resetOrderDetails: (state, action) => {
+		resetOrderDetails: (state) => {
 			state.order_details = []
 		},
 	},

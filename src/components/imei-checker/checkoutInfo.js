@@ -54,6 +54,13 @@ const CheckoutInfo = (props) => {
 			return null
 		}
 
+		if (!props.auth.isLoggedIn) {
+			props.setErrorMessage('Please log in first.')
+			props.setIsError(true)
+			props.setIsLoading(false)
+			return router.push('/login')
+		}
+
 		const requestOption = {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
