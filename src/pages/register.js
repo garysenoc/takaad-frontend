@@ -62,7 +62,7 @@ const Register = (props) => {
 			seterrorMessage(t('register:error_1'))
 			return
 		}
-		const response = await fetch(`${process.env.api_baseurl}v1/auth/signup`, {
+		const response = await fetch(`${process.env.api_baseurl}/v1/auth/signup`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

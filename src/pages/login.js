@@ -51,7 +51,7 @@ const Login = (props) => {
 			seterrorMessage(t('login:error_0'))
 			return
 		}
-		const response = await fetch(`${process.env.api_baseurl}v1/auth/signin`, {
+		const response = await fetch(`${process.env.api_baseurl}/v1/auth/signin`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
