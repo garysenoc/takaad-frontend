@@ -5,6 +5,7 @@ import { Button } from '@mui/material'
 
 import mapCartStateToProps from 'rtk/cart/state'
 import mapCartDispatchToProps from 'rtk/cart/action'
+import mapOrdersDispatchToProps from 'rtk/orders/action'
 import { CurrentFormattedDate } from 'src/utils/renderFormattedDate'
 
 const CreditCardForm = (props) => {
@@ -109,6 +110,7 @@ const CreditCardForm = (props) => {
 		}
 
 		sessionStorage.setItem('order_details', JSON.stringify(order_details))
+		props.clearOrders()
 
 		router.push('/place-order')
 	}
@@ -154,4 +156,6 @@ const CreditCardForm = (props) => {
 	)
 }
 
-export default connect(mapCartStateToProps, mapCartDispatchToProps())(CreditCardForm)
+export default connect(mapCartStateToProps, { ...mapCartDispatchToProps(), ...mapOrdersDispatchToProps() })(
+	CreditCardForm,
+)

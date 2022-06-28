@@ -5,7 +5,6 @@ import { styled } from '@mui/material/styles'
 import Link from 'next/link'
 import HelpIcon from '@mui/icons-material/Help'
 import { connect } from 'react-redux'
-import { useEffect } from 'react'
 
 import mapCheckerStateToProps from 'rtk/checker/state'
 import mapCheckerDispatchToProps from 'rtk/checker/action'
@@ -30,10 +29,6 @@ const OrderData = (props) => {
 			return 'There is no description for this field at the moment. Please check again later!'
 		}
 	}
-
-	useEffect(() => {
-		console.log('saved!')
-	}, [order_data])
 
 	return (
 		<>
@@ -71,7 +66,7 @@ const OrderData = (props) => {
 													fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
 												}}
 											>
-												Apple iPhone All in One Information
+												{props.orders.order_metadata[i].product}
 											</Typography>
 										</AccordionSummary>
 										<AccordionDetails>

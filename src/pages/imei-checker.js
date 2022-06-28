@@ -1,9 +1,8 @@
 import React, { Fragment, useState } from 'react'
 import { connect } from 'react-redux'
-import { Box, Button, Container, IconButton, Snackbar, Step, StepLabel, Stepper, Typography } from '@mui/material'
+import { Box, Button, Container, Step, StepLabel, Stepper, Typography } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import CloseIcon from '@mui/icons-material/Close'
 
 import GuardImeiCheckerPage from 'lib/guard-imei-checker'
 import mapCheckerStateToProps from 'rtk/checker/state'

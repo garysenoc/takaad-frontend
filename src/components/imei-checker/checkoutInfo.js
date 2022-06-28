@@ -38,6 +38,13 @@ const CheckoutInfo = (props) => {
 	const handlePayPalCreateOrders = async () => {
 		props.setIsLoading(true)
 
+		// if (!props.auth.isLoggedIn) {
+		// 	props.setSnackbarMessage('Please log in first.')
+		// 	props.setIsSnackbarOpen(true)
+		// 	props.setIsLoading(false)
+		// 	return router.push('/login')
+		// }
+
 		for (const [key, value] of Object.entries(props.checkout.billing_details)) {
 			if (key !== 'line2' && !value) {
 				props.setSnackbarMessage('Please fill up the required details in Billing & Shipping form.')
@@ -53,13 +60,6 @@ const CheckoutInfo = (props) => {
 			props.setIsLoading(false)
 			return null
 		}
-
-		// if (!props.auth.isLoggedIn) {
-		// 	props.setSnackbarMessage('Please log in first.')
-		// 	props.setIsSnackbarOpen(true)
-		// 	props.setIsLoading(false)
-		// 	return router.push('/login')
-		// }
 
 		const requestOption = {
 			method: 'POST',
@@ -81,6 +81,7 @@ const CheckoutInfo = (props) => {
 			}
 
 			handleSetOrderDetails()
+			props.clearOrders()
 			router.push(`${response.links[1].href}`)
 		} catch (error) {
 			props.setSnackbarMessage('Payment failed using paypal.')

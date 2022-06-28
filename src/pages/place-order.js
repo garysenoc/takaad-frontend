@@ -1,21 +1,17 @@
 import * as React from 'react'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { Container, Box, Grid, Typography, Snackbar } from '@mui/material'
+import { Container, Box, Grid, Typography } from '@mui/material'
 import { connect } from 'react-redux'
 import { useEffect } from 'react'
-import { IconButton } from '@mui/material'
-import CloseIcon from '@mui/icons-material/Close'
 
 import mapCheckoutStateToProps from 'rtk/checkout/state'
 import mapCheckoutDispatchToProps from 'rtk/checkout/action'
-// import { DefaultLayout } from 'src/layout/default-layout'
+import { renderBrand } from 'src/utils/renderPhoneInformation'
 import OrderDetails from 'src/components/place-order/order-details'
 import OrderData from 'src/components/place-order/order-data'
 import Navbar from 'src/components/navbar/navbar'
 import Footer from 'src/components/footer/footer'
 import GuardOrderDetails from 'lib/guardOrderDetails'
-import { renderBrand } from 'src/utils/renderPhoneInformation'
-import socket from 'lib/websocket'
 
 export const getServerSideProps = async (context) => {
 	if (context.query.token) {
@@ -51,17 +47,13 @@ export const getServerSideProps = async (context) => {
 }
 
 const PlaceOrder = GuardOrderDetails((props) => {
-	socket.off('service-reponse-api').on('service-reponse-api', (data) => {
-		props.setOrderData(data)
-		props.setIsLoading(false)
-	})
-
 	useEffect(() => {
 		props.response?.id && props.setOderCheckout(props.response)
-		handleSetOrderData()
+		handleAddOrderData()
 	}, [])
 
-	const handleSetOrderData = async () => {
+	const handleAddOrderData = async () => {
+		props.setIsLoading(true)
 		const options = {
 			method: 'GET',
 			headers: {
@@ -73,27 +65,34 @@ const PlaceOrder = GuardOrderDetails((props) => {
 		try {
 			const endpoints = []
 
-			for (let i = 0; i < props.cart.imeiserial.length; i++) {
+			for (let i = 0; i < props.cart.items.length; i++) {
 				endpoints.push(
 					fetch(
-						`${process.env.api_baseurl}/v1/imei/service?imei=${props.cart.imeiserial[i]}&brand=${renderBrand(
+						`${process.env.api_baseurl}/v1/imei/service?imei=${props.cart.items[i].details.imei}&brand=${renderBrand(
 							props.cart.items[i].product,
 						)}`,
 						options,
 					),
 				)
 			}
-			const data = await Promise.all(endpoints)
-			const payload = []
-			for (let i = 0; i < data.length; i++) {
-				const res = await data[i].json()
-				// console.log(res)
-			}
-			handleSendEmail()
-			props.clearItems()
 
-			if (!props.orders.order_data.length) {
-				props.setIsLoading(true)
+			props.setMetadata(props.cart.items)
+
+			const data = await Promise.all(endpoints)
+			const flag = false
+			for (let i = 0; i < data.length; i++) {
+				if (!data[i].ok) {
+					flag = true
+					break
+				}
+				const item = await data[i].json()
+				props.addOrderData(item.data)
+			}
+
+			if (!flag) {
+				await handleSendEmail()
+				props.clearItems()
+				props.setIsLoading(false)
 			}
 		} catch (error) {
 			if (error) {

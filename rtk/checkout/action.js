@@ -5,7 +5,7 @@ import ordersActions from 'rtk/orders'
 
 const { setIsLoading, setIsSnackbarOpen, setSnackbarMessage } = commonActions.actions
 const { clearItems } = cartActions.actions
-const { setOrderData } = ordersActions.actions
+const { setMetadata, addOrderData, clearOrders } = ordersActions.actions
 
 const mapDispatchToProps = () => {
 	return {
@@ -14,7 +14,9 @@ const mapDispatchToProps = () => {
 		setIsSnackbarOpen,
 		setSnackbarMessage,
 		clearItems,
-		setOrderData,
+		setMetadata,
+		addOrderData,
+		clearOrders,
 	}
 }
 
