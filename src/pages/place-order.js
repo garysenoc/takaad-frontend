@@ -53,6 +53,10 @@ const PlaceOrder = GuardOrderDetails((props) => {
 	}, [])
 
 	const handleAddOrderData = async () => {
+		if (props.cart.items.length === 0) {
+			return
+		}
+
 		props.setIsLoading(true)
 		const options = {
 			method: 'GET',

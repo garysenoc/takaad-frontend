@@ -8,12 +8,13 @@ export const ordersSlice = createSlice({
 	},
 	reducers: {
 		setMetadata: (state, action) => {
-			state.order_metadata = [...action.payload]
+			action.payload.map((data) => state.order_metadata.push(data))
 		},
 		addOrderData: (state, action) => {
 			state.order_data.push(action.payload)
 		},
 		clearOrders: (state) => {
+			state.order_metadata = []
 			state.order_data = []
 		},
 	},
