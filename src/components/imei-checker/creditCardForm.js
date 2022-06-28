@@ -17,12 +17,12 @@ const CreditCardForm = (props) => {
 
 		props.setIsLoading(true)
 
-		if (!props.auth.isLoggedIn) {
-			props.setSnackbarMessage('Please log in first.')
-			props.setIsSnackbarOpen(true)
-			props.setIsLoading(false)
-			return router.push('/login')
-		}
+		// if (!props.auth.isLoggedIn) {
+		// 	props.setSnackbarMessage('Please log in first.')
+		// 	props.setIsSnackbarOpen(true)
+		// 	props.setIsLoading(false)
+		// 	return router.push('/login')
+		// }
 
 		for (const [key, value] of Object.entries(props.checkout.billing_details)) {
 			if (key !== 'line2' && !value) {
