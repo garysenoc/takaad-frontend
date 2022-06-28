@@ -54,12 +54,12 @@ const CheckoutInfo = (props) => {
 			return null
 		}
 
-		if (!props.auth.isLoggedIn) {
-			props.setSnackbarMessage('Please log in first.')
-			props.setIsSnackbarOpen(true)
-			props.setIsLoading(false)
-			return router.push('/login')
-		}
+		// if (!props.auth.isLoggedIn) {
+		// 	props.setSnackbarMessage('Please log in first.')
+		// 	props.setIsSnackbarOpen(true)
+		// 	props.setIsLoading(false)
+		// 	return router.push('/login')
+		// }
 
 		const requestOption = {
 			method: 'POST',
