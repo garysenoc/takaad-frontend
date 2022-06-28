@@ -97,6 +97,8 @@ const PlaceOrder = GuardOrderDetails((props) => {
 				await handleSendEmail()
 				props.clearItems()
 				props.setIsLoading(false)
+			} else {
+				throw new Error()
 			}
 		} catch (error) {
 			if (error) {
