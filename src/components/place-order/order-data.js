@@ -103,7 +103,7 @@ const OrderData = (props) => {
 																						fontSize: { xs: 12, sm: 14, md: 16 },
 																					}}
 																				>
-																					{handleShowValueForTooltip(order.label)}
+																					{handleShowValueForTooltip(d.label)}
 																				</Typography>
 																				<Link href="/glosarry" passHref>
 																					<Typography
@@ -117,9 +117,9 @@ const OrderData = (props) => {
 																								cursor: 'pointer',
 																							},
 																						}}
-																						onClick={() => props.setSelectedGlosarry(order.label)}
+																						onClick={() => props.setSelectedGlosarry(d.label)}
 																					>
-																						{`Click to learn more about the "${order.label}" field`}
+																						{`Click to learn more about the "${d.label}" field`}
 																					</Typography>
 																				</Link>
 																			</>
