@@ -1,5 +1,5 @@
-const mapStateToProps = (checkerState) => ({
+const mapCheckerStateToProps = (checkerState) => ({
 	...checkerState,
 })
 
-export default mapStateToProps
+export default mapCheckerStateToProps

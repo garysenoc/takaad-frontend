@@ -15,6 +15,7 @@ const HomeHeader = (props) => {
 
 	const handleOnClick = async () => {
 		props.setIsLoading(true)
+		props.resetStep()
 
 		if (!props.checker.imei) {
 			props.setIsLoading(false)

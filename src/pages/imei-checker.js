@@ -23,7 +23,6 @@ export const getServerSideProps = async (ctx) => {
 }
 
 const ImeiChecker = GuardImeiCheckerPage((props) => {
-	const [activeStep, setActiveStep] = useState(0)
 	const [skipped, setSkipped] = useState(new Set())
 	const steps = ['Services', 'Cart', 'Checkout']
 
@@ -34,17 +33,17 @@ const ImeiChecker = GuardImeiCheckerPage((props) => {
 	const handleNext = () => {
 		let newSkipped = skipped
 
-		if (isStepSkipped(activeStep)) {
+		if (isStepSkipped(props.checker.step)) {
 			newSkipped = new Set(newSkipped.values())
-			newSkipped.delete(activeStep)
+			newSkipped.delete(props.checker.step)
 		}
 
-		setActiveStep((prevActiveStep) => prevActiveStep + 1)
+		props.setStep((prevActiveStep) => prevActiveStep + 1)
 		setSkipped(newSkipped)
 	}
 
 	const handleBack = () => {
-		setActiveStep((prevActiveStep) => prevActiveStep - 1)
+		props.setStep((prevActiveStep) => prevActiveStep - 1)
 	}
 
 	return (
@@ -58,7 +57,7 @@ const ImeiChecker = GuardImeiCheckerPage((props) => {
 			>
 				<Container>
 					<Box sx={{ width: '100%' }}>
-						<Stepper activeStep={activeStep}>
+						<Stepper activeStep={props.checker.step}>
 							{steps.map((label, index) => {
 								const stepProps = {}
 								const labelProps = {}
@@ -76,17 +75,17 @@ const ImeiChecker = GuardImeiCheckerPage((props) => {
 							})}
 						</Stepper>
 						<Fragment>
-							{activeStep === 0 && (
+							{props.checker.step === 0 && (
 								<Box mt={5}>
 									<Services nextStep={handleNext} />
 								</Box>
 							)}
-							{activeStep === 1 && (
+							{props.checker.step === 1 && (
 								<Box mt={5}>
 									<ViewCart nextStep={handleNext} />
 								</Box>
 							)}
-							{activeStep === 2 && (
+							{props.checker.step === 2 && (
 								<Box mt={5}>
 									<CheckoutInfo nextStep={handleNext} />
 								</Box>
@@ -94,7 +93,7 @@ const ImeiChecker = GuardImeiCheckerPage((props) => {
 							<Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
 								<Button
 									color="inherit"
-									disabled={activeStep === 0}
+									disabled={props.checker.step === 0}
 									onClick={handleBack}
 									sx={{
 										mr: 1,
@@ -107,7 +106,7 @@ const ImeiChecker = GuardImeiCheckerPage((props) => {
 										'&:hover': {
 											backgroundColor: '#212121',
 										},
-										display: activeStep === 0 ? 'none' : '',
+										display: props.checker.step === 0 ? 'none' : '',
 									}}
 									startIcon={<ArrowBackIcon />}
 								>
