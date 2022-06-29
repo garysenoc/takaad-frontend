@@ -7,6 +7,7 @@ import mapCartStateToProps from 'rtk/cart/state'
 import mapCartDispatchToProps from 'rtk/cart/action'
 import mapOrdersDispatchToProps from 'rtk/orders/action'
 import { CurrentFormattedDate } from 'src/utils/renderFormattedDate'
+import mapCheckerDispatchToProps from '../../../rtk/checker/action'
 
 const CreditCardForm = (props) => {
 	const router = useRouter()
@@ -111,6 +112,7 @@ const CreditCardForm = (props) => {
 
 		sessionStorage.setItem('order_details', JSON.stringify(order_details))
 		props.clearOrders()
+		props.finishedStep()
 
 		router.push('/place-order')
 	}
@@ -156,6 +158,8 @@ const CreditCardForm = (props) => {
 	)
 }
 
-export default connect(mapCartStateToProps, { ...mapCartDispatchToProps(), ...mapOrdersDispatchToProps() })(
-	CreditCardForm,
-)
+export default connect(mapCartStateToProps, {
+	...mapCartDispatchToProps(),
+	...mapOrdersDispatchToProps(),
+	...mapCheckerDispatchToProps(),
+})(CreditCardForm)

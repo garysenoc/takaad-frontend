@@ -26,6 +26,7 @@ import mapCartDispatchToProps from 'rtk/cart/action'
 import CheckoutForm from './checkoutForm'
 import CreditCardForm from './creditCardForm'
 import { CurrentFormattedDate } from 'src/utils/renderFormattedDate'
+import mapCheckerDispatchToProps from '../../../rtk/checker/action'
 
 const CheckoutInfo = (props) => {
 	const router = useRouter()
@@ -82,6 +83,7 @@ const CheckoutInfo = (props) => {
 
 			handleSetOrderDetails()
 			props.clearOrders()
+			props.finishedStep()
 			router.push(`${response.links[1].href}`)
 		} catch (error) {
 			props.setSnackbarMessage('Payment failed using paypal.')
@@ -549,4 +551,6 @@ const CheckoutInfo = (props) => {
 	)
 }
 
-export default connect(mapCartStateToProps, mapCartDispatchToProps())(CheckoutInfo)
+export default connect(mapCartStateToProps, { ...mapCartDispatchToProps(), ...mapCheckerDispatchToProps() })(
+	CheckoutInfo,
+)

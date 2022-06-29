@@ -5,7 +5,7 @@ import commonActions from 'rtk/common'
 const { setIsLoading, setIsSnackbarOpen, setSnackbarMessage } = commonActions.actions
 const { addItems } = cartActions.actions
 
-const mapDispatchToProps = () => {
+const mapCheckerDispatchToProps = () => {
 	return {
 		...checkerActions.actions,
 		addItems,
@@ -15,4 +15,4 @@ const mapDispatchToProps = () => {
 	}
 }
 
-export default mapDispatchToProps
+export default mapCheckerDispatchToProps

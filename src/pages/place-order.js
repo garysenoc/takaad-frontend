@@ -12,6 +12,7 @@ import OrderData from 'src/components/place-order/order-data'
 import Navbar from 'src/components/navbar/navbar'
 import Footer from 'src/components/footer/footer'
 import GuardOrderDetails from 'lib/guardOrderDetails'
+import mapCheckerDispatchToProps from '../../rtk/checker/action'
 
 export const getServerSideProps = async (context) => {
 	if (context.query.token) {
@@ -49,6 +50,7 @@ export const getServerSideProps = async (context) => {
 const PlaceOrder = GuardOrderDetails((props) => {
 	useEffect(() => {
 		props.response?.id && props.setOderCheckout(props.response)
+		props.checker.isFinishedStep && props.resetStep()
 		handleAddOrderData()
 	}, [])
 
@@ -183,4 +185,7 @@ const PlaceOrder = GuardOrderDetails((props) => {
 
 // PlaceOrder.getLayout = (page) => <DefaultLayout>{page}</DefaultLayout>
 
-export default connect(mapCheckoutStateToProps, mapCheckoutDispatchToProps())(PlaceOrder)
+export default connect(mapCheckoutStateToProps, {
+	...mapCheckoutDispatchToProps(),
+	...mapCheckerDispatchToProps(),
+})(PlaceOrder)
