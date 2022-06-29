@@ -84,6 +84,7 @@ const CheckoutInfo = (props) => {
 			handleSetOrderDetails()
 			props.clearOrders()
 			props.finishedStep()
+			props.setIsLoading(false)
 			router.push(`${response.links[1].href}`)
 		} catch (error) {
 			props.setSnackbarMessage('Payment failed using paypal.')

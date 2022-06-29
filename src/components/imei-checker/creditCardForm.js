@@ -113,6 +113,7 @@ const CreditCardForm = (props) => {
 		sessionStorage.setItem('order_details', JSON.stringify(order_details))
 		props.clearOrders()
 		props.finishedStep()
+		props.setIsLoading(false)
 
 		router.push('/place-order')
 	}
