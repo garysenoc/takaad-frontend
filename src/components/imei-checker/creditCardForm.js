@@ -86,7 +86,7 @@ const CreditCardForm = (props) => {
 
 			const paymentIntentResponse = await paymentIntentData.json()
 
-			if (paymentIntentResponse.payment_intent_client_secret.status === 'succeeded') {
+			if (paymentIntentResponse.status === 'succeeded') {
 				handleSetOrderDetails()
 			}
 
@@ -151,7 +151,7 @@ const CreditCardForm = (props) => {
 					},
 				}}
 				type="submit"
-				disabled={!stripe || !elements}
+				disabled={props.checker.isFinishedStep || !stripe || !elements}
 			>
 				{props.common.isLoading ? 'Processing...' : 'Place Order'}
 			</Button>

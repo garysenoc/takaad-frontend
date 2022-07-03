@@ -27,6 +27,7 @@ import CheckoutForm from './checkoutForm'
 import CreditCardForm from './creditCardForm'
 import { CurrentFormattedDate } from 'src/utils/renderFormattedDate'
 import mapCheckerDispatchToProps from '../../../rtk/checker/action'
+import ApplePay from './ApplePay'
 
 const CheckoutInfo = (props) => {
 	const router = useRouter()
@@ -485,7 +486,10 @@ const CheckoutInfo = (props) => {
 							</Typography>
 							{props.cart.selectedPayment === 'creditCard' && (
 								<Elements stripe={stripePromise}>
-									<CreditCardForm sx={{ color: '#fff !important' }} style={{ color: '#fff !important' }} />
+									<Stack direction="column" spacing={1}>
+										<CreditCardForm sx={{ color: '#fff !important' }} style={{ color: '#fff !important' }} />
+										<ApplePay />
+									</Stack>
 								</Elements>
 							)}
 							{props.cart.selectedPayment === 'paypal' && (
