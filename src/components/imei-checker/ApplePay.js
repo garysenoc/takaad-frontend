@@ -17,7 +17,12 @@ const ApplePay = (props) => {
 	const onClickHandler = (e) => {
 		if (props.checker.isFinishedStep) {
 			props.setIsSnackbarOpen(true)
-			props.setSnackbarMessage('Order is already in progress')
+			props.setSnackbarMessage('Order is already in progress.')
+			e.preventDefault()
+			return
+		} else if (!props.checkout.isAgreed) {
+			props.setIsSnackbarOpen(true)
+			props.setSnackbarMessage('Please check the box for website terms and conditions to agree.')
 			e.preventDefault()
 			return
 		}
