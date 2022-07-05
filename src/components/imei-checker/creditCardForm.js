@@ -69,7 +69,7 @@ const CreditCardForm = (props) => {
 
 		let paymentIntentPayload = {
 			id: paymentMethod.id,
-			amount: props.cart.checkout_price,
+			amount: props.cart.final_checkout_price,
 		}
 
 		const paymentIntentRequestOption = {

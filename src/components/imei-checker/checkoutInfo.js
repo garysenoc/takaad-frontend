@@ -36,6 +36,16 @@ const CheckoutInfo = (props) => {
 
 	const prices = props.cart.items.map((item) => item.price)
 	const total = prices.length && prices.reduce((partialSum, a) => partialSum + a, 0)
+	const newTotal = (() => {
+		let deduction = 0
+		if (props.cart.coupon)
+			deduction = props.cart.coupon.type === 'percentage' ? total * props.cart.coupon.value : props.cart.coupon.value
+		return Math.floor((total - deduction) * 100) / 100
+	})()
+
+	useEffect(() => {
+		props.setFinalCheckoutPrice(newTotal)
+	}, [])
 
 	const handlePayPalCreateOrders = async () => {
 		props.setIsLoading(true)
@@ -67,7 +77,7 @@ const CheckoutInfo = (props) => {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
-				amount: props.cart.checkout_price,
+				amount: props.cart.final_checkout_price,
 			}),
 		}
 
@@ -256,6 +266,40 @@ const CheckoutInfo = (props) => {
 									{`$${total}`}
 								</Typography>
 							</Stack>
+							{props.cart.coupon && (
+								<Stack direction="row" justifyContent="space-between" mt={2}>
+									<Typography
+										sx={{
+											fontFamily: 'Nunito Sans',
+											fontWeight: 600,
+											color: '#fff',
+											display: 'block',
+											textAlign: 'left',
+											fontSize: { xs: '14px', sm: '16px', md: '18px' },
+										}}
+									>
+										Discount:
+									</Typography>
+									<Typography
+										sx={{
+											fontFamily: 'Nunito Sans',
+											fontWeight: 400,
+											color: '#fff',
+											display: 'block',
+											textAlign: 'left',
+											fontSize: { xs: '14px', sm: '16px', md: '18px' },
+										}}
+									>
+										{`$${
+											Math.floor(
+												(props.cart.coupon.type === 'percentage'
+													? total * props.cart.coupon.value
+													: props.cart.coupon.value) * 100,
+											) / 100
+										}`}
+									</Typography>
+								</Stack>
+							)}
 							<Stack direction="row" justifyContent="space-between" mb={2}>
 								<Typography
 									sx={{
@@ -279,7 +323,7 @@ const CheckoutInfo = (props) => {
 										fontSize: { xs: '14px', sm: '16px', md: '18px' },
 									}}
 								>
-									{`$${total}`}
+									{`$${newTotal}`}
 								</Typography>
 							</Stack>
 							<FormControl sx={{ width: '100%' }}>

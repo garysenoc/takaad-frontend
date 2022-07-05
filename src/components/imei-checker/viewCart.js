@@ -6,6 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 
 import mapCartStateToProps from 'rtk/cart/state'
 import mapCartDispatchToProps from 'rtk/cart/action'
+import { coupon_codes } from './data'
 
 const ViewCart = (props) => {
 	const router = useRouter()
@@ -15,12 +16,36 @@ const ViewCart = (props) => {
 
 	const handleCouponChange = (event) => setcoupon(event.target.value)
 
+	const _moveNext = () => (router.pathname === '/imei-checker' ? props.nextStep() : router.push('/checkout'))
+
 	const handleApplyCoupon = () => {
 		if (coupon.length === 0) {
 			props.setIsSnackbarOpen(true)
 			props.setSnackbarMessage('Invalid empty coupon code.')
+		}
+		const coupon_code = coupon_codes.filter((item) => item.label === coupon)
+		if (coupon_code.length === 1) {
+			props.setCoupon(coupon_code[0])
+			_moveNext()
 		} else {
-			props.nextStep()
+			props.setIsSnackbarOpen(true)
+			props.setSnackbarMessage('Invalid coupon code.')
+		}
+	}
+
+	const handleCheckout = () => {
+		if (coupon.length === 0) {
+			props.clearCoupon()
+			_moveNext()
+			return
+		}
+		const coupon_code = coupon_codes.filter((item) => item.label === coupon)
+		if (coupon_code.length === 1) {
+			props.setCoupon(coupon_code[0])
+			_moveNext()
+		} else {
+			props.setIsSnackbarOpen(true)
+			props.setSnackbarMessage('Invalid coupon code.')
 		}
 	}
 
@@ -285,7 +310,7 @@ const ViewCart = (props) => {
 										backgroundColor: '#1ea665',
 									},
 								}}
-								onClick={() => (router.pathname === '/imei-checker' ? props.nextStep() : router.push('/checkout'))}
+								onClick={handleCheckout}
 							>
 								Proceed to checkout
 							</Button>

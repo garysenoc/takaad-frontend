@@ -38,7 +38,7 @@ const ApplePay = (props) => {
 			currency: 'usd',
 			total: {
 				label: 'All device information',
-				amount: Math.floor(props.cart.checkout_price * 100),
+				amount: Math.floor(props.cart.final_checkout_price * 100),
 			},
 			requestPayerName: true,
 			requestPayerEmail: true,
@@ -58,7 +58,7 @@ const ApplePay = (props) => {
 					},
 					body: JSON.stringify({
 						id: e.paymentMethod.id,
-						amount: props.cart.checkout_price,
+						amount: props.cart.final_checkout_price,
 					}),
 				}).then((r) => r.json())
 

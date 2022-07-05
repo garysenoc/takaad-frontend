@@ -203,3 +203,5 @@ export const samsung = {
 	Carrier: 'Usa Sprint',
 	'Sold-By': 'United States / 13 April 2016',
 }
+
+export const coupon_codes = [{ label: '80off', value: 0.8, type: 'percentage' }]
