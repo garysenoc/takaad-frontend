@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconButton, Snackbar } from '@mui/material'
+import { IconButton, Snackbar, SnackbarContent } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 
 import mapCommonStateToProps from 'rtk/common/state'
@@ -13,7 +13,7 @@ const ErrorSnackbar = ({ children, ...props }) => {
 		}
 
 		props.setIsSnackbarOpen(false)
-		props.setSnackbarMessage('')
+		props.setSnackbarMessage(['', 'default'])
 	}
 
 	const action = (
@@ -27,13 +27,13 @@ const ErrorSnackbar = ({ children, ...props }) => {
 	return (
 		<>
 			{children}
-			<Snackbar
-				open={props.common.isSnackbarOpen}
-				autoHideDuration={6000}
-				onClose={handleClose}
-				message={props.common.snackbarMessage}
-				action={action}
-			/>
+			<Snackbar open={props.common.isSnackbarOpen} autoHideDuration={6000} onClose={handleClose}>
+				<SnackbarContent
+					message={props.common.snackbarMessage}
+					action={action}
+					sx={{ backgroundColor: props.common.color }}
+				/>
+			</Snackbar>
 		</>
 	)
 }

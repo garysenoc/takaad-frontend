@@ -1,9 +1,9 @@
 import commonActions from 'rtk/common'
 
-const mapDispatchToProps = () => {
+const mapCommonDispatchToProps = () => {
 	return {
 		...commonActions.actions,
 	}
 }
 
-export default mapDispatchToProps
+export default mapCommonDispatchToProps

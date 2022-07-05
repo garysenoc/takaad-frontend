@@ -99,6 +99,8 @@ const PlaceOrder = GuardOrderDetails((props) => {
 				await handleSendEmail()
 				props.clearItems()
 				props.setIsLoading(false)
+				props.setSnackbarMessage(['Order completed!', '#28cd7e'])
+				props.setIsSnackbarOpen(true)
 			} else {
 				throw new Error()
 			}

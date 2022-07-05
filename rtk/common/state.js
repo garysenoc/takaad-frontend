@@ -1,5 +1,5 @@
-const mapStateToProps = (commonState) => ({
+const mapCommonStateToProps = (commonState) => ({
 	...commonState,
 })
 
-export default mapStateToProps
+export default mapCommonStateToProps
