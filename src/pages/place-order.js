@@ -112,7 +112,7 @@ const PlaceOrder = GuardOrderDetails((props) => {
 			},
 			body: JSON.stringify({
 				name: 'Taakad',
-				email: 'muhammadyusufcabais@gmail.com',
+				email: 'gsenoc@gmail.com',
 				subject: 'test123',
 				message: 'test email...',
 			}),
