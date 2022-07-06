@@ -69,7 +69,7 @@ const OrderData = (props) => {
 												{props.orders.order_metadata[i].product}
 											</Typography>
 										</AccordionSummary>
-										<AccordionDetails>
+										<AccordionDetails aria-expanded={true}>
 											<Box>
 												{order.map((d, i) => {
 													return (

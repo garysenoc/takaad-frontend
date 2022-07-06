@@ -1,5 +1,5 @@
-import { PaymentRequestButtonElement, useElements, useStripe } from '@stripe/react-stripe-js'
-import React, { useState, useEffect } from 'react'
+import { PaymentRequestButtonElement } from '@stripe/react-stripe-js'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import mapCartStateToProps from 'rtk/cart/state'
 import mapCartDispatchToProps from 'rtk/cart/action'
@@ -7,12 +7,10 @@ import mapOrdersDispatchToProps from 'rtk/orders/action'
 import mapCheckerDispatchToProps from 'rtk/checker/action'
 import { CurrentFormattedDate } from 'src/utils/renderFormattedDate'
 import { useRouter } from 'next/router'
+import capitalFirstLetterWord from '../../utils/capitalFirstLetterWord'
 
-const ApplePay = (props) => {
+const ApplePay = ({ paymentRequest, stripe, ...props }) => {
 	const router = useRouter()
-	const stripe = useStripe()
-	const elements = useElements()
-	const [paymentRequest, setPaymentRequest] = useState(null)
 
 	const onClickHandler = (e) => {
 		if (props.checker.isFinishedStep) {
@@ -29,27 +27,7 @@ const ApplePay = (props) => {
 	}
 
 	useEffect(() => {
-		if (!stripe || !elements) {
-			return
-		}
-
-		const pr = stripe.paymentRequest({
-			country: 'US',
-			currency: 'usd',
-			total: {
-				label: 'All device information',
-				amount: Math.floor(props.cart.final_checkout_price * 100),
-			},
-			requestPayerName: true,
-			requestPayerEmail: true,
-		})
-		// Check the availability of the Payment Request API.
-		pr.canMakePayment().then((result) => {
-			if (result) {
-				setPaymentRequest(pr)
-			}
-		})
-		pr.on('paymentmethod', async (e) => {
+		paymentRequest.on('paymentmethod', async (e) => {
 			try {
 				const result = await fetch(`${process.env.api_baseurl}/v1/users/stripe/create-payment-intent`, {
 					method: 'POST',
@@ -84,13 +62,11 @@ const ApplePay = (props) => {
 				handleSetOrderDetails()
 			} catch (error) {
 				props.setIsSnackbarOpen(true)
-				props.setSnackbarMessage(
-					`Payment failed using ${e.walletName.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase())}`,
-				)
+				props.setSnackbarMessage(`Payment failed using ${capitalFirstLetterWord(e.walletName)}`)
 				return
 			}
 		})
-	}, [stripe, elements])
+	}, [])
 
 	const handleSetOrderDetails = () => {
 		const order_details = {
@@ -112,7 +88,7 @@ const ApplePay = (props) => {
 		router.push('/place-order')
 	}
 
-	return <>{paymentRequest && <PaymentRequestButtonElement options={{ paymentRequest }} onClick={onClickHandler} />}</>
+	return <PaymentRequestButtonElement options={{ paymentRequest }} onClick={onClickHandler} />
 }
 
 export default connect(mapCartStateToProps, {

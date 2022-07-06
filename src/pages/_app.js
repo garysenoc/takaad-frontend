@@ -14,11 +14,14 @@ import theme from 'src/styles/theme'
 import createEmotionCache from 'src/utils/createEmotionCache'
 import 'src/styles/style.css'
 import ErrorSnackbar from '../components/ErrorSnackbar'
+import { Elements } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()
 
 const MyApp = (props) => {
+	const stripePromise = loadStripe(process.env.stripe_publishable_key)
 	const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
 	// const getLayout = Component.getLayout ?? ((page) => page)
 
@@ -31,12 +34,14 @@ const MyApp = (props) => {
 			<ThemeProvider theme={theme}>
 				<Provider store={store}>
 					<PersistGate persistor={persistor}>
-						{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-						<CssBaseline />
-						{/* {getLayout(<Component {...pageProps} />)} */}
-						<ErrorSnackbar>
-							<Component {...pageProps} />
-						</ErrorSnackbar>
+						<Elements stripe={stripePromise}>
+							{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+							<CssBaseline />
+							{/* {getLayout(<Component {...pageProps} />)} */}
+							<ErrorSnackbar>
+								<Component {...pageProps} />
+							</ErrorSnackbar>
+						</Elements>
 					</PersistGate>
 				</Provider>
 			</ThemeProvider>

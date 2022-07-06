@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Fragment, useEffect } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { useRouter } from 'next/router'
 import {
@@ -17,9 +17,7 @@ import {
 	Button,
 	Divider,
 } from '@mui/material'
-// import CreditCardIcon from '@mui/icons-material/CreditCard'
-import { loadStripe } from '@stripe/stripe-js'
-import { Elements } from '@stripe/react-stripe-js'
+import { useElements, useStripe } from '@stripe/react-stripe-js'
 
 import mapCartStateToProps from 'rtk/cart/state'
 import mapCartDispatchToProps from 'rtk/cart/action'
@@ -28,11 +26,14 @@ import CreditCardForm from './creditCardForm'
 import { CurrentFormattedDate } from 'src/utils/renderFormattedDate'
 import mapCheckerDispatchToProps from '../../../rtk/checker/action'
 import ApplePay from './ApplePay'
+import capitalFirstLetterWord from '../../utils/capitalFirstLetterWord'
 
 const CheckoutInfo = (props) => {
 	const router = useRouter()
-
-	const stripePromise = loadStripe(process.env.stripe_publishable_key)
+	const stripe = useStripe()
+	const elements = useElements()
+	const [walletName, setwalletName] = useState('')
+	const [paymentReq, setpaymentReq] = useState(null)
 
 	const prices = props.cart.items.map((item) => item.price)
 	const total = prices.length && prices.reduce((partialSum, a) => partialSum + a, 0)
@@ -121,6 +122,39 @@ const CheckoutInfo = (props) => {
 		sessionStorage.setItem('order_details', JSON.stringify(order_details))
 		// router.push('/place-order')
 	}
+
+	useEffect(() => {
+		if (!stripe || !elements) {
+			return
+		}
+
+		const pr = stripe.paymentRequest({
+			country: 'US',
+			currency: 'usd',
+			total: {
+				label: 'All device information',
+				amount: Math.floor(newTotal * 100),
+			},
+			requestPayerName: true,
+			requestPayerEmail: true,
+		})
+		pr.canMakePayment().then((result) => {
+			if (result) {
+				const wallets = Object.entries(result)
+				setwalletName(
+					wallets
+						.filter(([, value]) => value)
+						.map(
+							([key], idx, arr) =>
+								capitalFirstLetterWord(key.replace(/([A-Z])/g, (letter) => ` ${letter}`)) +
+								(idx < arr.length - 1 ? '/' : ''),
+						)
+						.join(''),
+				)
+				setpaymentReq(pr)
+			}
+		})
+	}, [stripe, elements])
 
 	return (
 		<>
@@ -364,6 +398,27 @@ const CheckoutInfo = (props) => {
 											</Typography>
 										</Box>
 									)}
+									{paymentReq && (
+										<Box sx={{ display: { xs: 'block', sm: 'flex' }, alignItems: 'center' }}>
+											<FormControlLabel
+												value="wallet"
+												sx={{
+													color: '#fff',
+												}}
+												control={
+													<Radio
+														sx={{
+															color: '#fff',
+															'&.Mui-checked': {
+																color: '#fff',
+															},
+														}}
+													/>
+												}
+												label={walletName}
+											/>
+										</Box>
+									)}
 									<Box sx={{ display: { xs: 'block', sm: 'flex' }, alignItems: 'center' }}>
 										<FormControlLabel
 											value="paypal"
@@ -529,12 +584,10 @@ const CheckoutInfo = (props) => {
 								Click here to check refund policy
 							</Typography>
 							{props.cart.selectedPayment === 'creditCard' && (
-								<Elements stripe={stripePromise}>
-									<Stack direction="column" spacing={1}>
-										<CreditCardForm sx={{ color: '#fff !important' }} style={{ color: '#fff !important' }} />
-										<ApplePay />
-									</Stack>
-								</Elements>
+								<CreditCardForm sx={{ color: '#fff !important' }} style={{ color: '#fff !important' }} />
+							)}
+							{props.cart.selectedPayment === 'wallet' && paymentReq && (
+								<ApplePay paymentRequest={paymentReq} stripe={stripe} />
 							)}
 							{props.cart.selectedPayment === 'paypal' && (
 								<>
