@@ -84,19 +84,21 @@ const PlaceOrder = GuardOrderDetails((props) => {
 
 			props.setMetadata(props.cart.items)
 
-			const data = await Promise.all(endpoints)
+			const results = await Promise.all(endpoints)
+			const data = []
 			const flag = false
-			for (let i = 0; i < data.length; i++) {
-				if (!data[i].ok) {
+			for (let i = 0; i < results.length; i++) {
+				if (!results[i].ok) {
 					flag = true
 					break
 				}
-				const item = await data[i].json()
+				const item = await results[i].json()
+				data.push(item.data)
 				props.addOrderData(item.data)
 			}
 
 			if (!flag) {
-				await handleSendEmail()
+				await handleSendEmail(props.cart.items, data)
 				props.clearItems()
 				props.setIsLoading(false)
 				props.setSnackbarMessage(['Order completed!', '#28cd7e'])
@@ -112,7 +114,7 @@ const PlaceOrder = GuardOrderDetails((props) => {
 		}
 	}
 
-	const handleSendEmail = async () => {
+	const handleSendEmail = async (metadata, data) => {
 		const requestPayload = {
 			method: 'POST',
 			headers: {
@@ -120,10 +122,15 @@ const PlaceOrder = GuardOrderDetails((props) => {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
-				name: 'Taakad',
-				email: 'muhammadyusufcabais@gmail.com',
-				subject: 'test123',
-				message: 'test email...',
+				name: `${props.checkout.billing_details.first_name} ${props.checkout.billing_details.last_name}`,
+				email: props.checkout.billing_details.email_address,
+				subject: 'All in One Information',
+				message: metadata
+					.map(
+						(item, index) =>
+							`${item.product}<br/>${data[index].map((keyVal) => `${keyVal.label}: ${keyVal.value}`).join('<br/>')}`,
+					)
+					.join('<br/><br/>'),
 			}),
 		}
 

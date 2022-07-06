@@ -140,7 +140,7 @@ const Services = (props) => {
 							fontSize: { xs: '18px', sm: '22px', md: '24px', lg: '27px' },
 						}}
 					>
-						{renderPhoneBrandName(payload.result)} All in One Information
+						All information on this device
 					</Typography>
 					<Typography
 						sx={{
