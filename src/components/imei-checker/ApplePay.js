@@ -89,7 +89,7 @@ const ApplePay = ({ paymentRequest, stripe, ...props }) => {
 			order_number: props.cart.items.map((item) => item.order_number),
 			date: CurrentFormattedDate(),
 			email: props.checkout.billing_details.email_address,
-			payment_method: props.cart.selectedPayment === 'paypal' ? 'Paypal' : 'Credit/Debit Card',
+			payment_method: props.cart.selectedPayment,
 			service: props.cart.items.map((item) => item.product),
 			price: props.cart.items.map((item) => item.price),
 			subtotal: props.cart.checkout_price,

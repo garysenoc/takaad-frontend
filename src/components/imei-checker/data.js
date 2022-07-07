@@ -205,3 +205,5 @@ export const samsung = {
 }
 
 export const coupon_codes = [{ label: '80off', value: 0.8, type: 'percentage' }]
+
+export const payment_method = { wallet: 'Wallet', paypal: 'PayPal', creditCard: 'Credit/Debit Card' }
