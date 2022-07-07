@@ -20,7 +20,7 @@ const CreditCardForm = (props) => {
 		props.setIsLoading(true)
 
 		// if (!props.auth.isLoggedIn) {
-		// 	props.setSnackbarMessage('Please log in first.')
+		// 	props.setSnackbarMessage(['Please log in first.', 'error'])
 		// 	props.setIsSnackbarOpen(true)
 		// 	props.setIsLoading(false)
 		// 	return router.push('/login')
@@ -28,7 +28,7 @@ const CreditCardForm = (props) => {
 
 		for (const [key, value] of Object.entries(props.checkout.billing_details)) {
 			if (key !== 'line2' && !value) {
-				props.setSnackbarMessage('Please fill up the required details in Billing & Shipping form.')
+				props.setSnackbarMessage(['Please fill up the required details in Billing & Shipping form.', 'error'])
 				props.setIsSnackbarOpen(true)
 				props.setIsLoading(false)
 				return null
@@ -36,7 +36,7 @@ const CreditCardForm = (props) => {
 		}
 
 		if (!props.checkout.isAgreed) {
-			props.setSnackbarMessage('Please check the box for website terms and conditions to agree.')
+			props.setSnackbarMessage(['Please check the box for website terms and conditions to agree.', 'error'])
 			props.setIsSnackbarOpen(true)
 			props.setIsLoading(false)
 			return null
@@ -62,7 +62,7 @@ const CreditCardForm = (props) => {
 
 		if (error) {
 			props.setIsSnackbarOpen(true)
-			props.setSnackbarMessage('Payment failed using credit card.')
+			props.setSnackbarMessage(['Payment failed using credit card.', 'error'])
 			props.setIsLoading(false)
 			return null
 		}
@@ -93,7 +93,7 @@ const CreditCardForm = (props) => {
 			// console.log(paymentIntentResponse)
 		} catch (error) {
 			props.setIsLoading(false)
-			props.setSnackbarMessage('Payment failed using credit card.')
+			props.setSnackbarMessage(['Payment failed using credit card.', 'error'])
 			props.setIsSnackbarOpen(true)
 		}
 	}
@@ -120,7 +120,7 @@ const CreditCardForm = (props) => {
 	}
 
 	return (
-		<form onSubmit={handleSubmit} style={{ width: '100%', color: ' #fff', marginTop: 20 }}>
+		<form onSubmit={handleSubmit} style={{ width: '100%', color: ' #fff' }}>
 			<CardElement
 				options={{
 					iconStyle: 'solid',

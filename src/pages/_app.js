@@ -13,7 +13,7 @@ import store, { persistor } from 'rtk/store'
 import theme from 'src/styles/theme'
 import createEmotionCache from 'src/utils/createEmotionCache'
 import 'src/styles/style.css'
-import ErrorSnackbar from '../components/ErrorSnackbar'
+import SnackbarMessage from '../components/SnackbarMessage'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 
@@ -38,9 +38,9 @@ const MyApp = (props) => {
 							{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
 							<CssBaseline />
 							{/* {getLayout(<Component {...pageProps} />)} */}
-							<ErrorSnackbar>
+							<SnackbarMessage>
 								<Component {...pageProps} />
-							</ErrorSnackbar>
+							</SnackbarMessage>
 						</Elements>
 					</PersistGate>
 				</Provider>

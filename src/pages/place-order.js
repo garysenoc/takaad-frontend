@@ -24,7 +24,7 @@ export const getServerSideProps = async (context) => {
 		})
 
 		if (!data.ok) {
-			props.setSnackbarMessage('Something went wrong, please contact the administrator.')
+			props.setSnackbarMessage(['Something went wrong, please contact the administrator.', 'error'])
 			props.setIsSnackbarOpen(true)
 			return { props: {} }
 		}
@@ -101,14 +101,14 @@ const PlaceOrder = GuardOrderDetails((props) => {
 				await handleSendEmail(props.cart.items, data)
 				props.clearItems()
 				props.setIsLoading(false)
-				props.setSnackbarMessage(['Order completed!', '#28cd7e'])
+				props.setSnackbarMessage(['Order completed!', 'success'])
 				props.setIsSnackbarOpen(true)
 			} else {
 				throw new Error()
 			}
 		} catch (error) {
 			if (error) {
-				props.setSnackbarMessage('Something went wrong, please contact the administrator.')
+				props.setSnackbarMessage(['Something went wrong, please contact the administrator.', 'error'])
 				props.setIsSnackbarOpen(true)
 			}
 		}

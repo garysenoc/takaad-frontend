@@ -34,7 +34,7 @@ const ViewCart = (props) => {
 		} catch (error) {
 			props.setCoupon(null)
 			props.setIsSnackbarOpen(true)
-			props.setSnackbarMessage(error.message)
+			props.setSnackbarMessage([error.message, 'error'])
 		}
 	}
 
@@ -49,7 +49,7 @@ const ViewCart = (props) => {
 			} else {
 				props.setCoupon(null)
 				props.setIsSnackbarOpen(true)
-				props.setSnackbarMessage(error.message)
+				props.setSnackbarMessage([error.message, 'error'])
 			}
 		}
 	}

@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 
 import mapCheckoutStateToProps from 'rtk/checkout/state'
 import mapCheckoutDispatchToProps from 'rtk/checkout/action'
-import { payment_method } from '../imei-checker/data'
 
 const OrderDetails = () => {
 	const order_details = JSON.parse(sessionStorage.getItem('order_details'))
@@ -54,7 +53,7 @@ const OrderDetails = () => {
 						fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
 					}}
 				>
-					<strong>Payment Method:</strong> {payment_method[order_details.payment_method]}
+					<strong>Payment Method:</strong> {order_details.payment_method}
 				</Typography>
 			</Box>
 

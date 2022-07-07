@@ -19,7 +19,7 @@ const HomeHeader = (props) => {
 
 		if (!props.checker.imei) {
 			props.setIsLoading(false)
-			props.setSnackbarMessage('Please fill up the Enter IMEI/Serial Number.')
+			props.setSnackbarMessage(['Please fill up the Enter IMEI/Serial Number.', 'error'])
 			props.setIsSnackbarOpen(true)
 
 			return null
@@ -32,7 +32,7 @@ const HomeHeader = (props) => {
 				props.setIMEICheckRequestStatus(data.status)
 				props.setImeiSerialNumber('')
 				props.setIsLoading(false)
-				props.setSnackbarMessage('Please enter a valid IMEI/Serial Number.')
+				props.setSnackbarMessage(['Please enter a valid IMEI/Serial Number.', 'error'])
 				props.setIsSnackbarOpen(true)
 
 				return null
@@ -44,7 +44,7 @@ const HomeHeader = (props) => {
 			router.push('/imei-checker')
 		} catch (error) {
 			props.setIsLoading(false)
-			props.setSnackbarMessage('Please enter a valid IMEI/Serial Number.')
+			props.setSnackbarMessage(['Please enter a valid IMEI/Serial Number.', 'error'])
 			props.setIsSnackbarOpen(true)
 		}
 	}

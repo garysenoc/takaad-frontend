@@ -6,7 +6,7 @@ export const commonSlice = createSlice({
 		isLoading: false,
 		isSnackbarOpen: false,
 		snackbarMessage: '',
-		color: 'default',
+		color: 'info',
 	},
 	reducers: {
 		setIsLoading: (state, action) => {
@@ -18,6 +18,7 @@ export const commonSlice = createSlice({
 		setSnackbarMessage: (state, action) => {
 			if (typeof action.payload === 'string') {
 				state.snackbarMessage = action.payload
+				state.color = 'info'
 			} else if (typeof action.payload === 'object') {
 				state.snackbarMessage = action.payload[0]
 				state.color = action.payload[1]

@@ -25,7 +25,7 @@ import CheckoutForm from './checkoutForm'
 import CreditCardForm from './creditCardForm'
 import { CurrentFormattedDate } from 'src/utils/renderFormattedDate'
 import mapCheckerDispatchToProps from '../../../rtk/checker/action'
-import ApplePay from './ApplePay'
+import Wallet from './Wallet'
 import capitalFirstLetterWord from '../../utils/capitalFirstLetterWord'
 
 const CheckoutInfo = (props) => {
@@ -39,7 +39,7 @@ const CheckoutInfo = (props) => {
 		props.setIsLoading(true)
 
 		// if (!props.auth.isLoggedIn) {
-		// 	props.setSnackbarMessage('Please log in first.')
+		// 	props.setSnackbarMessage(['Please log in first.', 'error'])
 		// 	props.setIsSnackbarOpen(true)
 		// 	props.setIsLoading(false)
 		// 	return router.push('/login')
@@ -47,7 +47,7 @@ const CheckoutInfo = (props) => {
 
 		for (const [key, value] of Object.entries(props.checkout.billing_details)) {
 			if (key !== 'line2' && !value) {
-				props.setSnackbarMessage('Please fill up the required details in Billing & Shipping form.')
+				props.setSnackbarMessage(['Please fill up the required details in Billing & Shipping form.', 'error'])
 				props.setIsSnackbarOpen(true)
 				props.setIsLoading(false)
 				return null
@@ -55,7 +55,7 @@ const CheckoutInfo = (props) => {
 		}
 
 		if (!props.checkout.isAgreed) {
-			props.setSnackbarMessage('Please check the box for website terms and conditions to agree.')
+			props.setSnackbarMessage(['Please check the box for website terms and conditions to agree.', 'error'])
 			props.setIsSnackbarOpen(true)
 			props.setIsLoading(false)
 			return null
@@ -74,7 +74,7 @@ const CheckoutInfo = (props) => {
 			const response = await data.json()
 
 			if (!data.ok) {
-				props.setSnackbarMessage('Something went wrong!')
+				props.setSnackbarMessage(['Something went wrong!', 'error'])
 				props.setIsSnackbarOpen(true)
 				props.setIsLoading(false)
 				return null
@@ -86,13 +86,53 @@ const CheckoutInfo = (props) => {
 			props.setIsLoading(false)
 			router.push(`${response.links[1].href}`)
 		} catch (error) {
-			props.setSnackbarMessage('Payment failed using paypal.')
+			props.setSnackbarMessage(['Payment failed using paypal.', 'error'])
 			props.setIsSnackbarOpen(true)
 			props.setIsLoading(false)
 		}
 	}
 
-	useEffect(() => props.setSelectedPayment('paypal'), [])
+	useEffect(() => props.setSelectedPayment('PayPal'), [])
+
+	const renderPaymentButton = () => {
+		if (props.cart.selectedPayment === 'Credit Card') {
+			return <CreditCardForm sx={{ color: '#fff !important' }} style={{ color: '#fff !important' }} />
+		} else if (props.cart.selectedPayment === 'PayPal') {
+			return (
+				<Button
+					sx={{
+						fontFamily: 'Nunito Sans',
+						fontWeight: 400,
+						color: '#fff',
+						backgroundColor: '#ffc439',
+						textTransform: 'capitalize',
+						width: '100%',
+						fontSize: { xs: '18px', md: '18px', lg: '24px' },
+						lineHeight: { xs: '18px', md: '18px', lg: '24px' },
+						padding: 2,
+						'&:hover': {
+							backgroundColor: '#d1a12e',
+						},
+					}}
+					onClick={handlePayPalCreateOrders}
+				>
+					{props.common.isLoading ? (
+						'Processing...'
+					) : (
+						<CardMedia
+							component="img"
+							image={`images/paypal.webp`}
+							sx={{
+								width: { xs: 70, sm: 90, md: 120 },
+							}}
+						/>
+					)}
+				</Button>
+			)
+		} else {
+			return <Wallet paymentRequest={paymentReq} stripe={stripe} />
+		}
+	}
 
 	const handleSetOrderDetails = () => {
 		const order_details = {
@@ -381,7 +421,7 @@ const CheckoutInfo = (props) => {
 									{paymentReq && (
 										<Box sx={{ display: { xs: 'block', sm: 'flex' }, alignItems: 'center' }}>
 											<FormControlLabel
-												value="wallet"
+												value={walletName}
 												sx={{
 													color: '#fff',
 												}}
@@ -401,7 +441,7 @@ const CheckoutInfo = (props) => {
 									)}
 									<Box sx={{ display: { xs: 'block', sm: 'flex' }, alignItems: 'center' }}>
 										<FormControlLabel
-											value="paypal"
+											value="PayPal"
 											sx={{
 												color: '#fff',
 											}}
@@ -420,7 +460,7 @@ const CheckoutInfo = (props) => {
 									</Box>
 									<Box sx={{ display: { xs: 'block', sm: 'flex' }, alignItems: 'center' }}>
 										<FormControlLabel
-											value="creditCard"
+											value="Credit Card"
 											sx={{
 												color: '#fff',
 											}}
@@ -563,68 +603,7 @@ const CheckoutInfo = (props) => {
 							>
 								Click here to check refund policy
 							</Typography>
-							{props.cart.selectedPayment === 'creditCard' && (
-								<CreditCardForm sx={{ color: '#fff !important' }} style={{ color: '#fff !important' }} />
-							)}
-							{props.cart.selectedPayment === 'wallet' && paymentReq && (
-								<ApplePay paymentRequest={paymentReq} stripe={stripe} />
-							)}
-							{props.cart.selectedPayment === 'paypal' && (
-								<>
-									<Button
-										sx={{
-											fontFamily: 'Nunito Sans',
-											fontWeight: 400,
-											color: '#fff',
-											backgroundColor: '#ffc439',
-											textTransform: 'capitalize',
-											marginTop: '10px',
-											width: '100%',
-											fontSize: { xs: '18px', md: '18px', lg: '24px' },
-											lineHeight: { xs: '18px', md: '18px', lg: '24px' },
-											padding: 2,
-											'&:hover': {
-												backgroundColor: '#d1a12e',
-											},
-										}}
-										onClick={handlePayPalCreateOrders}
-										// onClick={handleSetOrderDetails}
-									>
-										{props.common.isLoading ? (
-											'Processing...'
-										) : (
-											<CardMedia
-												component="img"
-												image={`images/paypal.webp`}
-												sx={{
-													width: { xs: 70, sm: 90, md: 120 },
-												}}
-											/>
-										)}
-									</Button>
-									{/* <Button
-										sx={{
-											fontFamily: 'Nunito Sans',
-											fontWeight: 400,
-											color: '#fff',
-											backgroundColor: '#4c5054',
-											marginTop: '10px',
-											textTransform: 'capitalize',
-											width: '100%',
-											fontSize: { xs: '18px', md: '18px', lg: '22px' },
-											lineHeight: { xs: '18px', md: '18px', lg: '22px' },
-											padding: 2,
-											'&:hover': {
-												backgroundColor: '#3c3f42',
-											},
-										}}
-										startIcon={<CreditCardIcon />}
-										onClick={() => router.push('/place-order')}
-									>
-										Debit/Credit Card
-									</Button> */}
-								</>
-							)}
+							<Box marginTop={2}>{renderPaymentButton()}</Box>
 						</Box>
 					</Grid>
 				</Grid>

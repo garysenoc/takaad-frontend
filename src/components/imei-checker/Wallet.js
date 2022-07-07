@@ -9,7 +9,7 @@ import { CurrentFormattedDate } from 'src/utils/renderFormattedDate'
 import { useRouter } from 'next/router'
 import capitalFirstLetterWord from '../../utils/capitalFirstLetterWord'
 
-const ApplePay = ({ paymentRequest, stripe, ...props }) => {
+const Wallet = ({ paymentRequest, stripe, ...props }) => {
 	const router = useRouter()
 
 	const onClickHandler = (e) => {
@@ -17,7 +17,7 @@ const ApplePay = ({ paymentRequest, stripe, ...props }) => {
 		for (const [key, value] of Object.entries(props.checkout.billing_details)) {
 			if (key !== 'line2' && !value) {
 				flag = true
-				props.setSnackbarMessage('Please fill up the required details in Billing & Shipping form.')
+				props.setSnackbarMessage(['Please fill up the required details in Billing & Shipping form.', 'error'])
 				props.setIsSnackbarOpen(true)
 				props.setIsLoading(false)
 				break
@@ -26,7 +26,7 @@ const ApplePay = ({ paymentRequest, stripe, ...props }) => {
 
 		if (!props.checkout.isAgreed) {
 			e.preventDefault()
-			props.setSnackbarMessage('Please check the box for website terms and conditions to agree.')
+			props.setSnackbarMessage(['Please check the box for website terms and conditions to agree.', 'error'])
 			props.setIsSnackbarOpen(true)
 			props.setIsLoading(false)
 			flag = true
@@ -78,7 +78,7 @@ const ApplePay = ({ paymentRequest, stripe, ...props }) => {
 				handleSetOrderDetails()
 			} catch (error) {
 				props.setIsSnackbarOpen(true)
-				props.setSnackbarMessage(`Payment failed using ${capitalFirstLetterWord(e.walletName)}`)
+				props.setSnackbarMessage([`Payment failed using ${capitalFirstLetterWord(e.walletName)}`, 'error'])
 				return
 			}
 		})
@@ -105,11 +105,16 @@ const ApplePay = ({ paymentRequest, stripe, ...props }) => {
 		router.push('/place-order')
 	}
 
-	return <PaymentRequestButtonElement options={{ paymentRequest }} onClick={onClickHandler} />
+	return (
+		<PaymentRequestButtonElement
+			options={{ paymentRequest, style: { paymentRequestButton: { theme: 'light' } } }}
+			onClick={onClickHandler}
+		/>
+	)
 }
 
 export default connect(mapCartStateToProps, {
 	...mapCartDispatchToProps(),
 	...mapOrdersDispatchToProps(),
 	...mapCheckerDispatchToProps(),
-})(ApplePay)
+})(Wallet)
