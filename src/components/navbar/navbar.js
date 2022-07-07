@@ -134,58 +134,76 @@ const Navbar = (props) => {
 							<ShoppingCartIcon sx={{ color: '#003056', '&:hover': { cursor: 'pointer', color: '#004d8a' } }} />
 						</CartBadge>
 						<Box sx={{ border: '1px solid #dedede', mx: 2, height: 50 }}></Box>
-						{props.auth.token === '' ? (
+						<Stack direction="row" spacing={1}>
+							{props.auth.token === '' ? (
+								<Button
+									sx={{
+										backgroundColor: '#003056',
+										color: '#fff',
+										borderRadius: 10,
+										textTransform: 'capitalize',
+										minWidth: { md: 100, lg: 120 },
+										fontSize: { md: 15, lg: 18 },
+										'&:hover': {
+											backgroundColor: '#004d8a',
+										},
+									}}
+									href="/login"
+								>
+									{t('common:btn_login')}
+								</Button>
+							) : (
+								<>
+									<Button
+										sx={{
+											backgroundColor: '#003056',
+											color: '#fff',
+											borderRadius: 10,
+											textTransform: 'capitalize',
+											minWidth: { md: 100, lg: 120 },
+											fontSize: { md: 15, lg: 18 },
+											'&:hover': {
+												backgroundColor: '#004d8a',
+											},
+										}}
+										onClick={handleLogOut}
+									>
+										{t('common:btn_logout')}
+									</Button>
+									<Button
+										sx={{
+											backgroundColor: '#28cd7e',
+											color: '#fff',
+											borderRadius: 10,
+											textTransform: 'capitalize',
+											minWidth: { md: 100, lg: 120 },
+											fontSize: { md: 15, lg: 18 },
+											'&:hover': {
+												backgroundColor: '#14a660',
+											},
+										}}
+										href="/orders"
+									>
+										Orders
+									</Button>
+								</>
+							)}
 							<Button
 								sx={{
-									backgroundColor: '#003056',
+									backgroundColor: '#28cd7e',
 									color: '#fff',
 									borderRadius: 10,
 									textTransform: 'capitalize',
 									minWidth: { md: 100, lg: 120 },
 									fontSize: { md: 15, lg: 18 },
 									'&:hover': {
-										backgroundColor: '#004d8a',
+										backgroundColor: '#14a660',
 									},
-									mr: { md: 1, lg: 2 },
 								}}
-								href="/login"
 							>
-								{t('common:btn_login')}
+								{t('common:btn_client_area')}
 							</Button>
-						) : (
-							<Button
-								sx={{
-									backgroundColor: '#003056',
-									color: '#fff',
-									borderRadius: 10,
-									textTransform: 'capitalize',
-									minWidth: { md: 100, lg: 120 },
-									fontSize: { md: 15, lg: 18 },
-									'&:hover': {
-										backgroundColor: '#004d8a',
-									},
-									mr: { md: 1, lg: 2 },
-								}}
-								onClick={handleLogOut}
-							>
-								{t('common:btn_logout')}
-							</Button>
-						)}
-						<Button
-							sx={{
-								backgroundColor: '#28cd7e',
-								color: '#fff',
-								borderRadius: 10,
-								textTransform: 'capitalize',
-								minWidth: { md: 100, lg: 120 },
-								fontSize: { md: 15, lg: 18 },
-								'&:hover': {
-									backgroundColor: '#14a660',
-								},
-							}}
-						>
-							{t('common:btn_client_area')}
-						</Button>
+						</Stack>
 					</Box>
 					<Box sx={{ display: { xs: 'block', md: 'none' } }}>
 						<SideBar

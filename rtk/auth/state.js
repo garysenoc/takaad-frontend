@@ -1,5 +1,5 @@
-const mapStateToProps = (authState) => ({
+const mapAuthStateToProps = (authState) => ({
 	...authState,
 })
 
-export default mapStateToProps
+export default mapAuthStateToProps

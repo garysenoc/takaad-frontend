@@ -1,9 +1,9 @@
 import authActions from 'rtk/auth'
 
-const mapDispatchToProps = () => {
+const mapAuthDispatchToProps = () => {
 	return {
 		...authActions.actions,
 	}
 }
 
-export default mapDispatchToProps
+export default mapAuthDispatchToProps

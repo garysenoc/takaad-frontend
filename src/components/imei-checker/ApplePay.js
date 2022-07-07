@@ -13,14 +13,30 @@ const ApplePay = ({ paymentRequest, stripe, ...props }) => {
 	const router = useRouter()
 
 	const onClickHandler = (e) => {
-		if (props.checker.isFinishedStep) {
+		let flag = false
+		for (const [key, value] of Object.entries(props.checkout.billing_details)) {
+			if (key !== 'line2' && !value) {
+				flag = true
+				props.setSnackbarMessage('Please fill up the required details in Billing & Shipping form.')
+				props.setIsSnackbarOpen(true)
+				props.setIsLoading(false)
+				break
+			}
+		}
+
+		if (!props.checkout.isAgreed) {
+			e.preventDefault()
+			props.setSnackbarMessage('Please check the box for website terms and conditions to agree.')
+			props.setIsSnackbarOpen(true)
+			props.setIsLoading(false)
+			flag = true
+		} else if (props.checker.isFinishedStep) {
 			props.setIsSnackbarOpen(true)
 			props.setSnackbarMessage('Order is already in progress.')
-			e.preventDefault()
-			return
-		} else if (!props.checkout.isAgreed) {
-			props.setIsSnackbarOpen(true)
-			props.setSnackbarMessage('Please check the box for website terms and conditions to agree.')
+			flag = true
+		}
+
+		if (flag) {
 			e.preventDefault()
 			return
 		}
