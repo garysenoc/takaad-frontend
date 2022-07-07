@@ -11,45 +11,67 @@ import { coupon_codes } from './data'
 const ViewCart = (props) => {
 	const router = useRouter()
 	const [coupon, setcoupon] = useState('')
-	const prices = props.cart.items.map((item) => item.price)
-	const total = prices.length && prices.reduce((partialSum, a) => partialSum + a)
 
 	const handleCouponChange = (event) => setcoupon(event.target.value)
 
 	const _moveNext = () => (router.pathname === '/imei-checker' ? props.nextStep() : router.push('/checkout'))
 
-	const handleApplyCoupon = () => {
+	const evaluateCoupon = () => {
 		if (coupon.length === 0) {
-			props.setIsSnackbarOpen(true)
-			props.setSnackbarMessage('Invalid empty coupon code.')
+			throw { code: 0, message: 'Invalid empty coupon code.' }
 		}
-		const coupon_code = coupon_codes.filter((item) => item.label === coupon)
-		if (coupon_code.length === 1) {
-			props.setCoupon(coupon_code[0])
-			_moveNext()
+		const [coupon_code] = coupon_codes.filter((item) => item.label === coupon)
+		if (coupon_code) {
+			return coupon_code
 		} else {
+			throw { code: 1, message: 'Invalid coupon code.' }
+		}
+	}
+
+	const handleApplyCoupon = () => {
+		try {
+			props.setCoupon(evaluateCoupon())
+		} catch (error) {
+			props.setCoupon(null)
 			props.setIsSnackbarOpen(true)
-			props.setSnackbarMessage('Invalid coupon code.')
+			props.setSnackbarMessage(error.message)
 		}
 	}
 
 	const handleCheckout = () => {
-		if (coupon.length === 0) {
-			props.clearCoupon()
+		try {
+			props.setCoupon(evaluateCoupon())
 			_moveNext()
-			return
-		}
-		const coupon_code = coupon_codes.filter((item) => item.label === coupon)
-		if (coupon_code.length === 1) {
-			props.setCoupon(coupon_code[0])
-			_moveNext()
-		} else {
-			props.setIsSnackbarOpen(true)
-			props.setSnackbarMessage('Invalid coupon code.')
+		} catch (error) {
+			if (error.code === 0) {
+				props.clearCoupon()
+				_moveNext()
+			} else {
+				props.setCoupon(null)
+				props.setIsSnackbarOpen(true)
+				props.setSnackbarMessage(error.message)
+			}
 		}
 	}
 
-	useEffect(() => props.setCheckoutPrice(total), [])
+	useEffect(() => {
+		const prices = props.cart.items.map((item) => item.price)
+		const subtotal = prices.length ? Math.floor(prices.reduce((partialSum, a) => partialSum + a) * 100) / 100 : 0
+		let discount = 0
+		if (coupon.length > 0 && props.cart.coupon) {
+			discount =
+				Math.floor(
+					(props.cart.coupon.type === 'percentage' ? subtotal * props.cart.coupon.value : props.cart.coupon.value) *
+						100,
+				) / 100
+		}
+		const total = Math.floor((subtotal - discount) * 100) / 100
+		props.setCheckoutPrice({
+			subtotal,
+			discount,
+			total,
+		})
+	}, [coupon, props.cart.coupon])
 
 	return (
 		<>
@@ -280,7 +302,7 @@ const ViewCart = (props) => {
 								fontSize: { xs: '16px', sm: '18px', md: '20px' },
 							}}
 						>
-							<strong>Subtotal: </strong> {`${total}`}
+							<strong>Subtotal: </strong> {`${props.cart.subtotal}`}
 						</Typography>
 						<Typography
 							sx={{
@@ -291,7 +313,18 @@ const ViewCart = (props) => {
 								fontSize: { xs: '16px', sm: '18px', md: '20px' },
 							}}
 						>
-							<strong>Total: {`${total}`}</strong>
+							<strong>Discount: </strong> {`${props.cart.discount}`}
+						</Typography>
+						<Typography
+							sx={{
+								fontFamily: 'Nunito Sans',
+								fontWeight: 400,
+								color: '#003056',
+								display: 'block',
+								fontSize: { xs: '16px', sm: '18px', md: '20px' },
+							}}
+						>
+							<strong>Total: </strong> {`${props.cart.total}`}
 						</Typography>
 						<Box my={2}>
 							<Button

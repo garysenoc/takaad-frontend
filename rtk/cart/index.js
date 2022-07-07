@@ -4,8 +4,9 @@ export const cartSlice = createSlice({
 	name: 'cart',
 	initialState: {
 		items: [],
-		checkout_price: 0,
-		final_checkout_price: 0,
+		subtotal: 0,
+		discount: 0,
+		total: 0,
 		selectedPayment: '',
 		coupon: null,
 	},
@@ -20,7 +21,9 @@ export const cartSlice = createSlice({
 			state.items = []
 		},
 		setCheckoutPrice: (state, action) => {
-			state.checkout_price = action.payload
+			state.subtotal = action.payload.subtotal
+			state.discount = action.payload.discount
+			state.total = action.payload.total
 		},
 		setSelectedPayment: (state, action) => {
 			state.selectedPayment = action.payload
@@ -30,9 +33,6 @@ export const cartSlice = createSlice({
 		},
 		clearCoupon: (state) => {
 			state.coupon = null
-		},
-		setFinalCheckoutPrice: (state, action) => {
-			state.final_checkout_price = action.payload
 		},
 	},
 	extraReducers: {},

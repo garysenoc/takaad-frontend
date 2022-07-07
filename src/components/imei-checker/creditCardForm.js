@@ -69,7 +69,7 @@ const CreditCardForm = (props) => {
 
 		let paymentIntentPayload = {
 			id: paymentMethod.id,
-			amount: props.cart.final_checkout_price,
+			amount: props.cart.total,
 		}
 
 		const paymentIntentRequestOption = {
@@ -106,8 +106,9 @@ const CreditCardForm = (props) => {
 			payment_method: props.cart.selectedPayment,
 			service: props.cart.items.map((item) => item.product),
 			price: props.cart.items.map((item) => item.price),
-			subtotal: props.cart.checkout_price,
-			total: props.cart.checkout_price,
+			subtotal: props.cart.subtotal,
+			discount: props.cart.discount,
+			total: props.cart.total,
 		}
 
 		sessionStorage.setItem('order_details', JSON.stringify(order_details))

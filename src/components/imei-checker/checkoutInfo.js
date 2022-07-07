@@ -35,19 +35,6 @@ const CheckoutInfo = (props) => {
 	const [walletName, setwalletName] = useState('')
 	const [paymentReq, setpaymentReq] = useState(null)
 
-	const prices = props.cart.items.map((item) => item.price)
-	const total = prices.length && prices.reduce((partialSum, a) => partialSum + a, 0)
-	const newTotal = (() => {
-		let deduction = 0
-		if (props.cart.coupon)
-			deduction = props.cart.coupon.type === 'percentage' ? total * props.cart.coupon.value : props.cart.coupon.value
-		return Math.floor((total - deduction) * 100) / 100
-	})()
-
-	useEffect(() => {
-		props.setFinalCheckoutPrice(newTotal)
-	}, [])
-
 	const handlePayPalCreateOrders = async () => {
 		props.setIsLoading(true)
 
@@ -78,7 +65,7 @@ const CheckoutInfo = (props) => {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
-				amount: props.cart.final_checkout_price,
+				amount: props.cart.total,
 			}),
 		}
 
@@ -115,8 +102,9 @@ const CheckoutInfo = (props) => {
 			payment_method: props.cart.selectedPayment,
 			service: props.cart.items.map((item) => item.product),
 			price: props.cart.items.map((item) => item.price),
-			subtotal: props.cart.checkout_price,
-			total: props.cart.checkout_price,
+			subtotal: props.cart.subtotal,
+			discount: props.cart.discount,
+			total: props.cart.total,
 		}
 
 		sessionStorage.setItem('order_details', JSON.stringify(order_details))
@@ -133,7 +121,7 @@ const CheckoutInfo = (props) => {
 			currency: 'usd',
 			total: {
 				label: 'All device information',
-				amount: Math.floor(newTotal * 100),
+				amount: Math.floor(props.cart.total * 100),
 			},
 			requestPayerName: true,
 			requestPayerEmail: true,
@@ -297,43 +285,35 @@ const CheckoutInfo = (props) => {
 										fontSize: { xs: '14px', sm: '16px', md: '18px' },
 									}}
 								>
-									{`$${total}`}
+									{`$${props.cart.subtotal}`}
 								</Typography>
 							</Stack>
-							{props.cart.coupon && (
-								<Stack direction="row" justifyContent="space-between" mt={2}>
-									<Typography
-										sx={{
-											fontFamily: 'Nunito Sans',
-											fontWeight: 600,
-											color: '#fff',
-											display: 'block',
-											textAlign: 'left',
-											fontSize: { xs: '14px', sm: '16px', md: '18px' },
-										}}
-									>
-										Discount:
-									</Typography>
-									<Typography
-										sx={{
-											fontFamily: 'Nunito Sans',
-											fontWeight: 400,
-											color: '#fff',
-											display: 'block',
-											textAlign: 'left',
-											fontSize: { xs: '14px', sm: '16px', md: '18px' },
-										}}
-									>
-										{`$${
-											Math.floor(
-												(props.cart.coupon.type === 'percentage'
-													? total * props.cart.coupon.value
-													: props.cart.coupon.value) * 100,
-											) / 100
-										}`}
-									</Typography>
-								</Stack>
-							)}
+							<Stack direction="row" justifyContent="space-between">
+								<Typography
+									sx={{
+										fontFamily: 'Nunito Sans',
+										fontWeight: 600,
+										color: '#fff',
+										display: 'block',
+										textAlign: 'left',
+										fontSize: { xs: '14px', sm: '16px', md: '18px' },
+									}}
+								>
+									Discount:
+								</Typography>
+								<Typography
+									sx={{
+										fontFamily: 'Nunito Sans',
+										fontWeight: 400,
+										color: '#fff',
+										display: 'block',
+										textAlign: 'left',
+										fontSize: { xs: '14px', sm: '16px', md: '18px' },
+									}}
+								>
+									{`$${props.cart.discount}`}
+								</Typography>
+							</Stack>
 							<Stack direction="row" justifyContent="space-between" mb={2}>
 								<Typography
 									sx={{
@@ -357,7 +337,7 @@ const CheckoutInfo = (props) => {
 										fontSize: { xs: '14px', sm: '16px', md: '18px' },
 									}}
 								>
-									{`$${newTotal}`}
+									{`$${props.cart.total}`}
 								</Typography>
 							</Stack>
 							<FormControl sx={{ width: '100%' }}>

@@ -5,7 +5,7 @@ import mapCheckoutStateToProps from 'rtk/checkout/state'
 import mapCheckoutDispatchToProps from 'rtk/checkout/action'
 import { payment_method } from '../imei-checker/data'
 
-const OrderDetails = (props) => {
+const OrderDetails = () => {
 	const order_details = JSON.parse(sessionStorage.getItem('order_details'))
 
 	return (
@@ -159,6 +159,36 @@ const OrderDetails = (props) => {
 							}}
 						>
 							{order_details.subtotal}
+						</Typography>
+					</Grid>
+				</Grid>
+
+				<Grid container>
+					<Grid item xs={6}>
+						<Typography
+							sx={{
+								fontFamily: 'Nunito Sans',
+								fontWeight: 600,
+								color: '#003056',
+								display: 'block',
+								fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
+							}}
+						>
+							Discount:
+						</Typography>
+					</Grid>
+					<Grid item xs={6}>
+						<Typography
+							sx={{
+								fontFamily: 'Nunito Sans',
+								fontWeight: 400,
+								color: '#003056',
+								textAlign: 'right',
+								display: 'block',
+								fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
+							}}
+						>
+							{order_details.discount}
 						</Typography>
 					</Grid>
 				</Grid>
