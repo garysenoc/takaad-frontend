@@ -44,7 +44,7 @@ const ViewCart = (props) => {
 			_moveNext()
 		} catch (error) {
 			if (error.code === 0) {
-				props.clearCoupon()
+				props.setCoupon(null)
 				_moveNext()
 			} else {
 				props.setCoupon(null)

@@ -31,9 +31,6 @@ export const cartSlice = createSlice({
 		setCoupon: (state, action) => {
 			state.coupon = action.payload
 		},
-		clearCoupon: (state) => {
-			state.coupon = null
-		},
 	},
 	extraReducers: {},
 })
