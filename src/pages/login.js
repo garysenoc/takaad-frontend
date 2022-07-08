@@ -63,7 +63,7 @@ const Login = (props) => {
 		})
 		if (response.status === 200) {
 			const data = await response.json()
-			props.setAuth({ username, token: data.token, isLoggedIn: true })
+			props.setAuth({ username, ...data, isLoggedIn: true })
 			seterror(false)
 			seterrorMessage('')
 			router.push('/')

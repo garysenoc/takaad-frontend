@@ -98,7 +98,31 @@ const PlaceOrder = GuardOrderDetails((props) => {
 			}
 
 			if (!flag) {
-				await handleSendEmail(props.cart.items, data)
+				const order = {
+					...(props.auth.id !== '' ? { user_id: props.auth.id } : {}),
+					date: new Date(),
+					discount: props.cart.discount,
+					email: props.checkout.billing_details.email_address,
+					order_number: props.cart.items.map((item) => item.order_number),
+					payment_method: props.cart.selectedPayment,
+					price: props.cart.items.map((item) => item.price),
+					service: props.cart.items.map((item) => item.product),
+					subtotal: props.cart.subtotal,
+					total: props.cart.total,
+					order_data: data,
+				}
+				const chores = [
+					fetch('http://localhost:8000/v1/order', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify(order),
+					}).catch(() => {
+						props.setIsSnackbarOpen(true)
+						props.setSnackbarMessage('Something went wrong in recording the order.')
+					}),
+					handleSendEmail(props.cart.items, data),
+				]
+				await Promise.allSettled(chores)
 				props.clearItems()
 				props.setIsLoading(false)
 				props.setSnackbarMessage(['Order completed!', 'success'])
@@ -135,10 +159,10 @@ const PlaceOrder = GuardOrderDetails((props) => {
 		}
 
 		try {
-			const data = await fetch('/api/services', requestPayload)
-			// const res = await data.json()
+			await fetch('/api/services', requestPayload)
 		} catch (error) {
-			console.log(error)
+			props.setIsSnackbarOpen(true)
+			props.setSnackbarMessage('Something went wrong in sending the email.')
 		}
 	}
 
