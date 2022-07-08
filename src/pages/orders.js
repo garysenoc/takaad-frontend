@@ -2,7 +2,10 @@ import GuardPage from '../../lib/guard.page'
 import Navbar from '../components/navbar/navbar'
 import Footer from '../components/footer/footer'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { Box, Container, Grid, Typography } from '@mui/material'
+import { Container, Divider, Grid, Paper, Stack, Typography } from '@mui/material'
+import { useState } from 'react'
+import { useEffect } from 'react'
+import { FormattedDate } from '../utils/renderFormattedDate'
 
 export async function getServerSideProps(ctx) {
 	return {
@@ -12,70 +15,106 @@ export async function getServerSideProps(ctx) {
 	}
 }
 
-const Orders = GuardPage(() => {
+const Orders = GuardPage((props) => {
+	const [orders, setOrders] = useState([])
+
+	useEffect(async () => {
+		const data = await fetch(`${process.env.api_baseurl}/v1/order/user/${props.auth.id}`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+		const orders = await data.json()
+		setOrders(orders)
+	}, [])
+
 	return (
 		<>
 			<Navbar />
-			<Container
-				sx={{
-					height: '100vh',
-					marginY: 5,
-				}}
-			>
-				<Box
+			<Container my={4} sx={{ height: '100vh' }}>
+				<Typography
 					sx={{
-						my: 1,
-						backgroundColor: '#003056',
-						borderRadius: '20px',
-						px: 2,
-						py: 1,
+						fontFamily: 'Nunito Sans',
+						fontWeight: 900,
+						color: '#003056',
+						display: 'block',
+						marginBottom: '25px',
+						textAlign: 'center',
+						fontSize: { xs: '24px', sm: '32px', md: '32px', lg: '44px' },
+						lineHeight: { xs: '28px', sm: '40px', md: '40px', lg: '52px' },
 					}}
 				>
-					<Grid container justifyContent="start" sx={{ borderBottom: '1px solid #fff' }}>
-						<Grid item xs={4}>
-							<Typography
-								align="left"
-								sx={{
-									fontFamily: 'Nunito Sans',
-									fontWeight: 600,
-									color: '#fff',
-									fontSize: { xs: '14px', sm: '16px', md: '18px' },
-									p: '10px',
-								}}
-							>
-								Product
-							</Typography>
-						</Grid>
-						<Grid item xs={4}>
-							<Typography
-								align="left"
-								sx={{
-									fontFamily: 'Nunito Sans',
-									fontWeight: 600,
-									color: '#fff',
-									fontSize: { xs: '14px', sm: '16px', md: '18px' },
-									p: '10px',
-								}}
-							>
-								Details
-							</Typography>
-						</Grid>
-						<Grid item xs={3}>
-							<Typography
-								align="left"
-								sx={{
-									fontFamily: 'Nunito Sans',
-									fontWeight: 600,
-									color: '#fff',
-									fontSize: { xs: '14px', sm: '16px', md: '18px' },
-									p: '10px',
-								}}
-							>
-								Price
-							</Typography>
-						</Grid>
-					</Grid>
-				</Box>
+					Order History
+				</Typography>
+				{orders.length === 0 ? (
+					<Typography variant="h4" fontWeight={800} color="GrayText" align="center">
+						No order history yet!
+					</Typography>
+				) : (
+					<Stack direction="row" flexWrap="wrap" spacing={1}>
+						{orders.map((order, idx) => (
+							<Paper key={idx} variant="outlined" sx={{ borderRadius: 2, width: 250 }}>
+								<Stack
+									direction="column"
+									sx={{
+										padding: 2,
+										backgroundColor: '#003056',
+										color: 'white',
+										borderTopLeftRadius: 'inherit',
+										borderTopRightRadius: 'inherit',
+									}}
+								>
+									<Typography variant="h5" fontWeight={700}>
+										{order.payment_method}
+									</Typography>
+									<Typography variant="subtitle2" sx={{ wordBreak: 'break-all' }}>
+										{order.email}
+									</Typography>
+									<Typography variant="subtitle2">{FormattedDate(new Date(order.date))}</Typography>
+								</Stack>
+								<Stack direction="column" spacing={1} sx={{ padding: 3, paddingY: 1 }}>
+									<Grid container sx={{ width: '100%' }}>
+										<Grid container item direction="row" spacing={2} justifyContent="space-between">
+											<Grid item>
+												<Typography variant="subtitle2" fontWeight={600}>
+													Subtotal
+												</Typography>
+											</Grid>
+											<Grid item>
+												<Typography variant="subtitle2">{order.subtotal}</Typography>
+											</Grid>
+										</Grid>
+										<Grid container item direction="row" spacing={2} justifyContent="space-between">
+											<Grid item>
+												<Typography variant="subtitle2" fontWeight={600}>
+													Discount
+												</Typography>
+											</Grid>
+											<Grid item>
+												<Typography variant="subtitle2">{order.discount}</Typography>
+											</Grid>
+										</Grid>
+										<Grid container item direction="row" spacing={2} justifyContent="space-between">
+											<Grid item>
+												<Typography variant="subtitle2" fontWeight={600}>
+													Total
+												</Typography>
+											</Grid>
+											<Grid item>
+												<Typography variant="subtitle2">{order.total}</Typography>
+											</Grid>
+										</Grid>
+									</Grid>
+									<Divider />
+									<Typography align="right" variant="subtitle2" color="blue">
+										View
+									</Typography>
+								</Stack>
+							</Paper>
+						))}
+					</Stack>
+				)}
 			</Container>
 			<Footer />
 		</>

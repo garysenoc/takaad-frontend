@@ -112,7 +112,7 @@ const PlaceOrder = GuardOrderDetails((props) => {
 					order_data: data,
 				}
 				const chores = [
-					fetch('http://localhost:8000/v1/order', {
+					fetch(`${process.env.api_baseurl}/v1/order`, {
 						method: 'POST',
 						headers: { 'Content-Type': 'application/json' },
 						body: JSON.stringify(order),
