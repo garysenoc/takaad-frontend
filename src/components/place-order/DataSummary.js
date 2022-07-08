@@ -26,7 +26,7 @@ const DataSummary = ({ order, order_metadata }) => {
 						fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
 					}}
 				>
-					{order_metadata.product}
+					{`${order_metadata.product} All in One Information`}
 				</Typography>
 			</AccordionSummary>
 			<AccordionDetails>

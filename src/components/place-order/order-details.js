@@ -103,7 +103,7 @@ const OrderDetails = () => {
 						>
 							{order_details.service.map((service, i) => (
 								<span key={i}>
-									{service}
+									{`${service} All in One Information`}
 									<br />
 								</span>
 							))}

@@ -37,7 +37,7 @@ const Services = (props) => {
 		if (!isItemAdded) {
 			const new_payload = {
 				order_number: payload.orderId,
-				product: `${renderPhoneBrandName(payload.result)} All in One Information`,
+				product: renderPhoneBrandName(payload.result),
 				details: {
 					imei: payload.imei,
 					brand: payload.object.brand,
