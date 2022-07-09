@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import mapCheckerStateToProps from 'rtk/checker/state'
 import mapCheckerDispatchToProps from 'rtk/checker/action'
-import DataSummary from './DataSummary'
+import OrderTable from '../OrderTable'
 
 const OrderData = (props) => {
 	const order_data = props.orders.order_data
@@ -28,7 +28,7 @@ const OrderData = (props) => {
 					<>
 						{order_data &&
 							order_data.map((order, i) => {
-								return <DataSummary key={i} order={order} order_metadata={props.orders.order_metadata[i]} />
+								return <OrderTable key={i} order={order} order_metadata={props.orders.order_metadata[i]} />
 							})}
 					</>
 				)}

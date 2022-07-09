@@ -368,7 +368,7 @@ const ViewCart = (props) => {
 								startIcon={
 									<CardMedia
 										component="img"
-										image={`images/paypal.webp`}
+										image={`/images/paypal.webp`}
 										sx={{
 											width: { xs: 70, sm: 90, md: 120 },
 										}}

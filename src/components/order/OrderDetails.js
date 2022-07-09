@@ -4,9 +4,7 @@ import { connect } from 'react-redux'
 import mapCheckoutStateToProps from 'rtk/checkout/state'
 import mapCheckoutDispatchToProps from 'rtk/checkout/action'
 
-const OrderDetails = () => {
-	const order_details = JSON.parse(sessionStorage.getItem('order_details'))
-
+const OrderDetails = ({ order }) => {
 	return (
 		<>
 			<Box>
@@ -19,7 +17,7 @@ const OrderDetails = () => {
 						fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
 					}}
 				>
-					<strong>Order Number:</strong> {order_details.order_number.join(', ')}
+					<strong>Order Number:</strong> {order.order_number.join(', ')}
 				</Typography>
 				<Typography
 					sx={{
@@ -30,7 +28,7 @@ const OrderDetails = () => {
 						fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
 					}}
 				>
-					<strong>Date:</strong> {order_details.date}
+					<strong>Date:</strong> {order.date}
 				</Typography>
 				<Typography
 					sx={{
@@ -41,7 +39,7 @@ const OrderDetails = () => {
 						fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
 					}}
 				>
-					<strong>Email:</strong> {order_details.email}
+					<strong>Email:</strong> {order.email}
 				</Typography>
 
 				<Typography
@@ -53,7 +51,7 @@ const OrderDetails = () => {
 						fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
 					}}
 				>
-					<strong>Payment Method:</strong> {order_details.payment_method}
+					<strong>Payment Method:</strong> {order.payment_method}
 				</Typography>
 			</Box>
 
@@ -101,7 +99,7 @@ const OrderDetails = () => {
 								fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
 							}}
 						>
-							{order_details.service.map((service, i) => (
+							{order.service.map((service, i) => (
 								<span key={i}>
 									{`${service} All in One Information`}
 									<br />
@@ -120,7 +118,7 @@ const OrderDetails = () => {
 								fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
 							}}
 						>
-							{order_details.price.map((price, i) => (
+							{order.price.map((price, i) => (
 								<span key={i}>
 									{price}
 									<br />
@@ -157,7 +155,7 @@ const OrderDetails = () => {
 								fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
 							}}
 						>
-							{order_details.subtotal}
+							{order.subtotal}
 						</Typography>
 					</Grid>
 				</Grid>
@@ -187,7 +185,7 @@ const OrderDetails = () => {
 								fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
 							}}
 						>
-							{order_details.discount}
+							{order.discount}
 						</Typography>
 					</Grid>
 				</Grid>
@@ -217,7 +215,7 @@ const OrderDetails = () => {
 								fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
 							}}
 						>
-							{order_details.total}
+							{order.total}
 						</Typography>
 					</Grid>
 				</Grid>

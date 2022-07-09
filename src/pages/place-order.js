@@ -7,8 +7,8 @@ import { useEffect } from 'react'
 import mapCheckoutStateToProps from 'rtk/checkout/state'
 import mapCheckoutDispatchToProps from 'rtk/checkout/action'
 import { renderBrand } from 'src/utils/renderPhoneInformation'
-import OrderDetails from 'src/components/place-order/order-details'
-import OrderData from 'src/components/place-order/order-data'
+import OrderDetails from 'src/components/order/OrderDetails'
+import OrderData from 'src/components/order/OrderData'
 import Navbar from 'src/components/navbar/navbar'
 import Footer from 'src/components/footer/footer'
 import GuardOrderDetails from 'lib/guardOrderDetails'
@@ -206,7 +206,7 @@ const PlaceOrder = GuardOrderDetails((props) => {
 							<OrderData />
 						</Grid>
 						<Grid item xs={12}>
-							<OrderDetails />
+							<OrderDetails order={JSON.parse(sessionStorage.getItem('order_details'))} />
 						</Grid>
 					</Grid>
 				</Container>

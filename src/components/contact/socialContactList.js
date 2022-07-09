@@ -42,7 +42,7 @@ const SocialContactList = ({ socialContacts }) => {
 							<Box sx={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)' }}>
 								<CardMedia
 									component="img"
-									image={`images/${contact.icon}`}
+									image={`/images/${contact.icon}`}
 									sx={{
 										width: { xs: '30px', sm: '100%', md: '100%' },
 									}}

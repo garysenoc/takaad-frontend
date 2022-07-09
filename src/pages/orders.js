@@ -6,6 +6,7 @@ import { Container, Divider, Grid, Paper, Stack, Typography } from '@mui/materia
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { FormattedDate } from '../utils/renderFormattedDate'
+import { useRouter } from 'next/router'
 
 export async function getServerSideProps(ctx) {
 	return {
@@ -16,6 +17,7 @@ export async function getServerSideProps(ctx) {
 }
 
 const Orders = GuardPage((props) => {
+	const router = useRouter()
 	const [orders, setOrders] = useState([])
 
 	useEffect(async () => {
@@ -25,8 +27,13 @@ const Orders = GuardPage((props) => {
 				'Content-Type': 'application/json',
 			},
 		})
-		const orders = await data.json()
-		setOrders(orders)
+		if (data.ok) {
+			const orders = (await data.json()).map((order) => {
+				const { date, ...rest } = order
+				return { date: FormattedDate(new Date(date)), ...rest }
+			})
+			setOrders(orders)
+		}
 	}, [])
 
 	return (
@@ -71,7 +78,7 @@ const Orders = GuardPage((props) => {
 									<Typography variant="subtitle2" sx={{ wordBreak: 'break-all' }}>
 										{order.email}
 									</Typography>
-									<Typography variant="subtitle2">{FormattedDate(new Date(order.date))}</Typography>
+									<Typography variant="subtitle2">{order.date}</Typography>
 								</Stack>
 								<Stack direction="column" spacing={1} sx={{ padding: 3, paddingY: 1 }}>
 									<Grid container sx={{ width: '100%' }}>
@@ -107,7 +114,13 @@ const Orders = GuardPage((props) => {
 										</Grid>
 									</Grid>
 									<Divider />
-									<Typography align="right" variant="subtitle2" color="blue">
+									<Typography
+										align="right"
+										variant="subtitle2"
+										color="blue"
+										sx={{ cursor: 'pointer' }}
+										onClick={() => router.push({ pathname: '/order', query: { order: JSON.stringify(order) } })}
+									>
 										View
 									</Typography>
 								</Stack>

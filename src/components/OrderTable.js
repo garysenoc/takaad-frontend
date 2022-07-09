@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
-import DataRow from './DataRow'
+import DataRow from './place-order/DataRow'
 
-const DataSummary = ({ order, order_metadata }) => {
+const OrderTable = ({ order, product }) => {
 	const [open, setOpen] = useState(true)
 
 	return (
@@ -26,7 +26,7 @@ const DataSummary = ({ order, order_metadata }) => {
 						fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
 					}}
 				>
-					{`${order_metadata.product} All in One Information`}
+					{`${product} All in One Information`}
 				</Typography>
 			</AccordionSummary>
 			<AccordionDetails>
@@ -40,4 +40,4 @@ const DataSummary = ({ order, order_metadata }) => {
 	)
 }
 
-export default DataSummary
+export default OrderTable

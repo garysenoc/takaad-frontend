@@ -83,7 +83,7 @@ const FourthSection = () => {
 											>
 												<IconCardMedia
 													component="img"
-													image={`images/${check.icon}`}
+													image={`/images/${check.icon}`}
 													sx={{
 														width: { xs: 100, sm: 110, md: 130, lg: 150 },
 													}}

@@ -59,7 +59,7 @@ export default function SideBar({
 				startIcon={
 					<CardMedia
 						component="img"
-						image={`images/${activeLanguage.icon}`}
+						image={`/images/${activeLanguage.icon}`}
 						sx={{
 							width: 25,
 							borderRadius: 50,
@@ -95,7 +95,7 @@ export default function SideBar({
 					>
 						<CardMedia
 							component="img"
-							image={`images/${language.icon}`}
+							image={`/images/${language.icon}`}
 							sx={{
 								marginRight: '10px',
 								width: '25px',

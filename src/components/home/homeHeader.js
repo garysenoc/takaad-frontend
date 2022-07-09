@@ -55,7 +55,7 @@ const HomeHeader = (props) => {
 				<Container sx={{ position: 'relative' }}>
 					<CardMedia
 						component="img"
-						image="images/Group-48.png"
+						image="/images/Group-48.png"
 						sx={{
 							position: 'absolute',
 							display: { xs: 'none', md: 'block' },
@@ -130,7 +130,7 @@ const HomeHeader = (props) => {
 									endIcon={
 										<CardMedia
 											component="img"
-											image="images/smile.png"
+											image="/images/smile.png"
 											sx={{
 												width: { xs: 12, sm: 15, md: 15, lg: 18 },
 												ml: { xs: '-5px', sm: '-4px' },

@@ -50,7 +50,7 @@ const PricingList = () => {
 						>
 							<CardMedia
 								component="img"
-								image={`images/${services.generic.icon}`}
+								image={`/images/${services.generic.icon}`}
 								sx={{
 									maxWidth: { xs: '40px', sm: '54.39px', md: '54.39px' },
 									verticalAlign: 'middle',
@@ -206,7 +206,7 @@ const PricingList = () => {
 						>
 							<CardMedia
 								component="img"
-								image={`images/${services.apple.icon}`}
+								image={`/images/${services.apple.icon}`}
 								sx={{
 									verticalAlign: 'middle',
 									marginX: 'auto',
@@ -361,7 +361,7 @@ const PricingList = () => {
 						>
 							<CardMedia
 								component="img"
-								image={`images/${services.unlock.icon}`}
+								image={`/images/${services.unlock.icon}`}
 								sx={{
 									verticalAlign: 'middle',
 									marginX: 'auto',
@@ -402,7 +402,7 @@ const PricingList = () => {
 									<Link sx={{ color: '#e1a416', fontSize: '14px' }}>
 										<CardMedia
 											component="img"
-											image={`images/warning.svg`}
+											image={`/images/warning.svg`}
 											sx={{
 												maxWidth: '21.27px',
 												verticalAlign: 'middle',

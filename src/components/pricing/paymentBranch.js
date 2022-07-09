@@ -71,7 +71,7 @@ const PaymentBranch = () => {
 									<Grid item key={index} xs={6} sm={3} sx={{ mt: { xs: '10px', sm: '0' } }}>
 										<CardMedia
 											component="img"
-											image={`images/${payment.icon}`}
+											image={`/images/${payment.icon}`}
 											sx={{
 												maxWidth: { xs: '140px', sm: '140px', md: payment.width },
 												verticalAlign: 'middle',

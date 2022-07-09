@@ -57,7 +57,7 @@ const Navbar = (props) => {
 						<Link href="/" passHref>
 							<CardMedia
 								component="img"
-								image="images/taakad-logo-300x164-1.png"
+								image="/images/taakad-logo-300x164-1.png"
 								sx={{ cursor: 'pointer', width: { xs: 100, sm: 120, md: 150 } }}
 							/>
 						</Link>
@@ -110,7 +110,7 @@ const Navbar = (props) => {
 								startIcon={
 									<CardMedia
 										component="img"
-										image={`images/${props.language.activeLanguage.icon}`}
+										image={`/images/${props.language.activeLanguage.icon}`}
 										sx={{
 											width: 25,
 											borderRadius: 50,

@@ -121,7 +121,7 @@ const CheckoutInfo = (props) => {
 					) : (
 						<CardMedia
 							component="img"
-							image={`images/paypal.webp`}
+							image={`/images/paypal.webp`}
 							sx={{
 								width: { xs: 70, sm: 90, md: 120 },
 							}}
@@ -479,7 +479,7 @@ const CheckoutInfo = (props) => {
 										<Stack direction="row">
 											<CardMedia
 												component="img"
-												image={`images/amex.svg`}
+												image={`/images/amex.svg`}
 												sx={{
 													width: '43px',
 													height: '26px',
@@ -488,7 +488,7 @@ const CheckoutInfo = (props) => {
 											/>
 											<CardMedia
 												component="img"
-												image={`images/discover.svg`}
+												image={`/images/discover.svg`}
 												sx={{
 													width: '43px',
 													height: '26px',
@@ -497,7 +497,7 @@ const CheckoutInfo = (props) => {
 											/>
 											<CardMedia
 												component="img"
-												image={`images/visa.svg`}
+												image={`/images/visa.svg`}
 												sx={{
 													width: '43px',
 													height: '26px',
@@ -506,7 +506,7 @@ const CheckoutInfo = (props) => {
 											/>
 											<CardMedia
 												component="img"
-												image={`images/mastercard.svg`}
+												image={`/images/mastercard.svg`}
 												sx={{
 													width: '43px',
 													height: '26px',
@@ -535,7 +535,7 @@ const CheckoutInfo = (props) => {
 										/>
 										<CardMedia
 											component="img"
-											image={`images/applepay.svg`}
+											image={`/images/applepay.svg`}
 											sx={{
 												width: '43px',
 												height: '26px',

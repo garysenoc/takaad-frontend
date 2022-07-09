@@ -46,7 +46,7 @@ const FifthSection = () => {
 							>
 								<CardMedia
 									component="img"
-									image="images/desk-mob-img.webp"
+									image="/images/desk-mob-img.webp"
 									sx={{
 										width: '100%',
 									}}

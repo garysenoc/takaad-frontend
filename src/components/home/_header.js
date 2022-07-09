@@ -166,7 +166,7 @@ const Header = () => {
 						>
 							<CardMedia
 								component="img"
-								image="images/bushes-img.svg"
+								image="/images/bushes-img.svg"
 								sx={{
 									position: 'absolute',
 									bottom: '0',
@@ -259,7 +259,7 @@ const Header = () => {
 								</Box>
 								<CardMedia
 									component="img"
-									image="images/mob-img.webp"
+									image="/images/mob-img.webp"
 									sx={{
 										maxWidth: '100%',
 										verticalAlign: 'middle',
