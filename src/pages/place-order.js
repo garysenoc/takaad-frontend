@@ -13,6 +13,7 @@ import Navbar from 'src/components/navbar/navbar'
 import Footer from 'src/components/footer/footer'
 import GuardOrderDetails from 'lib/guardOrderDetails'
 import mapCheckerDispatchToProps from '../../rtk/checker/action'
+import sendEmail from '../utils/sendEmail'
 
 export const getServerSideProps = async (context) => {
 	if (context.query.token) {
@@ -102,6 +103,8 @@ const PlaceOrder = GuardOrderDetails((props) => {
 					...(props.auth.id !== '' ? { user_id: props.auth.id } : {}),
 					date: new Date(),
 					discount: props.cart.discount,
+					first_name: props.checkout.billing_details.first_name,
+					last_name: props.checkout.billing_details.last_name,
 					email: props.checkout.billing_details.email_address,
 					order_number: props.cart.items.map((item) => item.order_number),
 					payment_method: props.cart.selectedPayment,
@@ -111,18 +114,14 @@ const PlaceOrder = GuardOrderDetails((props) => {
 					total: props.cart.total,
 					order_data: data,
 				}
-				const chores = [
-					fetch(`${process.env.api_baseurl}/v1/order`, {
+				const createResultOrder = await (
+					await fetch(`${process.env.api_baseurl}/v1/order`, {
 						method: 'POST',
 						headers: { 'Content-Type': 'application/json' },
 						body: JSON.stringify(order),
-					}).catch(() => {
-						props.setIsSnackbarOpen(true)
-						props.setSnackbarMessage('Something went wrong in recording the order.')
-					}),
-					handleSendEmail(props.cart.items, data),
-				]
-				await Promise.allSettled(chores)
+					})
+				).json()
+				await handleSendEmail(createResultOrder)
 				props.clearItems()
 				props.setIsLoading(false)
 				props.setSnackbarMessage(['Order completed!', 'success'])
@@ -138,28 +137,9 @@ const PlaceOrder = GuardOrderDetails((props) => {
 		}
 	}
 
-	const handleSendEmail = async (metadata, data) => {
-		const requestPayload = {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json, text/plain, */*',
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				name: `${props.checkout.billing_details.first_name} ${props.checkout.billing_details.last_name}`,
-				email: props.checkout.billing_details.email_address,
-				subject: 'All in One Information',
-				message: metadata
-					.map(
-						(item, index) =>
-							`${item.product}<br/>${data[index].map((keyVal) => `${keyVal.label}: ${keyVal.value}`).join('<br/>')}`,
-					)
-					.join('<br/><br/>'),
-			}),
-		}
-
+	const handleSendEmail = async (order) => {
 		try {
-			await fetch('/api/services', requestPayload)
+			await sendEmail(order._id, `${order.first_name} ${order.last_name}`, order.email, order.service, order.order_data)
 		} catch (error) {
 			props.setIsSnackbarOpen(true)
 			props.setSnackbarMessage('Something went wrong in sending the email.')

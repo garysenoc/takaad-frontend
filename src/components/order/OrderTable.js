@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
-import DataRow from './place-order/DataRow'
+import DataRow from '../place-order/DataRow'
 
 const OrderTable = ({ order, product }) => {
 	const [open, setOpen] = useState(true)

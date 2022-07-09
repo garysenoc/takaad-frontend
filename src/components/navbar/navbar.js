@@ -186,23 +186,23 @@ const Navbar = (props) => {
 									>
 										Orders
 									</Button>
+									<Button
+										sx={{
+											backgroundColor: '#28cd7e',
+											color: '#fff',
+											borderRadius: 10,
+											textTransform: 'capitalize',
+											minWidth: { md: 100, lg: 120 },
+											fontSize: { md: 15, lg: 18 },
+											'&:hover': {
+												backgroundColor: '#14a660',
+											},
+										}}
+									>
+										{t('common:btn_client_area')}
+									</Button>
 								</>
 							)}
-							<Button
-								sx={{
-									backgroundColor: '#28cd7e',
-									color: '#fff',
-									borderRadius: 10,
-									textTransform: 'capitalize',
-									minWidth: { md: 100, lg: 120 },
-									fontSize: { md: 15, lg: 18 },
-									'&:hover': {
-										backgroundColor: '#14a660',
-									},
-								}}
-							>
-								{t('common:btn_client_area')}
-							</Button>
 						</Stack>
 					</Box>
 					<Box sx={{ display: { xs: 'block', md: 'none' } }}>

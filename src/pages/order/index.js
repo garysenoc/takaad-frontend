@@ -15,7 +15,7 @@ const Order = () => {
 	const router = useRouter()
 	const order = JSON.parse(router.query.order)
 
-	return <DisplayOrder order={order} order_data={order.order_data} service={order.service} />
+	return <DisplayOrder orderData={order} />
 }
 
 export default connect((state) => state)(Order)

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import mapCheckerStateToProps from 'rtk/checker/state'
 import mapCheckerDispatchToProps from 'rtk/checker/action'
-import OrderTable from '../OrderTable'
+import OrderTable from './OrderTable'
 
 const OrderData = (props) => {
 	const order_data = props.orders.order_data

@@ -31,7 +31,7 @@ const OrderId = () => {
 		}
 	}, [])
 
-	return <DisplayOrder order={order} order_data={order?.order_data} service={order?.service} />
+	return <DisplayOrder orderData={order} />
 }
 
 export default connect((state) => state)(OrderId)
