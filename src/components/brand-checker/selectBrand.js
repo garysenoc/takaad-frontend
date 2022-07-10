@@ -11,16 +11,22 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import BrandInformation from './brandInformation'
 import { brands } from './data'
 import { useTranslation } from 'next-i18next'
+import { connect } from 'react-redux'
+import mapBrandStateToProps from 'rtk/brand/state'
+import mapBrandDispatchToProps from 'rtk/brand/action'
 
-const SelectBrand = ({ page }) => {
+const SelectBrand = (props) => {
+	const page = props.page
 	const router = useRouter()
 	const { t } = useTranslation()
 	const [activeBrand, setActiveBrand] = useState(page === 'brand-checker' ? brands[0] : '')
 
 	const handleChange = (brand) => {
+		props.setBrand(brand)
 		if (page === 'home') {
 			router.push('brand-checker')
 		} else {
+			// props.setBrand(brand)
 			setActiveBrand(brand)
 		}
 	}
@@ -375,4 +381,4 @@ SelectBrand.propTypes = {
 	page: PropTypes.string.isRequired,
 }
 
-export default SelectBrand
+export default connect(mapBrandStateToProps, mapBrandDispatchToProps())(SelectBrand)

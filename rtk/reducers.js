@@ -7,6 +7,7 @@ import checkerSlice from 'rtk/checker'
 import cartSlice from 'rtk/cart'
 import checkoutSlice from 'rtk/checkout'
 import ordersSlice from 'rtk/orders'
+import brandSlice from 'rtk/brand'
 
 const reducers = combineReducers({
 	auth: authSlice.reducer,
@@ -16,6 +17,7 @@ const reducers = combineReducers({
 	checkout: checkoutSlice.reducer,
 	language: languageSlice.reducer,
 	orders: ordersSlice.reducer,
+	brand: brandSlice.reducer,
 })
 
 export default reducers
