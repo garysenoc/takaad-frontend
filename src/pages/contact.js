@@ -6,8 +6,6 @@ import Header from 'src/components/contact/header'
 import SocialContactList from 'src/components/contact/socialContactList'
 import ContactForm from 'src/components/contact/contactForm'
 import { socialContacts } from 'src/components/contact/data'
-import Navbar from 'src/components/navbar/navbar'
-import Footer from 'src/components/footer/footer'
 
 export async function getServerSideProps(ctx) {
 	return {
@@ -20,7 +18,6 @@ export async function getServerSideProps(ctx) {
 const Contact = () => {
 	return (
 		<>
-			<Navbar />
 			<Box sx={{ padding: { xs: '50px 0', sm: '50px 0', md: '50px 0', lg: '80px 0' } }}>
 				<Container>
 					<Header />
@@ -43,7 +40,6 @@ const Contact = () => {
 					</Box>
 				</Container>
 			</Box>
-			<Footer />
 		</>
 	)
 }

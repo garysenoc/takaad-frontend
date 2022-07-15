@@ -5,8 +5,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Header from 'src/components/pricing/header'
 import PricingList from 'src/components/pricing/pricingList'
 import PaymentBranch from 'src/components/pricing/paymentBranch'
-import Navbar from 'src/components/navbar/navbar'
-import Footer from 'src/components/footer/footer'
 
 export async function getServerSideProps(ctx) {
 	return {
@@ -19,7 +17,6 @@ export async function getServerSideProps(ctx) {
 const Pricing = () => {
 	return (
 		<>
-			<Navbar />
 			<Box sx={{ padding: { xs: '40px 0', sm: '50px 0', md: '70px 0', lg: '90px 0' } }}>
 				<Container>
 					<Box>
@@ -29,7 +26,6 @@ const Pricing = () => {
 					</Box>
 				</Container>
 			</Box>
-			<Footer />
 		</>
 	)
 }

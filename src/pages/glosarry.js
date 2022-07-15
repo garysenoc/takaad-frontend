@@ -7,8 +7,6 @@ import GlosarryList from 'src/components/glosarry/glosarryList'
 import mapCheckerStateToProps from 'rtk/checker/state'
 import mapCheckerDispatchToProps from 'rtk/checker/action'
 import { glosarryInfos } from 'src/components/glosarry/data'
-import Navbar from 'src/components/navbar/navbar'
-import Footer from 'src/components/footer/footer'
 
 export const getServerSideProps = async (ctx) => {
 	return {
@@ -31,7 +29,6 @@ const Glosarry = (props) => {
 
 	return (
 		<>
-			<Navbar />
 			<Box my={4}>
 				<Container>
 					<Typography
@@ -179,7 +176,6 @@ const Glosarry = (props) => {
 					</Box>
 				</Container>
 			</Box>
-			<Footer />
 		</>
 	)
 }

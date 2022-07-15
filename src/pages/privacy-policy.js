@@ -6,8 +6,6 @@ import { useTranslation } from 'next-i18next'
 // import { DefaultLayout } from 'src/layout/default-layout'
 import PrivacyPolicyTitle from 'src/components/privacy-policy/title'
 import { PrivacyPolicyData } from 'src/components/privacy-policy/data'
-import Navbar from 'src/components/navbar/navbar'
-import Footer from 'src/components/footer/footer'
 
 export async function getServerSideProps(ctx) {
 	return {
@@ -39,7 +37,6 @@ const PrivacyPolicy = () => {
 
 	return (
 		<>
-			<Navbar />
 			<PrivacyPolicyTitle />
 			{PrivacyPolicyData.map((data, index) => {
 				return (
@@ -186,7 +183,6 @@ const PrivacyPolicy = () => {
 					</Fragment>
 				)
 			})}
-			<Footer />
 		</>
 	)
 }

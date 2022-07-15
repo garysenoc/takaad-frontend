@@ -9,8 +9,6 @@ import mapCheckoutDispatchToProps from 'rtk/checkout/action'
 import { renderBrand } from 'src/utils/renderPhoneInformation'
 import OrderDetails from 'src/components/order/OrderDetails'
 import OrderData from 'src/components/order/OrderData'
-import Navbar from 'src/components/navbar/navbar'
-import Footer from 'src/components/footer/footer'
 import GuardOrderDetails from 'lib/guardOrderDetails'
 import mapCheckerDispatchToProps from '../../rtk/checker/action'
 import sendEmail from '../utils/sendEmail'
@@ -148,7 +146,6 @@ const PlaceOrder = GuardOrderDetails((props) => {
 
 	return (
 		<>
-			<Navbar />
 			<Box my={4} sx={{ minHeight: '73vh' }}>
 				<Container>
 					<Typography
@@ -191,7 +188,6 @@ const PlaceOrder = GuardOrderDetails((props) => {
 					</Grid>
 				</Container>
 			</Box>
-			<Footer />
 		</>
 	)
 })

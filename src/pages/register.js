@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import Navbar from '../components/navbar/navbar'
-import Footer from '../components/footer/footer'
 import {
 	Button,
 	Container,
@@ -94,7 +92,6 @@ const Register = (props) => {
 
 	return (
 		<>
-			<Navbar />
 			<Container
 				sx={{
 					height: '100vh',
@@ -171,7 +168,6 @@ const Register = (props) => {
 					</Typography>
 				</Stack>
 			</Container>
-			<Footer />
 		</>
 	)
 }

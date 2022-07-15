@@ -16,6 +16,8 @@ import 'src/styles/style.css'
 import SnackbarMessage from '../components/SnackbarMessage'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
+import Navbar from '../components/navbar/navbar'
+import Footer from '../components/footer/footer'
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()
@@ -39,7 +41,9 @@ const MyApp = (props) => {
 							<CssBaseline />
 							{/* {getLayout(<Component {...pageProps} />)} */}
 							<SnackbarMessage>
+								<Navbar />
 								<Component {...pageProps} />
+								<Footer />
 							</SnackbarMessage>
 						</Elements>
 					</PersistGate>

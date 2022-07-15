@@ -1,8 +1,6 @@
 import React from 'react'
 import { Box, Button, Container, Grid, Stack, Typography } from '@mui/material'
 import OrderTable from './OrderTable'
-import Footer from '../footer/footer'
-import Navbar from '../navbar/navbar'
 import OrderDetails from './OrderDetails'
 import { connect } from 'react-redux'
 import sendEmail from '../../utils/sendEmail'
@@ -28,7 +26,6 @@ const DisplayOrder = ({ orderData, ...props }) => {
 
 	return (
 		<>
-			<Navbar />
 			<Box my={4} sx={{ minHeight: '73vh' }}>
 				<Container>
 					<Typography
@@ -87,7 +84,6 @@ const DisplayOrder = ({ orderData, ...props }) => {
 					)}
 				</Container>
 			</Box>
-			<Footer />
 		</>
 	)
 }

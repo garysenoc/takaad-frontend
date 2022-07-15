@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import Navbar from 'src/components/navbar/navbar'
-import Footer from 'src/components/footer/footer'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Container } from '@mui/material'
 import LoginForm from '../components/login/LoginForm'
@@ -20,7 +18,6 @@ const Login = () => {
 
 	return (
 		<>
-			<Navbar />
 			<Container
 				sx={{
 					height: '100vh',
@@ -33,7 +30,6 @@ const Login = () => {
 					<LoginForm handlePageSwitch={handlePageSwitch} />
 				)}
 			</Container>
-			<Footer />
 		</>
 	)
 }

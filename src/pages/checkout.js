@@ -7,8 +7,6 @@ import CheckoutInfo from 'src/components/imei-checker/checkoutInfo'
 import GuardCheckoutPage from 'lib/guard.checkout'
 import mapCheckoutStateToProps from 'rtk/checkout/state'
 import mapCheckoutDispatchToProps from 'rtk/checkout/action'
-import Navbar from 'src/components/navbar/navbar'
-import Footer from 'src/components/footer/footer'
 
 export const getServerSideProps = async (ctx) => {
 	return {
@@ -21,13 +19,11 @@ export const getServerSideProps = async (ctx) => {
 const Checkout = GuardCheckoutPage(() => {
 	return (
 		<>
-			<Navbar />
 			<Box my={4}>
 				<Container>
 					<CheckoutInfo />
 				</Container>
 			</Box>
-			<Footer />
 		</>
 	)
 })

@@ -7,8 +7,6 @@ import { useTranslation } from 'next-i18next'
 
 // import { DefaultLayout } from 'src/layout/default-layout'
 import { questions } from 'src/components/faq/data'
-import Navbar from 'src/components/navbar/navbar'
-import Footer from 'src/components/footer/footer'
 
 const ExpandMore = styled((props) => {
 	const { expand, ...other } = props
@@ -35,7 +33,6 @@ const Faq = () => {
 
 	return (
 		<>
-			<Navbar />
 			<Box sx={{ padding: { xs: '40px 0', sm: '50px 0', md: '50px 0', lg: '80px 0' } }}>
 				<Container>
 					<Box sx={{ textAlign: 'center', marginBottom: { xs: '5px', sm: '10px', md: '10px' } }}>
@@ -96,7 +93,6 @@ const Faq = () => {
 					</Box>
 				</Container>
 			</Box>
-			<Footer />
 		</>
 	)
 }

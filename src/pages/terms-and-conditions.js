@@ -6,8 +6,6 @@ import { useTranslation } from 'next-i18next'
 // import { DefaultLayout } from 'src/layout/default-layout'
 import TermsAndConditionsTitle from 'src/components/terms-and-conditions/title'
 import { TermsAndConditionsData } from 'src/components/terms-and-conditions/data'
-import Navbar from 'src/components/navbar/navbar'
-import Footer from 'src/components/footer/footer'
 
 export async function getServerSideProps(ctx) {
 	return {
@@ -24,7 +22,6 @@ const TermsAndConditions = () => {
 
 	return (
 		<>
-			<Navbar />
 			<TermsAndConditionsTitle />
 			{TermsAndConditionsData.map((data, index) => {
 				return (
@@ -72,7 +69,6 @@ const TermsAndConditions = () => {
 					</Fragment>
 				)
 			})}
-			<Footer />
 		</>
 	)
 }

@@ -1,6 +1,4 @@
 import GuardPage from '../../lib/guard.page'
-import Navbar from '../components/navbar/navbar'
-import Footer from '../components/footer/footer'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Container, Divider, Grid, Paper, Stack, Typography } from '@mui/material'
 import { useState } from 'react'
@@ -38,7 +36,6 @@ const Orders = GuardPage((props) => {
 
 	return (
 		<>
-			<Navbar />
 			<Container my={4} sx={{ height: '100vh' }}>
 				<Typography
 					sx={{
@@ -129,7 +126,6 @@ const Orders = GuardPage((props) => {
 					</Stack>
 				)}
 			</Container>
-			<Footer />
 		</>
 	)
 })

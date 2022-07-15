@@ -11,8 +11,6 @@ import mapCheckerDispatchToProps from 'rtk/checker/action'
 import Services from 'src/components/imei-checker/services'
 import ViewCart from 'src/components/imei-checker/viewCart'
 import CheckoutInfo from 'src/components/imei-checker/checkoutInfo'
-import Navbar from 'src/components/navbar/navbar'
-import Footer from 'src/components/footer/footer'
 
 export const getServerSideProps = async (ctx) => {
 	return {
@@ -48,7 +46,6 @@ const ImeiChecker = GuardImeiCheckerPage((props) => {
 
 	return (
 		<>
-			<Navbar />
 			<Box
 				sx={{
 					minHeight: { xs: '71vh', sm: '76vh', md: '74vh', lg: '76vh', xl: '87vh' },
@@ -117,7 +114,6 @@ const ImeiChecker = GuardImeiCheckerPage((props) => {
 					</Box>
 				</Container>
 			</Box>
-			<Footer />
 		</>
 	)
 })
