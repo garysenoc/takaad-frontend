@@ -39,6 +39,10 @@ module.exports = {
 		nodemailer_password: process.env.NODEMAILER_PASSWORD,
 		stripe_publishable_key: process.env.STRIPE_PUBLISHABLE_KEY,
 		internal_token: process.env.INTERNAL_TOKEN,
+		apple: {
+			client_id: process.env.APPLE_CLIENT_ID,
+			redirect_url: process.env.APPLE_REDIRECT_URL,
+		},
 	},
 
 	/**

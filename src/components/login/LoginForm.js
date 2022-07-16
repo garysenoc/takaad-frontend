@@ -18,6 +18,9 @@ import mapAuthStateToProps from 'rtk/auth/state'
 import mapAuthDispatchToProps from 'rtk/auth/action'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import AppleLogin from 'react-apple-login'
+import AppleIcon from '@mui/icons-material/Apple'
+import mapCommonDispatchToProps from '../../../rtk/common/action'
 
 function MyHelperText({ message }) {
 	const { error } = useFormControl() || {}
@@ -58,6 +61,34 @@ const LoginForm = ({ handlePageSwitch, ...props }) => {
 		} else {
 			seterror(true)
 			seterrorMessage(t('login:error_1'))
+		}
+	}
+	const appleResponse = async (response) => {
+		seterror(false)
+		seterrorMessage('')
+		try {
+			if (!response.error) {
+				const appleSignInResponse = await fetch(`${process.env.api_baseurl}/v1/auth/apple`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(response),
+				})
+				if (!appleSignInResponse.ok && appleSignInResponse.status !== 302) {
+					throw new Error()
+				}
+				const data = await appleSignInResponse.json()
+				const { id, token, username } = data
+				props.setAuth({ id, token, username, isLoggedIn: true })
+				props.setIsSnackbarOpen(false)
+				router.push('/')
+			} else {
+				throw new Error()
+			}
+		} catch (error) {
+			props.setIsSnackbarOpen(true)
+			props.setSnackbarMessage(['Apple authentication error.', 'error'])
 		}
 	}
 	useEffect(() => {
@@ -105,6 +136,26 @@ const LoginForm = ({ handlePageSwitch, ...props }) => {
 			>
 				{t('login:button_0')}
 			</Button>
+			<AppleLogin
+				clientId={process.env.apple.client_id}
+				redirectURI={process.env.apple.redirect_url}
+				usePopup={true}
+				callback={appleResponse}
+				scope="email name"
+				responseMode="query"
+				render={(renderProps) => (
+					<Button
+						startIcon={<AppleIcon />}
+						sx={{ backgroundColor: 'black', '&:hover': { backgroundColor: 'black' } }}
+						size="large"
+						variant="contained"
+						fullWidth={false}
+						onClick={renderProps.onClick}
+					>
+						Continue with Apple
+					</Button>
+				)}
+			/>
 			<Typography align="center">
 				{t('login:label_0')} <Link href="/register">{t('login:label_1')}</Link> or use{' '}
 				<MUILink sx={{ cursor: 'pointer' }} onClick={handlePageSwitch}>
@@ -115,4 +166,4 @@ const LoginForm = ({ handlePageSwitch, ...props }) => {
 	)
 }
 
-export default connect(mapAuthStateToProps, mapAuthDispatchToProps())(LoginForm)
+export default connect(mapAuthStateToProps, { ...mapAuthDispatchToProps(), ...mapCommonDispatchToProps() })(LoginForm)
