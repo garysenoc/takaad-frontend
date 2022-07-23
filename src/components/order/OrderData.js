@@ -28,7 +28,7 @@ const OrderData = (props) => {
 					<>
 						{order_data &&
 							order_data.map((order, i) => {
-								return <OrderTable key={i} order={order} order_metadata={props.orders.order_metadata[i]} />
+								return <OrderTable key={i} order={order} product={props.orders.order_metadata[i].product} />
 							})}
 					</>
 				)}

@@ -33,8 +33,6 @@ module.exports = {
 
 	env: {
 		api_baseurl: process.env.API_BASEURL || 'http://localhost:8000',
-		imei_baseurl: process.env.IMEI_BASEURL,
-		imei_access_key: process.env.IMEI_ACCESS_KEY,
 		nodemailer_username: process.env.NODEMAILER_USERNAME,
 		nodemailer_password: process.env.NODEMAILER_PASSWORD,
 		stripe_publishable_key: process.env.STRIPE_PUBLISHABLE_KEY,

@@ -177,34 +177,3 @@ export const renderBrand = (str) => {
 		}
 	}
 }
-
-export const getDeviceBrand = (str) => {
-	const _str = str.toLowerCase().replaceAll(' ', '')
-
-	if (
-		_str.indexOf('apple') !== -1 ||
-		_str.indexOf('iphone') !== -1 ||
-		_str.indexOf('ipad') !== -1 ||
-		_str.indexOf('macbook') !== -1 ||
-		_str.indexOf('airpod') !== -1 ||
-		(_str.indexOf('watch') !== -1 && _str.indexOf('apple') !== -1)
-	)
-		return 'Apple'
-	else if (_str.indexOf('samsung') !== -1 || _str.indexOf('galaxy') !== -1) return 'Samsung'
-	// else if (_str.indexOf('nokia') !== -1) return 'Nokia' // To Be Supported
-	return null
-}
-
-export const getDeviceSeriesName = (str) => {
-	const _str = str.toLowerCase().replaceAll(' ', '')
-
-	if (_str.indexOf('iphone') !== -1) return 'iPhone'
-	else if (_str.indexOf('ipad') !== -1) return 'iPad'
-	else if (_str.indexOf('macbook') !== -1) return 'MacBook'
-	else if (_str.indexOf('airpod') !== -1) return 'AirPods'
-	else if (_str.indexOf('watch') !== -1 && _str.indexOf('apple') !== -1) return 'Apple Watch'
-	else if (_str.indexOf('galaxy') !== -1 && _str.indexOf('samsung') !== -1) return 'Samsung Galaxy'
-	else if (_str.indexOf('watch') !== -1) return 'Watch'
-	else if (_str.indexOf('galaxy') !== -1) return 'Galaxy'
-	return null
-}

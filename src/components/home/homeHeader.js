@@ -6,7 +6,6 @@ import { Box, Container, Grid, Typography, Stack, InputBase, CardMedia } from '@
 import mapCheckerStateToProps from 'rtk/checker/state'
 import mapCheckerDispatchToProps from 'rtk/checker/action'
 import { LoadingButton } from '@mui/lab'
-import { basicIMEICheck } from '../../utils/apiCallCollection'
 import { useTranslation } from 'next-i18next'
 
 const HomeHeader = (props) => {
@@ -26,7 +25,9 @@ const HomeHeader = (props) => {
 		}
 
 		try {
-			const data = await basicIMEICheck(props.checker.imei)
+			const data = await (
+				await fetch(`${process.env.api_baseurl}/v1/imei/basic-info?imei=${props.checker.imei}`)
+			).json()
 
 			if (data.status === 'failed') {
 				props.setIMEICheckRequestStatus(data.status)
