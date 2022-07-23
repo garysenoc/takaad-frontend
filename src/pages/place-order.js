@@ -137,7 +137,7 @@ const PlaceOrder = GuardOrderDetails((props) => {
 
 	const handleSendEmail = async (order) => {
 		try {
-			await sendEmail(order._id, `${order.first_name} ${order.last_name}`, order.email, order.service, order.order_data)
+			await sendEmail(order)
 		} catch (error) {
 			props.setIsSnackbarOpen(true)
 			props.setSnackbarMessage('Something went wrong in sending the email.')

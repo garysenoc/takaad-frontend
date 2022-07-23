@@ -9,13 +9,7 @@ import mapCommonDispatchToProps from '../../../rtk/common/action'
 const DisplayOrder = ({ orderData, ...props }) => {
 	const handleSendEmail = async () => {
 		try {
-			await sendEmail(
-				orderData._id,
-				`${orderData.first_name} ${orderData.last_name}`,
-				orderData.email,
-				orderData.service,
-				orderData.order_data,
-			)
+			await sendEmail(orderData)
 			props.setIsSnackbarOpen(true)
 			props.setSnackbarMessage(['Sent to email successfully.', 'success'])
 		} catch (error) {
