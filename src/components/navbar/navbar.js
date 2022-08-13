@@ -136,22 +136,56 @@ const Navbar = (props) => {
 						<Box sx={{ border: '1px solid #dedede', mx: 2, height: 50 }}></Box>
 						<Stack direction="row" spacing={1}>
 							{props.auth.token === '' ? (
-								<Button
-									sx={{
-										backgroundColor: '#003056',
-										color: '#fff',
-										borderRadius: 10,
-										textTransform: 'capitalize',
-										minWidth: { md: 100, lg: 120 },
-										fontSize: { md: 15, lg: 18 },
-										'&:hover': {
-											backgroundColor: '#004d8a',
-										},
-									}}
-									href="/login"
-								>
-									{t('common:btn_login')}
-								</Button>
+								<>
+									<Button
+										sx={{
+											backgroundColor: '#003056',
+											color: '#fff',
+											borderRadius: 10,
+											textTransform: 'capitalize',
+											minWidth: { md: 100, lg: 120 },
+											fontSize: { md: 15, lg: 18 },
+											'&:hover': {
+												backgroundColor: '#004d8a',
+											},
+										}}
+										href="/login"
+									>
+										{t('common:btn_login')}
+									</Button>
+
+									<Button
+										sx={{
+											mx: { md: 1, lg: 3 },
+											'&:hover': {
+												backgroundColor: '#14a660',
+											},
+											backgroundColor: '#003056',
+											color: '#fff',
+											borderRadius: 10,
+											textTransform: 'capitalize',
+											minWidth: { md: 100, lg: 120 },
+											fontSize: { md: 15, lg: 18 },
+											'&:hover': {
+												backgroundColor: '#004d8a',
+											},
+										}}
+										disableRipple={true}
+										href="https://wholesale.taakad.com"
+									>
+										<LinkLabel
+											sx={{
+												color: '#fff',
+												fontSize: { md: 15, lg: 17 },
+												'&:hover': {
+													color: '#fff',
+												},
+											}}
+										>
+											Wholesale
+										</LinkLabel>
+									</Button>
+								</>
 							) : (
 								<>
 									<Button
