@@ -6,7 +6,7 @@ export const services = {
 		serviceList: [
 			{
 				title: 'Samsung IMEI Check',
-				price: 0.05,
+				price: 0,
 				infos: [
 					{
 						label: 'Model Info',
@@ -68,7 +68,7 @@ export const services = {
 			},
 			{
 				title: 'Huawei IMEI Check  ',
-				price: 0.01,
+				price: 0,
 				infos: [
 					{
 						label: 'Description Full',
@@ -207,7 +207,7 @@ export const services = {
 			},
 			{
 				title: 'Blacklist PRO (GSMA)(all brands)',
-				price: 0.06,
+				price: 0,
 				infos: [
 					{
 						label: 'IMEI',
@@ -245,7 +245,7 @@ export const services = {
 			},
 			{
 				title: 'Blacklist Check (GSMA)(all brands)',
-				price: 0.01,
+				price: 0,
 				infos: [
 					{
 						label: 'Model',
@@ -271,7 +271,7 @@ export const services = {
 			},
 			{
 				title: 'LG IMEI Check',
-				price: 0.06,
+				price: 0,
 				infos: [
 					{
 						label: 'Model Number',
@@ -333,7 +333,7 @@ export const services = {
 			},
 			{
 				title: 'OnePlus IMEI Check',
-				price: 0.06,
+				price: 0,
 				infos: [
 					{
 						label: 'Model',
@@ -379,7 +379,7 @@ export const services = {
 			},
 			{
 				title: 'XIAOMI MI LOCK & INFO (S2)',
-				price: 0.04,
+				price: 0,
 				infos: [
 					{
 						label: 'Description',
@@ -433,7 +433,7 @@ export const services = {
 			},
 			{
 				title: 'HTC IMEI Check',
-				price: 0.01,
+				price: 0,
 				infos: [
 					{
 						label: 'Model',
@@ -496,7 +496,7 @@ export const services = {
 			},
 			{
 				title: 'Sony IMEI Check',
-				price: 0.01,
+				price: 0,
 				infos: [
 					{
 						label: 'Model Name',
@@ -558,7 +558,7 @@ export const services = {
 			},
 			{
 				title: 'Motorola IMEI Check',
-				price: 0.06,
+				price: 0,
 				infos: [
 					{
 						label: 'Product Name',
@@ -636,7 +636,7 @@ export const services = {
 			},
 			{
 				title: 'ZTE Imei Check',
-				price: 0.06,
+				price: 0,
 				infos: [
 					{
 						label: 'Model Code',
@@ -715,7 +715,7 @@ export const services = {
 		serviceList: [
 			{
 				title: 'APPLE FULL INFO (+CARRIER)-NEW',
-				price: 0.15,
+				price: 0,
 				infos: [
 					{
 						label: 'Model Description',
@@ -837,7 +837,7 @@ export const services = {
 			},
 			{
 				title: 'Find my iPhone (On/Off) + Model',
-				price: 0.01,
+				price: 0,
 				infos: [
 					{
 						label: 'Model',
@@ -855,7 +855,7 @@ export const services = {
 			},
 			{
 				title: 'iCloud Status (Clean/Lost)+ Model',
-				price: 0.02,
+				price: 0,
 				infos: [
 					{
 						label: 'Model',
@@ -877,7 +877,7 @@ export const services = {
 			},
 			{
 				title: 'Apple SimLock + Model',
-				price: 0.05,
+				price: 0,
 				infos: [
 					{
 						label: 'Model',
@@ -907,7 +907,7 @@ export const services = {
 			},
 			{
 				title: 'Apple Carrier + SimLock',
-				price: 0.08,
+				price: 0,
 				infos: [
 					{
 						label: 'Model',
@@ -961,7 +961,7 @@ export const services = {
 			},
 			{
 				title: 'iPhone/iPad MDM Check',
-				price: 0.25,
+				price: 0,
 				infos: [
 					{
 						label: 'IMEI',
@@ -979,7 +979,7 @@ export const services = {
 			},
 			{
 				title: 'Warranty + Activation + Replaced',
-				price: 0.01,
+				price: 0,
 				infos: [
 					{
 						label: 'Model',
@@ -1053,7 +1053,7 @@ export const services = {
 			},
 			{
 				title: 'APPLE FULL INFO (No Carier/Simlock)',
-				price: 0.07,
+				price: 0,
 				infos: [
 					{
 						label: 'Model Description',
@@ -1163,7 +1163,7 @@ export const services = {
 			},
 			{
 				title: 'IMEI TO SN',
-				price: 0.02,
+				price: 0,
 				infos: [
 					{
 						label: 'Model',
@@ -1189,7 +1189,7 @@ export const services = {
 			},
 			{
 				title: 'iMac FMI Status On/Off',
-				price: 0.75,
+				price: 0,
 				infos: [
 					{
 						label: 'Model',
@@ -1207,7 +1207,7 @@ export const services = {
 			},
 			{
 				title: 'SOLD BY [Apple]',
-				price: 2.12,
+				price: 0,
 				infos: [
 					{
 						label: 'Description',
@@ -1273,7 +1273,7 @@ export const services = {
 			},
 			{
 				title: 'Apple Basic Info',
-				price: 0.06,
+				price: 0,
 				infos: [
 					{
 						label: 'Model Description',
