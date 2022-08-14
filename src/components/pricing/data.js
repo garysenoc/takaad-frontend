@@ -686,7 +686,7 @@ export const services = {
 			},
 			{
 				title: 'Brand + Model IMEI Check',
-				price: 0.01,
+				price: 0,
 				infos: [
 					{
 						label: 'IMEI',

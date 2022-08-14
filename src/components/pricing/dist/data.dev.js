@@ -514,7 +514,7 @@ var services = {
       }]
     }, {
       title: 'Brand + Model IMEI Check',
-      price: 0.01,
+      price: 0,
       infos: [{
         label: 'IMEI',
         description: '354460116xxxxxx'
