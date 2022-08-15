@@ -20,9 +20,8 @@ const SnackbarMessage = ({ children, ...props }) => {
 			{children}
 			<Snackbar
 				open={props.common.isSnackbarOpen}
-				autoHideDuration={10000}
 				onClose={handleClose}
-				anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+				anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
 				sx={{ marginTop: 10 }}
 			>
 				<Alert onClose={handleClose} severity={props.common.color}>
