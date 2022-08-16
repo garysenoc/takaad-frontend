@@ -22,7 +22,7 @@ const SnackbarMessage = ({ children, ...props }) => {
 				open={props.common.isSnackbarOpen}
 				onClose={handleClose}
 				anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
-				sx={{ marginTop: 10 }}
+				sx={{ marginTop: 10, marginRight: 10, color: 'text.secondary' }}
 			>
 				<Alert onClose={handleClose} severity={props.common.color}>
 					{props.common.snackbarMessage}
