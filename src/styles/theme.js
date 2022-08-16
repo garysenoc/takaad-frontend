@@ -41,11 +41,6 @@ const theme = createTheme({
 	typography: {
 		fontFamily: "'Nunito Sans', 'Poppins', 'Roboto', sans-serif",
 	},
-	icon: sx({
-		mr: 0.5,
-		ml: '-2px',
-		color: '##fff',
-	  }),
 })
 
 export default theme
