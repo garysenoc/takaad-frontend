@@ -1,18 +1,6 @@
 import { Fragment, useState } from 'react'
 import Link from 'next/link'
-import {
-	Box,
-	IconButton,
-	List,
-	ListItem,
-	Button,
-	Typography,
-	Drawer,
-	CardMedia,
-	Menu,
-	MenuItem,
-	Badge,
-} from '@mui/material'
+import { Box, IconButton, List, ListItem, Button, Typography, Drawer, CardMedia, Menu, MenuItem, Badge, } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import MenuIcon from '@mui/icons-material/Menu'
 import CloseIcon from '@mui/icons-material/Close'
@@ -181,6 +169,7 @@ export default function SideBar({
 											backgroundColor: '#004d8a',
 										},
 									}}
+									href="/login"
 								>
 									<LinkLabel
 										sx={{
@@ -207,6 +196,7 @@ export default function SideBar({
 											backgroundColor: '#1ea665',
 										},
 									}}
+									href="https://wholesale.taakad.com"
 								>
 									<LinkLabel
 										sx={{
