@@ -6,7 +6,6 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
 const NotFound = () => {
 	const Router = useRouter()
-
 	return (
 		<>
 			<Head>
