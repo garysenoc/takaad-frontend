@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles'
-import { red } from '@mui/material/colors'
+import { red, deepOrange, white} from '@mui/material/colors'
 
 // Create a theme instance.
 const theme = createTheme({
@@ -11,8 +11,15 @@ const theme = createTheme({
 			main: '#28cd7e',
 		},
 		error: {
+			main: deepOrange.A400,
+		},
+		success: {
 			main: red.A400,
 		},
+		text: {
+			primary: '#003056',
+			secondary: '#fff',
+		}
 	},
 	components: {
 		MuiAppBar: {
