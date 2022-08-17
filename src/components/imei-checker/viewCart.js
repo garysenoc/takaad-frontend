@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { connect } from 'react-redux'
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useCallback, useEffect, useState } from 'react'
 import { Box, Button, Stack, TextField, Typography, Grid } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 
@@ -54,7 +54,7 @@ const ViewCart = (props) => {
 		}
 	}
 
-	useEffect(() => {
+	const calculateTotal = useCallback(() => {
 		const prices = props.cart.items.map((item) => item.price)
 		const subtotal = prices.length ? Math.floor(prices.reduce((partialSum, a) => partialSum + a) * 100) / 100 : 0
 		let discount = 0
@@ -71,7 +71,11 @@ const ViewCart = (props) => {
 			discount,
 			total,
 		})
-	}, [coupon, props.cart.coupon])
+	}, [coupon, props.cart.coupon, props.setCheckoutPrice, props.cart.items])
+
+	useEffect(() => {
+		calculateTotal()
+	}, [calculateTotal])
 
 	return (
 		<>
@@ -225,7 +229,10 @@ const ViewCart = (props) => {
 										</Grid>
 										<Grid item xs={1}>
 											<DeleteIcon
-												onClick={() => props.clearItem(item.details.imei)}
+												onClick={() => {
+													calculateTotal()
+													props.clearItem(item.details.imei)
+												}}
 												sx={{ color: '#ffffff', m: 1, '&:hover': { cursor: 'pointer' } }}
 											/>
 										</Grid>
@@ -250,7 +257,10 @@ const ViewCart = (props) => {
 										backgroundColor: '#212121',
 									},
 								}}
-								onClick={() => props.clearItems()}
+								onClick={() => {
+									calculateTotal()
+									props.clearItems()
+								}}
 							>
 								Clear Cart
 							</Button>
