@@ -5,6 +5,15 @@ import DataRow from '../place-order/DataRow'
 
 const OrderTable = ({ order, product }) => {
 	const [open, setOpen] = useState(true)
+	const excludedData = new Set([
+		'Telephone Technical Support',
+		'Repairs and Service Coverage',
+		'AppleCare Eligible',
+		'Valid Purchase Date',
+		'Registered Device',
+		'Replaced Device',
+		'Loaner Device',
+	])
 
 	return (
 		<Accordion
@@ -31,9 +40,11 @@ const OrderTable = ({ order, product }) => {
 			</AccordionSummary>
 			<AccordionDetails>
 				<Box>
-					{order.map((d, i) => (
-						<DataRow key={i} data={d} index={i} />
-					))}
+					{order
+						.filter((d) => !excludedData.has(d.label))
+						.map((d, i) => (
+							<DataRow key={i} data={d} index={i} />
+						))}
 				</Box>
 			</AccordionDetails>
 		</Accordion>
