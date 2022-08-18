@@ -5,11 +5,12 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { FormattedDate } from '../utils/renderFormattedDate'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 
 export async function getServerSideProps(ctx) {
 	return {
 		props: {
-			...(await serverSideTranslations(ctx.locale, ['login', 'common'])),
+			...(await serverSideTranslations(ctx.locale, ['login', 'common','order'])),
 		},
 	}
 }
@@ -17,7 +18,7 @@ export async function getServerSideProps(ctx) {
 const Orders = GuardPage((props) => {
 	const router = useRouter()
 	const [orders, setOrders] = useState([])
-
+	const { t } = useTranslation()
 	useEffect(async () => {
 		const data = await fetch(`${process.env.api_baseurl}/v1/order/user/${props.auth.id}`, {
 			method: 'GET',
@@ -49,11 +50,11 @@ const Orders = GuardPage((props) => {
 						lineHeight: { xs: '28px', sm: '40px', md: '40px', lg: '52px' },
 					}}
 				>
-					Order History
+					{t('order:order-history')}
 				</Typography>
 				{orders.length === 0 ? (
 					<Typography variant="h4" fontWeight={800} color="GrayText" align="center">
-						No order history yet!
+						{t('order:no-order-history')}
 					</Typography>
 				) : (
 					<Stack direction="row" flexWrap="wrap" spacing={1}>
@@ -82,7 +83,7 @@ const Orders = GuardPage((props) => {
 										<Grid container item direction="row" spacing={2} justifyContent="space-between">
 											<Grid item>
 												<Typography variant="subtitle2" fontWeight={600}>
-													Subtotal
+												{t('order:subtotal')}
 												</Typography>
 											</Grid>
 											<Grid item>
@@ -92,7 +93,7 @@ const Orders = GuardPage((props) => {
 										<Grid container item direction="row" spacing={2} justifyContent="space-between">
 											<Grid item>
 												<Typography variant="subtitle2" fontWeight={600}>
-													Discount
+												{t('order:discount')}	
 												</Typography>
 											</Grid>
 											<Grid item>
@@ -102,7 +103,7 @@ const Orders = GuardPage((props) => {
 										<Grid container item direction="row" spacing={2} justifyContent="space-between">
 											<Grid item>
 												<Typography variant="subtitle2" fontWeight={600}>
-													Total
+												{t('order:total')}
 												</Typography>
 											</Grid>
 											<Grid item>
@@ -118,7 +119,7 @@ const Orders = GuardPage((props) => {
 										sx={{ cursor: 'pointer' }}
 										onClick={() => router.push({ pathname: '/order', query: { order: JSON.stringify(order) } })}
 									>
-										View
+										{t('order:view')}
 									</Typography>
 								</Stack>
 							</Paper>

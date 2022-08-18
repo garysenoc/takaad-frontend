@@ -12,6 +12,8 @@ import OrderData from 'src/components/order/OrderData'
 import GuardOrderDetails from 'lib/guardOrderDetails'
 import mapCheckerDispatchToProps from '../../rtk/checker/action'
 import sendEmail from '../utils/sendEmail'
+import { useTranslation } from 'next-i18next'
+
 
 export const getServerSideProps = async (context) => {
 	if (context.query.token) {
@@ -33,14 +35,14 @@ export const getServerSideProps = async (context) => {
 
 		return {
 			props: {
-				...(await serverSideTranslations(context.locale, ['common'])),
+				...(await serverSideTranslations(context.locale, ['common','place-order'])),
 				response,
 			},
 		}
 	} else {
 		return {
 			props: {
-				...(await serverSideTranslations(context.locale, ['common'])),
+				...(await serverSideTranslations(context.locale, ['common','place-order'])),
 			},
 		}
 	}
@@ -52,7 +54,7 @@ const PlaceOrder = GuardOrderDetails((props) => {
 		props.checker.isFinishedStep && props.resetStep()
 		handleAddOrderData()
 	}, [])
-
+	const { t } = useTranslation()
 	const handleAddOrderData = async () => {
 		if (props.cart.items.length === 0) {
 			return
@@ -160,7 +162,7 @@ const PlaceOrder = GuardOrderDetails((props) => {
 							lineHeight: { xs: '28px', sm: '40px', md: '40px', lg: '52px' },
 						}}
 					>
-						Order Checkout
+						{t('place-order:order-checkout')}
 					</Typography>
 					<Typography
 						sx={{
@@ -176,7 +178,7 @@ const PlaceOrder = GuardOrderDetails((props) => {
 							fontSize: { xs: 14, sm: 18, md: 20, lg: 22 },
 						}}
 					>
-						Thank you {props.checkout.billing_details.first_name}! Your order has been received.
+						{t('place-order:thankyou')} {props.checkout.billing_details.first_name} {t('place-order:order-received')}
 					</Typography>
 					<Grid container spacing={2}>
 						<Grid item xs={12}>

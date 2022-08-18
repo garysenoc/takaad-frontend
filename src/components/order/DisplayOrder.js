@@ -5,6 +5,7 @@ import OrderDetails from './OrderDetails'
 import { connect } from 'react-redux'
 import sendEmail from '../../utils/sendEmail'
 import mapCommonDispatchToProps from '../../../rtk/common/action'
+import { useTranslation } from 'next-i18next'
 
 const DisplayOrder = ({ orderData, ...props }) => {
 	const handleSendEmail = async () => {
@@ -17,6 +18,7 @@ const DisplayOrder = ({ orderData, ...props }) => {
 			props.setSnackbarMessage(['Something went wrong in sending the email.', 'error'])
 		}
 	}
+	const { t } = useTranslation()
 
 	return (
 		<>
@@ -34,11 +36,11 @@ const DisplayOrder = ({ orderData, ...props }) => {
 							lineHeight: { xs: '28px', sm: '40px', md: '40px', lg: '52px' },
 						}}
 					>
-						Order
+						{t('order:order-title')}
 					</Typography>
 					{!orderData ? (
 						<Typography variant="h4" fontWeight={800} color="GrayText" align="center">
-							Order does not exist!
+							{t('order:order-not-exist')}
 						</Typography>
 					) : (
 						<Stack direction="column" spacing={5}>
@@ -72,7 +74,7 @@ const DisplayOrder = ({ orderData, ...props }) => {
 								}}
 								onClick={handleSendEmail}
 							>
-								Resend
+								{t('order:resend')}
 							</Button>
 						</Stack>
 					)}

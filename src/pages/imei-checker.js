@@ -11,11 +11,12 @@ import mapCheckerDispatchToProps from 'rtk/checker/action'
 import Services from 'src/components/imei-checker/services'
 import ViewCart from 'src/components/imei-checker/viewCart'
 import CheckoutInfo from 'src/components/imei-checker/checkoutInfo'
+import { useTranslation } from 'next-i18next'
 
 export const getServerSideProps = async (ctx) => {
 	return {
 		props: {
-			...(await serverSideTranslations(ctx.locale, ['common'])),
+			...(await serverSideTranslations(ctx.locale, ['common','imei-checker'])),
 		},
 	}
 }
@@ -23,7 +24,7 @@ export const getServerSideProps = async (ctx) => {
 const ImeiChecker = GuardImeiCheckerPage((props) => {
 	const [skipped, setSkipped] = useState(new Set())
 	const steps = ['Services', 'Cart', 'Checkout']
-
+	const { t } = useTranslation()
 	const isStepSkipped = (step) => {
 		return skipped.has(step)
 	}
@@ -107,7 +108,7 @@ const ImeiChecker = GuardImeiCheckerPage((props) => {
 									}}
 									startIcon={<ArrowBackIcon />}
 								>
-									Back
+									{t('imei-checker:back-btn')}
 								</Button>
 							</Box>
 						</Fragment>

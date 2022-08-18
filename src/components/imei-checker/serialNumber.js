@@ -1,10 +1,11 @@
 import { useRouter } from 'next/dist/client/router'
 
 import { Box, Button, InputBase, Typography } from '@mui/material'
+import { useTranslation } from 'next-i18next'
 
 const SerialNumber = ({ nextStep }) => {
 	const router = useRouter()
-
+	const { t } = useTranslation()
 	const handleClick = () => {
 		if (nextStep) {
 			nextStep()
@@ -27,10 +28,10 @@ const SerialNumber = ({ nextStep }) => {
 						lineHeight: { xs: '28px', sm: '40px', md: '40px', lg: '52px' },
 					}}
 				>
-					Enter Your Device's 15-Digit IMEI Or Serial Number
+					{t('imei-checker:enter-imei')} 
 				</Typography>
 				<InputBase
-					placeholder="Your IMEI or Serial Number"
+					placeholder={t('imei-checker:your-imei')} 
 					variant="outlined"
 					inputlabelprops={{
 						shrink: true,
@@ -64,7 +65,8 @@ const SerialNumber = ({ nextStep }) => {
 						fontStyle: 'italic',
 					}}
 				>
-					* Dial *#06# to get your phones IMEI number
+					{t('imei-checker:imei-instruction')} 
+					
 				</Typography>
 				<Box mt={2}>
 					<Button
@@ -85,7 +87,7 @@ const SerialNumber = ({ nextStep }) => {
 						}}
 						onClick={handleClick}
 					>
-						Get Device Info
+						{t('imei-checker:device-info')} 
 					</Button>
 				</Box>
 			</Box>

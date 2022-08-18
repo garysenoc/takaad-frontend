@@ -3,15 +3,17 @@ import { Grid, MenuItem, TextField } from '@mui/material'
 
 import mapCheckoutStateToProps from 'rtk/checkout/state'
 import mapCheckoutDispatchToProps from 'rtk/checkout/action'
+import { useTranslation } from 'next-i18next'
 
 const CheckoutForm = (props) => {
+	const { t } = useTranslation()
 	return (
 		<>
 			<Grid container justifyContent="center">
 				<Grid item xs={12} sm={6} md={6} sx={{ paddingRight: { sm: 1, md: 1 } }}>
 					<TextField
 						fullWidth
-						placeholder="First name"
+						placeholder={t('imei-checker:fname')} 
 						sx={{
 							fontFamily: 'Nunito Sans',
 							fontWeight: 400,
@@ -26,7 +28,7 @@ const CheckoutForm = (props) => {
 				<Grid item xs={12} sm={6} md={6} sx={{ marginTop: { xs: 3, sm: 0 }, paddingLeft: { sm: 1, md: 1 } }}>
 					<TextField
 						fullWidth
-						placeholder="Last name"
+						placeholder={t('imei-checker:fname')} 
 						sx={{
 							fontFamily: 'Nunito Sans',
 							fontWeight: 400,
@@ -43,7 +45,7 @@ const CheckoutForm = (props) => {
 						fullWidth
 						id="outlined-select-currency"
 						select
-						label="Country"
+						label={t('imei-checker:country')} 
 						value={props.checkout.billing_details.country}
 						onChange={(e) => props.setBillingDetails({ field: 'country', value: e.target.value })}
 					>
@@ -55,7 +57,7 @@ const CheckoutForm = (props) => {
 				<Grid item xs={12} mt={2}>
 					<TextField
 						fullWidth
-						placeholder="House number and street name"
+						placeholder={t('imei-checker:houseNo')} 
 						sx={{
 							fontFamily: 'Nunito Sans',
 							fontWeight: 400,
@@ -70,7 +72,7 @@ const CheckoutForm = (props) => {
 				<Grid item xs={12} mt={3}>
 					<TextField
 						fullWidth
-						placeholder="Apartment, suite, unit, etc. (optional)"
+						placeholder={t('imei-checker:apartment')} 
 						sx={{
 							fontFamily: 'Nunito Sans',
 							fontWeight: 400,
@@ -85,7 +87,7 @@ const CheckoutForm = (props) => {
 				<Grid item xs={12} mt={3}>
 					<TextField
 						fullWidth
-						placeholder="Town / City"
+						placeholder={t('imei-checker:city')} 
 						sx={{
 							fontFamily: 'Nunito Sans',
 							fontWeight: 400,
@@ -102,7 +104,7 @@ const CheckoutForm = (props) => {
 						fullWidth
 						id="outlined-select-currency"
 						select
-						label="State"
+						label={t('imei-checker:state')} 
 						value={props.checkout.billing_details.state}
 						onChange={(e) => props.setBillingDetails({ field: 'state', value: e.target.value })}
 					>
@@ -114,7 +116,7 @@ const CheckoutForm = (props) => {
 				<Grid item xs={12} sm={6} md={6} sx={{ marginTop: { xs: 2, sm: 3 }, paddingLeft: { sm: 1, md: 1 } }}>
 					<TextField
 						fullWidth
-						placeholder="ZIP Code"
+						placeholder={t('imei-checker:zip')} 
 						sx={{
 							fontFamily: 'Nunito Sans',
 							fontWeight: 400,
@@ -129,7 +131,7 @@ const CheckoutForm = (props) => {
 				<Grid item xs={12} sm={6} md={6} sx={{ paddingRight: { sm: 1, md: 1 } }} mt={3}>
 					<TextField
 						fullWidth
-						placeholder="Phone"
+						placeholder={t('imei-checker:phone')} 
 						sx={{
 							fontFamily: 'Nunito Sans',
 							fontWeight: 400,
@@ -144,7 +146,7 @@ const CheckoutForm = (props) => {
 				<Grid item xs={12} sm={6} md={6} sx={{ paddingLeft: { sm: 1, md: 1 } }} mt={3}>
 					<TextField
 						fullWidth
-						placeholder="Email Address"
+						placeholder={t('imei-checker:email')} 
 						sx={{
 							fontFamily: 'Nunito Sans',
 							fontWeight: 400,

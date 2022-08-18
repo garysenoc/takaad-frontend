@@ -6,7 +6,7 @@ import DisplayOrder from '../../components/order/DisplayOrder'
 export async function getServerSideProps(ctx) {
 	return {
 		props: {
-			...(await serverSideTranslations(ctx.locale, ['home', 'contact', 'common'])),
+			...(await serverSideTranslations(ctx.locale, ['home', 'contact', 'common','order'])),
 		},
 	}
 }

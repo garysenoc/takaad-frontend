@@ -3,8 +3,10 @@ import { connect } from 'react-redux'
 
 import mapCheckoutStateToProps from 'rtk/checkout/state'
 import mapCheckoutDispatchToProps from 'rtk/checkout/action'
+import { useTranslation } from 'next-i18next'
 
 const OrderDetails = ({ order }) => {
+	const { t } = useTranslation()
 	return (
 		<>
 			<Box>
@@ -17,7 +19,7 @@ const OrderDetails = ({ order }) => {
 						fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
 					}}
 				>
-					<strong>Order Number:</strong> {order.order_number.join(', ')}
+					<strong>{t('order:order-number')}</strong> {order.order_number.join(', ')}
 				</Typography>
 				<Typography
 					sx={{
@@ -28,7 +30,7 @@ const OrderDetails = ({ order }) => {
 						fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
 					}}
 				>
-					<strong>Date:</strong> {order.date}
+					<strong>{t('order:date')}</strong> {order.date}
 				</Typography>
 				<Typography
 					sx={{
@@ -39,7 +41,7 @@ const OrderDetails = ({ order }) => {
 						fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
 					}}
 				>
-					<strong>Email:</strong> {order.email}
+					<strong>{t('order:email')}</strong> {order.email}
 				</Typography>
 
 				<Typography
@@ -51,7 +53,7 @@ const OrderDetails = ({ order }) => {
 						fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
 					}}
 				>
-					<strong>Payment Method:</strong> {order.payment_method}
+					<strong>{t('order:payment-method')}</strong> {order.payment_method}
 				</Typography>
 			</Box>
 
@@ -67,7 +69,7 @@ const OrderDetails = ({ order }) => {
 								fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
 							}}
 						>
-							Service
+							{t('order:service')}
 						</Typography>
 					</Grid>
 					<Grid item xs={6}>
@@ -81,7 +83,7 @@ const OrderDetails = ({ order }) => {
 								fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
 							}}
 						>
-							Price
+							{t('order:price')}
 						</Typography>
 					</Grid>
 				</Grid>
@@ -101,7 +103,7 @@ const OrderDetails = ({ order }) => {
 						>
 							{order.service.map((service, i) => (
 								<span key={i}>
-									{`${service} All in One Information`}
+									{`${service}`} {t('order:all-in-one')}
 									<br />
 								</span>
 							))}
@@ -141,7 +143,7 @@ const OrderDetails = ({ order }) => {
 								fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
 							}}
 						>
-							Subtotal:
+							{t('order:subtotal')}: 
 						</Typography>
 					</Grid>
 					<Grid item xs={6}>
@@ -171,7 +173,7 @@ const OrderDetails = ({ order }) => {
 								fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
 							}}
 						>
-							Discount:
+							{t('order:discount')}: 
 						</Typography>
 					</Grid>
 					<Grid item xs={6}>
@@ -201,7 +203,7 @@ const OrderDetails = ({ order }) => {
 								fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
 							}}
 						>
-							Total:
+							{t('order:total')}: 
 						</Typography>
 					</Grid>
 					<Grid item xs={6}>

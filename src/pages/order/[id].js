@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import DisplayOrder from '../../components/order/DisplayOrder'
 import { FormattedDate } from '../../utils/renderFormattedDate'
+import { useTranslation } from 'next-i18next'
 
 export async function getServerSideProps(ctx) {
 	return {

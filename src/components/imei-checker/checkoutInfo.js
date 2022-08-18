@@ -27,10 +27,13 @@ import { CurrentFormattedDate } from 'src/utils/renderFormattedDate'
 import mapCheckerDispatchToProps from '../../../rtk/checker/action'
 import Wallet from './Wallet'
 import capitalFirstLetterWord from '../../utils/capitalFirstLetterWord'
+import { useTranslation } from 'next-i18next'
+
 
 const CheckoutInfo = (props) => {
 	const router = useRouter()
 	const stripe = useStripe()
+	const { t } = useTranslation()
 	const elements = useElements()
 	const [walletName, setwalletName] = useState('')
 	const [paymentReq, setpaymentReq] = useState(null)
@@ -199,7 +202,7 @@ const CheckoutInfo = (props) => {
 						lineHeight: { xs: '28px', sm: '40px', md: '40px', lg: '52px' },
 					}}
 				>
-					Checkout
+					{t('imei-checker:checkout-title')} 
 				</Typography>
 				<Grid container justifyContent="center" spacing={2}>
 					<Grid item xs={12} sm={12} md={6}>
@@ -228,7 +231,7 @@ const CheckoutInfo = (props) => {
 								fontSize: { xs: '20px', sm: '24', md: '28px' },
 							}}
 						>
-							Billing &amp; Shipping
+							{t('imei-checker:billing-shipping')} 
 						</Typography>
 						<CheckoutForm />
 					</Grid>
@@ -272,7 +275,7 @@ const CheckoutInfo = (props) => {
 												fontSize: { xs: '14px', sm: '16px', md: '18px' },
 											}}
 										>
-											IMEI Number: {item.details.imei}
+											{t('imei-checker:imei')}  {item.details.imei}
 										</Typography>
 										<Typography
 											sx={{
@@ -283,7 +286,7 @@ const CheckoutInfo = (props) => {
 												fontSize: { xs: '14px', sm: '16px', md: '18px' },
 											}}
 										>
-											Brand: {item.details.brand}
+											{t('imei-checker:brand')}  {item.details.brand}
 										</Typography>
 										<Typography
 											sx={{
@@ -294,7 +297,7 @@ const CheckoutInfo = (props) => {
 												fontSize: { xs: '14px', sm: '16px', md: '18px' },
 											}}
 										>
-											Model: {item.details.model}
+											{t('imei-checker:model')}  {item.details.model}
 										</Typography>
 
 										<Divider sx={{ border: '1px solid #ffffff' }} />
@@ -313,7 +316,7 @@ const CheckoutInfo = (props) => {
 										fontSize: { xs: '14px', sm: '16px', md: '18px' },
 									}}
 								>
-									Subtotal:
+									{t('imei-checker:subtotal')} 
 								</Typography>
 								<Typography
 									sx={{
@@ -339,7 +342,7 @@ const CheckoutInfo = (props) => {
 										fontSize: { xs: '14px', sm: '16px', md: '18px' },
 									}}
 								>
-									Discount:
+									{t('imei-checker:discount')} 
 								</Typography>
 								<Typography
 									sx={{
@@ -365,7 +368,7 @@ const CheckoutInfo = (props) => {
 										fontSize: { xs: '14px', sm: '16px', md: '18px' },
 									}}
 								>
-									Total:
+									{t('imei-checker:total')} 
 								</Typography>
 								<Typography
 									sx={{
@@ -414,7 +417,7 @@ const CheckoutInfo = (props) => {
 													fontSize: { xs: '14px', sm: '16px', md: '16px' },
 												}}
 											>
-												Available balance: $3403.46
+												{t('imei-checker:available-balance')}  $3403.46
 											</Typography>
 										</Box>
 									)}
@@ -455,7 +458,7 @@ const CheckoutInfo = (props) => {
 													}}
 												/>
 											}
-											label="Paypal"
+											label={t('imei-checker:paypal')} 
 										/>
 									</Box>
 									<Box sx={{ display: { xs: 'block', sm: 'flex' }, alignItems: 'center' }}>
@@ -474,7 +477,7 @@ const CheckoutInfo = (props) => {
 													}}
 												/>
 											}
-											label="Credit Cards"
+											label={t('imei-checker:credit-card')} 
 										/>
 										<Stack direction="row">
 											<CardMedia
@@ -556,8 +559,7 @@ const CheckoutInfo = (props) => {
 									fontSize: { xs: '14px', sm: '14px', md: '16px' },
 								}}
 							>
-								Your personal data will be used to process your order, support your experience throughout this website,
-								and for other purposes described in our privacy policy.
+								{t('imei-checker:privacy-policy-description')} 
 							</Typography>
 							<FormGroup>
 								<FormControlLabel
@@ -574,7 +576,7 @@ const CheckoutInfo = (props) => {
 										/>
 									}
 									sx={{ color: '#fff' }}
-									label="I have read and agree to the website terms and conditions *"
+									label={t('imei-checker:terms-condition')}
 								/>
 							</FormGroup>
 							<Typography
@@ -588,7 +590,7 @@ const CheckoutInfo = (props) => {
 									fontSize: { xs: '14px', sm: '14px', md: '16px' },
 								}}
 							>
-								Have a coupon? <strong>Click here to enter your code</strong>
+								{t('imei-checker:have-coupon')} <strong>{t('imei-checker:enter-code')}</strong>
 							</Typography>
 							<Typography
 								sx={{
@@ -601,7 +603,7 @@ const CheckoutInfo = (props) => {
 									fontSize: { xs: '14px', sm: '14px', md: '16px' },
 								}}
 							>
-								Click here to check refund policy
+								{t('imei-checker:refund-policy')}
 							</Typography>
 							<Box marginTop={2}>{renderPaymentButton()}</Box>
 						</Box>

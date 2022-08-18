@@ -2,9 +2,12 @@ import React, { useState } from 'react'
 import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 import DataRow from '../place-order/DataRow'
+import { useTranslation } from 'next-i18next'
+
 
 const OrderTable = ({ order, product }) => {
 	const [open, setOpen] = useState(true)
+	const { t } = useTranslation()
 
 	return (
 		<Accordion
@@ -26,7 +29,7 @@ const OrderTable = ({ order, product }) => {
 						fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
 					}}
 				>
-					{`${product} All in One Information`}
+					{`${product}`} {t('order:all-in-one')}
 				</Typography>
 			</AccordionSummary>
 			<AccordionDetails>

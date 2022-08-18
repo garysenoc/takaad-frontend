@@ -18,6 +18,7 @@ import {
 	renderBrandPricePerCheck,
 } from 'src/utils/renderPhoneInformation'
 import { glosarryInfos } from 'src/components/glosarry/data'
+import { useTranslation } from 'next-i18next'
 
 const CustomWidthTooltip = styled(({ className, ...props }) => <Tooltip {...props} classes={{ popper: className }} />)({
 	[`& .${tooltipClasses.tooltip}`]: {
@@ -27,6 +28,7 @@ const CustomWidthTooltip = styled(({ className, ...props }) => <Tooltip {...prop
 
 const Services = (props) => {
 	const router = useRouter()
+	const { t } = useTranslation()
 	const { payload } = props.checker
 
 	const handleAddToCart = () => {
@@ -81,7 +83,7 @@ const Services = (props) => {
 						lineHeight: { xs: '28px', sm: '40px', md: '40px', lg: '52px' },
 					}}
 				>
-					Services
+					{t('imei-checker:services-title')} 
 				</Typography>
 				<Typography
 					sx={{
@@ -93,7 +95,7 @@ const Services = (props) => {
 						fontSize: { xs: '16px', sm: '18px', md: '20px', lg: '22px' },
 					}}
 				>
-					Select {renderPhoneBrandName(payload.result)} services you wish to run:
+					{t('imei-checker:select')} {renderPhoneBrandName(payload.result)} {t('imei-checker:services')}
 				</Typography>
 				<Box>
 					<Typography
@@ -105,7 +107,7 @@ const Services = (props) => {
 							fontSize: { xs: '14px', sm: '16px', md: '18px' },
 						}}
 					>
-						<strong>IMEI Number: </strong> {payload.imei}
+						<strong>{t('imei-checker:imei')}  </strong> {payload.imei}
 					</Typography>
 					<Typography
 						sx={{
@@ -116,7 +118,7 @@ const Services = (props) => {
 							fontSize: { xs: '14px', sm: '16px', md: '18px' },
 						}}
 					>
-						<strong>Brand: </strong> {payload.object.brand}
+						<strong>{t('imei-checker:brand')} </strong> {payload.object.brand}
 					</Typography>
 					<Typography
 						sx={{
@@ -127,7 +129,7 @@ const Services = (props) => {
 							fontSize: { xs: '14px', sm: '16px', md: '18px' },
 						}}
 					>
-						<strong>Model: </strong> {payload.object.model}
+						<strong>{t('imei-checker:model')}</strong> {payload.object.model}
 					</Typography>
 				</Box>
 				<Stack direction="row" justifyContent="space-between" sx={{ borderBottom: 'dashed #003056 2px', marginTop: 1 }}>
@@ -140,7 +142,7 @@ const Services = (props) => {
 							fontSize: { xs: '18px', sm: '22px', md: '24px', lg: '27px' },
 						}}
 					>
-						All information on this device
+						{t('imei-checker:device-info-title')}
 					</Typography>
 					<Typography
 						sx={{
@@ -169,7 +171,7 @@ const Services = (props) => {
 								fontSize: { xs: '16px', sm: '18px', md: '22px' },
 							}}
 						>
-							Example of what information to expect with this service
+							{t('imei-checker:drop-down-example-info')}
 						</Typography>
 					</AccordionSummary>
 					<AccordionDetails>
@@ -273,7 +275,7 @@ const Services = (props) => {
 							fontSize: { xs: '16px', sm: '22px', md: '24px', lg: '27px' },
 						}}
 					>
-						Total: {`$${renderBrandPricePerCheck(payload.result)}`}
+						{t('imei-checker:total')} {`$${renderBrandPricePerCheck(payload.result)}`}
 					</Typography>
 					<Button
 						sx={{
@@ -293,7 +295,7 @@ const Services = (props) => {
 						}}
 						onClick={handleAddToCart}
 					>
-						Add To Cart
+						{t('imei-checker:add-to-cart-btn')}
 					</Button>
 				</Stack>
 				<Button
@@ -314,7 +316,7 @@ const Services = (props) => {
 					startIcon={<ArrowBackIcon />}
 					onClick={() => router.push('/')}
 				>
-					Back to Home
+					{t('imei-checker:back-button')}
 				</Button>
 			</Box>
 		</>

@@ -4,10 +4,12 @@ import { connect } from 'react-redux'
 import mapCheckerStateToProps from 'rtk/checker/state'
 import mapCheckerDispatchToProps from 'rtk/checker/action'
 import OrderTable from './OrderTable'
+import { useTranslation } from 'next-i18next'
+
 
 const OrderData = (props) => {
 	const order_data = props.orders.order_data
-
+	const { t } = useTranslation()
 	return (
 		<>
 			<Box sx={{ p: 1, backgroundColor: '#003056', borderRadius: 1 }}>
@@ -22,7 +24,7 @@ const OrderData = (props) => {
 						}}
 					>
 						<CircularProgress disableShrink style={{ color: '#ffffff' }} />
-						<h1 style={{ margin: 0, color: '#ffffff' }}>Loading Information...</h1>
+						<h1 style={{ margin: 0, color: '#ffffff' }}> {t('order:loading')}</h1>
 					</div>
 				) : (
 					<>

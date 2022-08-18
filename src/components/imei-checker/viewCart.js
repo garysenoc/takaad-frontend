@@ -7,9 +7,11 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import mapCartStateToProps from 'rtk/cart/state'
 import mapCartDispatchToProps from 'rtk/cart/action'
 import { coupon_codes } from './data'
+import { useTranslation } from 'next-i18next'
 
 const ViewCart = (props) => {
 	const router = useRouter()
+	const { t } = useTranslation()
 	const [coupon, setcoupon] = useState('')
 
 	const handleCouponChange = (event) => setcoupon(event.target.value)
@@ -91,7 +93,7 @@ const ViewCart = (props) => {
 					lineHeight: { xs: '28px', sm: '40px', md: '40px', lg: '52px' },
 				}}
 			>
-				View Your Cart
+				{t('imei-checker:view-cart-title')} 
 			</Typography>
 
 			{!props.cart.items.length ? (
@@ -114,7 +116,7 @@ const ViewCart = (props) => {
 							fontSize: { xs: '18px', sm: '22px', md: '26px' },
 						}}
 					>
-						Your cart is empty.
+						{t('imei-checker:cart-empty')} 
 					</Typography>
 				</Box>
 			) : null}
@@ -141,7 +143,7 @@ const ViewCart = (props) => {
 										p: '10px',
 									}}
 								>
-									Product
+									{t('imei-checker:product')} 
 								</Typography>
 							</Grid>
 							<Grid item xs={4}>
@@ -155,7 +157,7 @@ const ViewCart = (props) => {
 										p: '10px',
 									}}
 								>
-									Details
+									{t('imei-checker:details')} 
 								</Typography>
 							</Grid>
 							<Grid item xs={3}>
@@ -169,7 +171,7 @@ const ViewCart = (props) => {
 										p: '10px',
 									}}
 								>
-									Price
+									{t('imei-checker:price')} 
 								</Typography>
 							</Grid>
 						</Grid>
@@ -202,13 +204,13 @@ const ViewCart = (props) => {
 													p: '10px',
 												}}
 											>
-												<strong>IMEI Number: </strong>
+												<strong>{t('imei-checker:imei')} </strong>
 												{item.details.imei}
 												<br />
-												<strong>Brand: </strong>
+												<strong>{t('imei-checker:brand')}</strong>
 												{item.details.brand}
 												<br />
-												<strong>Model: </strong>
+												<strong>{t('imei-checker:model')} </strong>
 												{item.details.model}
 												<br />
 											</Typography>
@@ -262,14 +264,14 @@ const ViewCart = (props) => {
 									props.clearItems()
 								}}
 							>
-								Clear Cart
+								{t('imei-checker:clear-cart')}
 							</Button>
 						</Box>
 					</Box>
 					<Stack direction="row" mt={4}>
 						<TextField
 							error={props.common.isSnackbarOpen}
-							placeholder="Coupon Code"
+							placeholder={t('imei-checker:coupon-code')}
 							inputProps={{
 								sx: {
 									backgroundColor: '#fff',
@@ -299,7 +301,7 @@ const ViewCart = (props) => {
 							}}
 							onClick={handleApplyCoupon}
 						>
-							Apply Coupon
+							{t('imei-checker:apply-coupon-btn')}
 						</Button>
 					</Stack>
 					<Box sx={{ textAlign: 'right', marginTop: 5 }}>
@@ -312,7 +314,7 @@ const ViewCart = (props) => {
 								fontSize: { xs: '16px', sm: '18px', md: '20px' },
 							}}
 						>
-							<strong>Subtotal: </strong> {`${props.cart.subtotal}`}
+							<strong>{t('imei-checker:subtotal')} </strong> {`${props.cart.subtotal}`}
 						</Typography>
 						<Typography
 							sx={{
@@ -323,7 +325,7 @@ const ViewCart = (props) => {
 								fontSize: { xs: '16px', sm: '18px', md: '20px' },
 							}}
 						>
-							<strong>Discount: </strong> {`${props.cart.discount}`}
+							<strong>{t('imei-checker:discount')}</strong> {`${props.cart.discount}`}
 						</Typography>
 						<Typography
 							sx={{
@@ -334,7 +336,7 @@ const ViewCart = (props) => {
 								fontSize: { xs: '16px', sm: '18px', md: '20px' },
 							}}
 						>
-							<strong>Total: </strong> {`${props.cart.total}`}
+							<strong>{t('imei-checker:total')}</strong> {`${props.cart.total}`}
 						</Typography>
 						<Box my={2}>
 							<Button
@@ -355,7 +357,7 @@ const ViewCart = (props) => {
 								}}
 								onClick={handleCheckout}
 							>
-								Proceed to checkout
+								{t('imei-checker:proceed-checkout-btn')}
 							</Button>
 						</Box>
 						{/* <Box>

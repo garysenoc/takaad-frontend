@@ -1,0 +1,20 @@
+{
+    "order-title":"Order",
+    "order-not-exist":"Order does not exist!",
+    "resend":"Resend",
+    "order-history":"Order History",
+    "no-order-history":"No order history yet!",
+    "subtotal":"Subtotal",
+    "discount":"Discount",
+    "total":"Total",
+    "view":"View",
+    "loading":"Loading Information...",
+    "order-number":"Order Number:",
+    "date":"Date:",
+    "email":"Email:",
+    "payment-method":"Payment Method:",
+    "service":"Service",
+    "price":"Price",
+    "all-in-one":"All in One Information"
+
+}
