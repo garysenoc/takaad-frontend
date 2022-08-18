@@ -12,7 +12,6 @@ export async function getServerSideProps(ctx) {
 		},
 	}
 }
-
 const OrderId = () => {
 	const router = useRouter()
 	const [order, setOrder] = useState(null)
