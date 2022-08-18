@@ -119,9 +119,9 @@ const PlaceOrder = GuardOrderDetails((props) => {
 						body: JSON.stringify(order),
 					})
 				).json()
-				await handleSendEmail(createResultOrder)
 				props.clearItems()
 				props.setIsLoading(false)
+				await handleSendEmail(createResultOrder)
 				props.setSnackbarMessage(['Order completed!', 'success'])
 				props.setIsSnackbarOpen(true)
 			} else {
@@ -129,7 +129,10 @@ const PlaceOrder = GuardOrderDetails((props) => {
 			}
 		} catch (error) {
 			if (error) {
-				props.setSnackbarMessage(['Something went wrong, please contact the administrator.', 'error'])
+				props.setSnackbarMessage([
+					typeof error === 'string' ? error : 'Something went wrong, please contact the administrator.',
+					'error',
+				])
 				props.setIsSnackbarOpen(true)
 			}
 		}
@@ -137,10 +140,13 @@ const PlaceOrder = GuardOrderDetails((props) => {
 
 	const handleSendEmail = async (order) => {
 		try {
-			await sendEmail(order)
+			let result = await sendEmail(order)
+			if (!result.ok) {
+				result = await result.json()
+				throw result.message
+			}
 		} catch (error) {
-			props.setIsSnackbarOpen(true)
-			props.setSnackbarMessage('Something went wrong in sending the email.')
+			throw `Email not sent. ${typeof error === 'string' ? error : ''}`
 		}
 	}
 

@@ -83,7 +83,7 @@ const sendMail = (req, res) => {
 		if (err) {
 			// console.error(err)
 			res.status(400).json({
-				message: 'Something went wrong!',
+				message: err.message,
 			})
 		} else {
 			// console.log('Message sent: %s', info.messageId)

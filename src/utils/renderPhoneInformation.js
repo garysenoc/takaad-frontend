@@ -156,7 +156,7 @@ export const renderBrand = (str) => {
 			return 'ipad'
 		}
 
-		case _str.indexOf('macbook') !== -1: {
+		case _str.indexOf('macbook') !== -1 || _str.indexOf('mackbook') !== -1: {
 			return 'macbook'
 		}
 

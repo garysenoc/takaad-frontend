@@ -32,11 +32,7 @@ const HomeHeader = (props) => {
 			if (data.status === 'failed') {
 				props.setIMEICheckRequestStatus(data.status)
 				props.setImeiSerialNumber('')
-				props.setIsLoading(false)
-				props.setSnackbarMessage(['Please enter a valid IMEI/Serial Number.', 'error'])
-				props.setIsSnackbarOpen(true)
-
-				return null
+				throw new Error()
 			}
 
 			props.setPayload(data)
