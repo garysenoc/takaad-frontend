@@ -32,6 +32,7 @@ module.exports = {
 	// pageExtensions: ['page.js'],
 
 	env: {
+		host: process.env.HOST || 'http://localhost:3000',
 		api_baseurl: process.env.API_BASEURL || 'http://localhost:8000',
 		nodemailer_username: process.env.NODEMAILER_USERNAME,
 		nodemailer_password: process.env.NODEMAILER_PASSWORD,
