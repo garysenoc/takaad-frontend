@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 import DataRow from '../place-order/DataRow'
+import censorIMEIAndOrSN from '../../utils/censorIMEIAndOrSN'
 
 const OrderTable = ({ order, product }) => {
 	const [open, setOpen] = useState(true)
@@ -43,7 +44,7 @@ const OrderTable = ({ order, product }) => {
 					{order
 						.filter((d) => !excludedData.has(d.label))
 						.map((d, i) => (
-							<DataRow key={i} data={d} index={i} />
+							<DataRow key={i} data={censorIMEIAndOrSN(d)} index={i} />
 						))}
 				</Box>
 			</AccordionDetails>

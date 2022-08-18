@@ -1,4 +1,5 @@
 import { FormattedDate } from '../../utils/renderFormattedDate'
+import censorIMEIAndOrSN from '../../utils/censorIMEIAndOrSN'
 import nodemailer from 'nodemailer'
 
 const sendMail = (req, res) => {
@@ -64,7 +65,12 @@ const sendMail = (req, res) => {
 									src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-13-pink-select-2021?wid=940&hei=1112&fmt=png-alpha&.v=1645572315935"
 								/>
 								<table style="width: 100%; margin-top: 1rem">
-									${order_data[index].map((keyVal) => `<tr><td >${keyVal.label}</td><td>${keyVal.value}</td></tr>`).join('')}
+									${order_data[index]
+										.map((keyVal) => {
+											keyVal = censorIMEIAndOrSN(keyVal)
+											return `<tr><td >${keyVal.label}</td><td>${keyVal.value}</td></tr>`
+										})
+										.join('')}
 								</table>`,
 						)
 						.join('<br/>')}
@@ -92,6 +98,7 @@ const sendMail = (req, res) => {
 					<tr style="${tableStyle}"><td style="${tableStyle}" colspan="2">Subtotal:</td><td style="${tableStyle}">$${subtotal}</td></tr>
 					<tr style="${tableStyle}"><td style="${tableStyle}" colspan="2">Shipping:</td><td style="${tableStyle}">Free Shipping</td></tr>
 					<tr style="${tableStyle}"><td style="${tableStyle}" colspan="2">Payment method:</td><td style="${tableStyle}">${payment_method}</td></tr>
+					<tr style="${tableStyle}"><td style="${tableStyle}" colspan="2">Discount</td><td style="${tableStyle}">$${discount}</td></tr>
 					<tr style="${tableStyle}"><td style="${tableStyle}" colspan="2">Total:</td><td style="${tableStyle}">$${total}</td></tr>
 				</table>
 			</div>
