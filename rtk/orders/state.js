@@ -1,5 +1,5 @@
-const mapStateToProps = (ordersState) => ({
+const mapOrdersStateToProps = (ordersState) => ({
 	...ordersState,
 })
 
-export default mapStateToProps
+export default mapOrdersStateToProps

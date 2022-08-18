@@ -1,10 +1,10 @@
-import { Box, Grid, Typography, Divider } from '@mui/material'
+import { Box, Grid, Typography, Divider, Stack } from '@mui/material'
 import { connect } from 'react-redux'
+import Image from 'next/image'
 
-import mapCheckoutStateToProps from 'rtk/checkout/state'
-import mapCheckoutDispatchToProps from 'rtk/checkout/action'
+import mapOrdersStateToProps from '../../../rtk/orders/state'
 
-const OrderDetails = ({ order }) => {
+const OrderDetails = ({ orders: { order_number }, order, common: { isLoading } }) => {
 	return (
 		<>
 			<Box>
@@ -220,8 +220,22 @@ const OrderDetails = ({ order }) => {
 					</Grid>
 				</Grid>
 			</Box>
+
+			{!isLoading && (
+				<Stack direction="row" justifyContent="center" padding={5}>
+					<Image
+						loader={({ src, width }) =>
+							`https://api.qrserver.com/v1/create-qr-code/?size=${width}x${width}&data=${`${process.env.host}/order/${src}`}`
+						}
+						src={order_number}
+						width={256}
+						height={256}
+						alt="qr"
+					/>
+				</Stack>
+			)}
 		</>
 	)
 }
 
-export default connect(mapCheckoutStateToProps, mapCheckoutDispatchToProps())(OrderDetails)
+export default connect(mapOrdersStateToProps)(OrderDetails)

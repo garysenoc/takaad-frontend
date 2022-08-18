@@ -1,9 +1,9 @@
 import ordersActions from 'rtk/orders'
 
-const mapDispatchToProps = () => {
+const mapOrdersDispatchToProps = () => {
 	return {
 		...ordersActions.actions,
 	}
 }
 
-export default mapDispatchToProps
+export default mapOrdersDispatchToProps

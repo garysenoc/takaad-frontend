@@ -1,6 +1,6 @@
+import nodemailer from 'nodemailer'
 import { FormattedDate } from '../../utils/renderFormattedDate'
 import censorIMEIAndOrSN from '../../utils/censorIMEIAndOrSN'
-import nodemailer from 'nodemailer'
 
 const sendMail = (req, res) => {
 	const { date, discount, email, first_name, order_data, payment_method, price, service, subtotal, total, _id } =
@@ -35,10 +35,15 @@ const sendMail = (req, res) => {
 			background-color: rgba(8, 8, 8, 0.9);
 			color: whitesmoke;
 			padding: 1.5rem;
-			margin-bottom: 10rem;
 			">
 				<h2>Your My IMEI Checker order is now complete</h2>
 	  		</div>
+			<img
+				src="${`https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=${`${process.env.host}/order/${_id}`}`}"
+				width=256
+				height=256
+				alt="orderQR"
+				style="display: block; margin: auto; padding: 25px;"/>
 			<div>
 				<div
 				style="

@@ -12,6 +12,7 @@ import OrderData from 'src/components/order/OrderData'
 import GuardOrderDetails from 'lib/guardOrderDetails'
 import mapCheckerDispatchToProps from '../../rtk/checker/action'
 import sendEmail from '../utils/sendEmail'
+import mapOrdersDispatchToProps from '../../rtk/orders/action'
 
 export const getServerSideProps = async (context) => {
 	if (context.query.token) {
@@ -119,6 +120,7 @@ const PlaceOrder = GuardOrderDetails((props) => {
 						body: JSON.stringify(order),
 					})
 				).json()
+				props.setOrderNumber(createResultOrder._id)
 				props.clearItems()
 				props.setIsLoading(false)
 				await handleSendEmail(createResultOrder)
@@ -203,4 +205,5 @@ const PlaceOrder = GuardOrderDetails((props) => {
 export default connect(mapCheckoutStateToProps, {
 	...mapCheckoutDispatchToProps(),
 	...mapCheckerDispatchToProps(),
+	...mapOrdersDispatchToProps(),
 })(PlaceOrder)
