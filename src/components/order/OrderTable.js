@@ -6,15 +6,6 @@ import censorIMEIAndOrSN from '../../utils/censorIMEIAndOrSN'
 
 const OrderTable = ({ order, product }) => {
 	const [open, setOpen] = useState(true)
-	const excludedData = new Set([
-		'Telephone Technical Support',
-		'Repairs and Service Coverage',
-		'AppleCare Eligible',
-		'Valid Purchase Date',
-		'Registered Device',
-		'Replaced Device',
-		'Loaner Device',
-	])
 
 	return (
 		<Accordion
@@ -41,11 +32,9 @@ const OrderTable = ({ order, product }) => {
 			</AccordionSummary>
 			<AccordionDetails>
 				<Box>
-					{order
-						.filter((d) => !excludedData.has(d.label))
-						.map((d, i) => (
-							<DataRow key={i} data={censorIMEIAndOrSN(d)} index={i} />
-						))}
+					{order.map((d, i) => (
+						<DataRow key={i} data={censorIMEIAndOrSN(d)} index={i} />
+					))}
 				</Box>
 			</AccordionDetails>
 		</Accordion>
