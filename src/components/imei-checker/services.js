@@ -18,6 +18,7 @@ import {
 	renderBrandPricePerCheck,
 } from 'src/utils/renderPhoneInformation'
 import { glosarryInfos } from 'src/components/glosarry/data'
+import censorExceptLastN from '../../utils/censorExceptLastN'
 
 const CustomWidthTooltip = styled(({ className, ...props }) => <Tooltip {...props} classes={{ popper: className }} />)({
 	[`& .${tooltipClasses.tooltip}`]: {
@@ -105,7 +106,7 @@ const Services = (props) => {
 							fontSize: { xs: '14px', sm: '16px', md: '18px' },
 						}}
 					>
-						<strong>IMEI Number: </strong> {payload.imei}
+						<strong>IMEI Number: </strong> {censorExceptLastN(payload.imei, 3)}
 					</Typography>
 					<Typography
 						sx={{

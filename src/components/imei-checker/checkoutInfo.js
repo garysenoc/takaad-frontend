@@ -27,6 +27,7 @@ import { CurrentFormattedDate } from 'src/utils/renderFormattedDate'
 import mapCheckerDispatchToProps from '../../../rtk/checker/action'
 import Wallet from './Wallet'
 import capitalFirstLetterWord from '../../utils/capitalFirstLetterWord'
+import censorExceptLastN from '../../utils/censorExceptLastN'
 
 const CheckoutInfo = (props) => {
 	const router = useRouter()
@@ -272,7 +273,7 @@ const CheckoutInfo = (props) => {
 												fontSize: { xs: '14px', sm: '16px', md: '18px' },
 											}}
 										>
-											IMEI Number: {item.details.imei}
+											IMEI Number: {censorExceptLastN(item.details.imei, 3)}
 										</Typography>
 										<Typography
 											sx={{
