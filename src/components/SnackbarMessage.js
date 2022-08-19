@@ -20,6 +20,7 @@ const SnackbarMessage = ({ children, ...props }) => {
 			{children}
 			<Snackbar
 				open={props.common.isSnackbarOpen}
+				autoHideDuration={12500}
 				onClose={handleClose}
 				anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
 				sx={{ marginTop: 10, marginRight: 10, color: 'text.secondary' }}
