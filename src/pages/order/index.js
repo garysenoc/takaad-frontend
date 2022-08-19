@@ -13,7 +13,7 @@ export async function getServerSideProps(ctx) {
 
 const Order = () => {
 	const router = useRouter()
-	const order = JSON.parse(router.query.order)
+	const order = router.query.order ? JSON.parse(router.query.order) : null
 
 	return <DisplayOrder orderData={order} />
 }
