@@ -7,6 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import mapCartStateToProps from 'rtk/cart/state'
 import mapCartDispatchToProps from 'rtk/cart/action'
 import { coupon_codes } from './data'
+import censorExceptLastN from '../../utils/censorExceptLastN'
 
 const ViewCart = (props) => {
 	const router = useRouter()
@@ -203,7 +204,7 @@ const ViewCart = (props) => {
 												}}
 											>
 												<strong>IMEI Number: </strong>
-												{item.details.imei}
+												{censorExceptLastN(item.details.imei, 3)}
 												<br />
 												<strong>Brand: </strong>
 												{item.details.brand}
