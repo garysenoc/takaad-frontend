@@ -221,7 +221,7 @@ const OrderDetails = ({ orders: { order_number }, order, common: { isLoading } }
 				</Grid>
 			</Box>
 
-			{!isLoading && (
+			{!isLoading && order_number !== '' && (
 				<Stack direction="row" justifyContent="center" padding={5}>
 					<Image
 						loader={({ src, width }) =>
